@@ -1,7 +1,6 @@
 # sumarejidump
 
-Just dump sumareji tables.
-
+Just dump sumareji tables into CSV
 
 ## Usage
 
@@ -15,7 +14,18 @@ table_name
 the name of table for dump. default all tables.
 
 option
--from filter data by date from format: YYYYMMDD
--to filter data by date to format: YYYYMMDD
--o output directory
+-c condition
+-o order
+-d output directory
 ```
+
+The output CSV file name is the name of table.
+CSV header filed is same to the attribute of the table.
+
+## Development
+### Requirements
+- Go 1.10+
+
+### Coding Convention
+Follow Golang official Code Review Comments
+https://github.com/golang/go/wiki/CodeReviewComments
