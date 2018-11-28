@@ -15,12 +15,12 @@ the name of table for dump. default all tables.
 
 option
 -c condition
--o order
 -d output directory
 ```
 
 The output CSV file name is the name of table.
 CSV header filed is same to the attribute of the table.
+The order of CSV filed is same to the No of the table in sumareji specification.
 
 ## Development
 ### Requirements
