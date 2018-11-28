@@ -18,14 +18,13 @@ option
 -d output directory
 ```
 
-The output CSV file name is the name of table.
-CSV header filed is same to the attribute of the table.
-The order of CSV filed is same to the No of the table in sumareji specification.
+- The output CSV file name is the name of table.
+- CSV header filed is same to the attribute of the table.
+- The order of CSV filed is same to the No of the table in sumareji specification.
 
 ## Development
 ### Requirements
 - Go 1.10+
 
 ### Coding Convention
-Follow Golang official Code Review Comments
-https://github.com/golang/go/wiki/CodeReviewComments
+Follow [Golang official Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
