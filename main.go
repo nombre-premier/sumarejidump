@@ -64,15 +64,23 @@ func main() {
 	resp, _ := client.Do(r)
 	fmt.Println(resp.Status)
 	b, err := ioutil.ReadAll(resp.Body)
-	if err == nil {
-		fmt.Println(string(b))
-	}
 	v, err := jason.NewObjectFromBytes(b)
 	result, err := v.GetObjectArray("result")
+
+	empData := []*Category{}
+	cw, err := NewCSVWriter(empData, "output/Category.csv")
+	defer cw.Close()
+	if err != nil {
+		panic(err)
+	}
+	parsedData := []*Category{}
+
 	for _, r := range result {
-		fmt.Println(r.String())
 		c := Category{}
 		json.Unmarshal([]byte(r.String()), &c)
-		fmt.Println(c)
+		parsedData = append(parsedData, &c)
 	}
+	fmt.Println(parsedData)
+	cw.Write(parsedData)
+
 }
