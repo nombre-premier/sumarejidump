@@ -13,33 +13,20 @@ import (
 	"github.com/antonholmquist/jason"
 )
 
-const CATEGORY = "Category"
-const STORE = "Store"
-
-type SumarejiClient struct {
+type SrClient struct {
 	endpoint    string
 	contractID  string
 	accessToken string
 	client      *http.Client
 }
 
-type SumarejiRefParams struct {
-	ProcName   string   `json:"-"`
-	Fields     []string `json:"fields"`
-	Conditions []string `json:"conditions"`
-	Order      []string `json:"order"`
-	Limit      int      `json:"limit"`
-	Page       int      `json:"page"`
-	TableName  string   `json:"table_name"`
-}
-
-type SumarejiRefResponse struct {
+type SrRefResponse struct {
 	TotalCount int
 	Result     []*jason.Object
 }
 
-func NewSumarejiClient(contractID string, accessToken string) SumarejiClient {
-	return SumarejiClient{
+func NewSrClient(contractID string, accessToken string) SrClient {
+	return SrClient{
 		endpoint:    "https://webapi.smaregi.jp/access/",
 		contractID:  contractID,
 		accessToken: accessToken,
@@ -47,7 +34,7 @@ func NewSumarejiClient(contractID string, accessToken string) SumarejiClient {
 	}
 }
 
-func parseRefResponse(resp *http.Response) (*SumarejiRefResponse, error) {
+func parseRefResponse(resp *http.Response) (*SrRefResponse, error) {
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
@@ -72,12 +59,12 @@ func parseRefResponse(resp *http.Response) (*SumarejiRefResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	refResponse := SumarejiRefResponse{TotalCount: totalCount, Result: result}
+	refResponse := SrRefResponse{TotalCount: totalCount, Result: result}
 
 	return &refResponse, nil
 }
 
-func (sc *SumarejiClient) Request(params SumarejiRefParams) (*SumarejiRefResponse, error) {
+func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
 	jsonBytes, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -101,11 +88,11 @@ func (sc *SumarejiClient) Request(params SumarejiRefParams) (*SumarejiRefRespons
 	return parseRefResponse(resp)
 }
 
-func (sc *SumarejiClient) DumpTableToCSV(params SumarejiRefParams) (*CSVWriter, error) {
+func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 	switch params.TableName {
 	case CATEGORY:
 		empData := []*Category{}
-		resultBuffer := make([]*Category, params.Limit, params.Limit)
+		resultBuffer := make([]*Category, params.Limit)
 
 		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
 		if err != nil {
