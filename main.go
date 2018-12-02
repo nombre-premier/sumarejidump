@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"os"
 )
 
@@ -16,21 +14,20 @@ func main() {
 		Order: []string{}, Limit: 1000, Page: 1,
 		TableName: "Category",
 	}
-	resp, _ := client.Request(params)
-
-	empData := []*Category{}
-	cw, err := NewCSVWriter(empData, "output/Category.csv")
-	defer cw.Close()
+	cw, err := client.DumpTableToCSV(params)
 	if err != nil {
 		panic(err)
 	}
-	parsedData := []*Category{}
+	defer cw.Close()
 
-	for _, r := range resp.Result {
-		c := Category{}
-		json.Unmarshal([]byte(r.String()), &c)
-		parsedData = append(parsedData, &c)
+	params2 := SumarejiRefParams{ProcName: "store_ref",
+		Fields: []string{}, Conditions: []string{},
+		Order: []string{}, Limit: 1000, Page: 1,
+		TableName: "Store",
 	}
-	fmt.Println(parsedData)
-	cw.Write(parsedData)
+	cw2, err := client.DumpTableToCSV(params2)
+	if err != nil {
+		panic(err)
+	}
+	defer cw2.Close()
 }

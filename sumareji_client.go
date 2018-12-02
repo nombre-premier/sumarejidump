@@ -2,13 +2,19 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/antonholmquist/jason"
 )
+
+const CATEGORY = "Category"
+const STORE = "Store"
 
 type SumarejiClient struct {
 	endpoint    string
@@ -57,12 +63,16 @@ func parseRefResponse(resp *http.Response) (*SumarejiRefResponse, error) {
 		return nil, err
 	}
 
-	totalCount, err := v.GetInt64("total_count")
+	totalCountStr, err := v.GetString("total_count")
 	if err != nil {
 		return nil, err
 	}
 
-	refResponse := SumarejiRefResponse{TotalCount: int(totalCount), Result: result}
+	totalCount, err := strconv.Atoi(totalCountStr)
+	if err != nil {
+		return nil, err
+	}
+	refResponse := SumarejiRefResponse{TotalCount: totalCount, Result: result}
 
 	return &refResponse, nil
 }
@@ -89,4 +99,49 @@ func (sc *SumarejiClient) Request(params SumarejiRefParams) (*SumarejiRefRespons
 		return nil, err
 	}
 	return parseRefResponse(resp)
+}
+
+func (sc *SumarejiClient) DumpTableToCSV(params SumarejiRefParams) (*CSVWriter, error) {
+	switch params.TableName {
+	case CATEGORY:
+		empData := []*Category{}
+		resultBuffer := make([]*Category, params.Limit, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			return nil, err
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	case STORE:
+		empData := []*Store{}
+		resultBuffer := make([]Store, 1, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	default:
+		return nil, errors.New("No table name is matched")
+	}
 }
