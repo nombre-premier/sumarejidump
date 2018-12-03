@@ -338,6 +338,64 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		}
 		cw.Write(resultBuffer[:len(resp.Result)])
 		return cw, nil
+	case BARGAIN:
+		empData := []*Bargain{}
+		resultBuffer := make([]Bargain, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	case BARGAIN_PRODUCT:
+		empData := []*BargainProduct{}
+		resultBuffer := make([]BargainProduct, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	case BARGAIN_STORE:
+		empData := []*BargainStore{}
+		resultBuffer := make([]BargainStore, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+
 	default:
 		return nil, errors.New("No table name is matched")
 	}

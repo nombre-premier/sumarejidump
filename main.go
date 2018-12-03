@@ -16,6 +16,7 @@ func main() {
 		"Customer",
 		"Stock", "StockHistory",
 		"TransactionHead", "TransactionDetail",
+		"Bargain", "BargainStore", "BargainProduct",
 	}
 
 	for _, t := range tables {
