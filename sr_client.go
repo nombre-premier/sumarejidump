@@ -111,7 +111,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		return cw, nil
 	case STORE:
 		empData := []*Store{}
-		resultBuffer := make([]Store, 1, params.Limit)
+		resultBuffer := make([]Store, params.Limit)
 
 		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
 		if err != nil {
@@ -169,7 +169,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		return cw, nil
 	case PRODUCT_RESERVE_ITEM:
 		empData := []*ProductReseveItem{}
-		resultBuffer := make([]ProductReseveItem, 1, params.Limit)
+		resultBuffer := make([]ProductReseveItem, params.Limit)
 
 		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
 		if err != nil {
@@ -246,6 +246,44 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 	case CUSTOMER:
 		empData := []*Customer{}
 		resultBuffer := make([]Customer, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	case STOCK:
+		empData := []*Stock{}
+		resultBuffer := make([]Stock, params.Limit)
+
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		if err != nil {
+			panic(err)
+		}
+
+		resp, err := sc.Request(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
+		}
+		cw.Write(resultBuffer[:len(resp.Result)])
+		return cw, nil
+	case STOCK_HISTORY:
+		empData := []*StockHistory{}
+		resultBuffer := make([]StockHistory, params.Limit)
 
 		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
 		if err != nil {

@@ -14,6 +14,7 @@ func main() {
 		"ProductReserveItem", "ProductReserveItemLabel",
 		"ProductStore", "ProductInventoryReservation",
 		"Customer",
+		"Stock", "StockHistory",
 	}
 
 	for _, t := range tables {
