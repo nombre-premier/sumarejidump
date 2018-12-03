@@ -13,6 +13,7 @@ func main() {
 		"Product", "ProductPrice",
 		"ProductReserveItem", "ProductReserveItemLabel",
 		"ProductStore", "ProductInventoryReservation",
+		"Customer",
 	}
 
 	for _, t := range tables {
