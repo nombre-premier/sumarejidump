@@ -16,6 +16,7 @@ const (
 	PRODUCT                       = "Product"
 	PRODUCT_PRICE                 = "ProductPrice"
 	PRODUCT_RESERVE_ITEM          = "ProductReserveItem"
+	PRODUCT_RESERVE_ITEM_LABEL    = "ProductReserveItemLabel"
 	PRODUCT_STORE                 = "ProductStore"
 	PRODUCT_INVENTORY_RESERVATION = "ProductInventoryReservation"
 
@@ -66,6 +67,7 @@ var srTableMetas = []SrTableMeta{
 	SrTableMeta{Name: PRODUCT, Limit: 1000, ProcName: PRODUCT_REF},
 	SrTableMeta{Name: PRODUCT_PRICE, Limit: 1000, ProcName: PRODUCT_REF},
 	SrTableMeta{Name: PRODUCT_RESERVE_ITEM, Limit: 1000, ProcName: PRODUCT_REF},
+	SrTableMeta{Name: PRODUCT_RESERVE_ITEM_LABEL, Limit: 1000, ProcName: PRODUCT_REF},
 	SrTableMeta{Name: PRODUCT_STORE, Limit: 1000, ProcName: PRODUCT_REF},
 	SrTableMeta{Name: PRODUCT_INVENTORY_RESERVATION, Limit: 1000, ProcName: PRODUCT_REF},
 	SrTableMeta{Name: CUSTOMER, Limit: 1000, ProcName: CUSTOMER_REF},
