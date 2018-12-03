@@ -9,25 +9,22 @@ func main() {
 	accessToken := os.Getenv("SUMAREJI_ACCESS_TOKEN")
 	client := NewSrClient(contractID, accessToken)
 
-	params, err := NewSrRefParamsWithTableName("Category")
-	if err != nil {
-		panic(err)
+	tables := []string{"Category", "Store",
+		"Product", "ProductPrice",
+		"ProductReserveItem", "ProductReserveItemLabel",
+		"ProductStore", "ProductInventoryReservation",
 	}
 
-	cw, err := client.DumpTableToCSV(params)
-	if err != nil {
-		panic(err)
-	}
-	defer cw.Close()
+	for _, t := range tables {
+		params, err := NewSrRefParamsWithTableName(t)
+		if err != nil {
+			panic(err)
+		}
 
-	params2, err := NewSrRefParamsWithTableName("Store")
-	if err != nil {
-		panic(err)
+		cw, err := client.DumpTableToCSV(params)
+		if err != nil {
+			panic(err)
+		}
+		cw.Close()
 	}
-
-	cw2, err := client.DumpTableToCSV(params2)
-	if err != nil {
-		panic(err)
-	}
-	defer cw2.Close()
 }

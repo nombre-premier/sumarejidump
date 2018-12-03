@@ -17,12 +17,21 @@
   pruneopts = "UT"
   revision = "cde31a6ec2a87636e8a5f13d18468e9dd683149e"
 
+[[projects]]
+  digest = "1:81e02c4edb639c80559c0650f9401d3e2dcc3256d1fa215382bb7c83c1db9126"
+  name = "github.com/shopspring/decimal"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "cd690d0c9e2447b1ef2a129a6b7b49077da89b8e"
+  version = "1.1.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/antonholmquist/jason",
     "github.com/gocarina/gocsv",
+    "github.com/shopspring/decimal",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
