@@ -13,11 +13,11 @@ import (
 	"github.com/antonholmquist/jason"
 )
 
+const dirFormat = "20060102150405"
+
 type SrClient struct {
-	endpoint    string
-	contractID  string
-	accessToken string
-	client      *http.Client
+	config SrConfig
+	client *http.Client
 }
 
 type SrRefResponse struct {
@@ -25,12 +25,10 @@ type SrRefResponse struct {
 	Result     []*jason.Object
 }
 
-func NewSrClient(contractID string, accessToken string) SrClient {
+func NewSrClient(config SrConfig) SrClient {
 	return SrClient{
-		endpoint:    "https://webapi.smaregi.jp/access/",
-		contractID:  contractID,
-		accessToken: accessToken,
-		client:      &http.Client{},
+		config: config,
+		client: &http.Client{},
 	}
 }
 
@@ -73,12 +71,12 @@ func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
 	data.Set("proc_name", params.ProcName)
 	data.Add("params", string(jsonBytes))
 
-	r, err := http.NewRequest("POST", sc.endpoint, strings.NewReader(data.Encode()))
+	r, err := http.NewRequest("POST", sc.config.EndPoint, strings.NewReader(data.Encode()))
 	if err != nil {
 		return nil, err
 	}
-	r.Header.Add("X_contract_id", sc.contractID)
-	r.Header.Add("X_access_token", sc.accessToken)
+	r.Header.Add("X_contract_id", sc.config.ContractID)
+	r.Header.Add("X_access_token", sc.config.AccessToken)
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	resp, err := sc.client.Do(r)
@@ -94,7 +92,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Category{}
 		resultBuffer := make([]*Category, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -113,7 +111,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Store{}
 		resultBuffer := make([]Store, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -132,7 +130,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Product{}
 		resultBuffer := make([]Product, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -152,7 +150,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*ProductPrice{}
 		resultBuffer := make([]ProductPrice, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -171,7 +169,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*ProductReseveItem{}
 		resultBuffer := make([]ProductReseveItem, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -190,7 +188,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*ProductReseveItemLabel{}
 		resultBuffer := make([]ProductReseveItemLabel, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -209,7 +207,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*ProductStore{}
 		resultBuffer := make([]ProductStore, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -228,7 +226,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*ProductInventoryReservation{}
 		resultBuffer := make([]ProductInventoryReservation, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -247,7 +245,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Customer{}
 		resultBuffer := make([]Customer, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -266,7 +264,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Stock{}
 		resultBuffer := make([]Stock, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -285,7 +283,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*StockHistory{}
 		resultBuffer := make([]StockHistory, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -304,7 +302,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*TransactionHead{}
 		resultBuffer := make([]TransactionHead, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -323,7 +321,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*TransactionDetail{}
 		resultBuffer := make([]TransactionDetail, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -342,7 +340,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*Bargain{}
 		resultBuffer := make([]Bargain, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -361,7 +359,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*BargainProduct{}
 		resultBuffer := make([]BargainProduct, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -380,7 +378,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*BargainStore{}
 		resultBuffer := make([]BargainStore, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -399,7 +397,7 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		empData := []*DailySum{}
 		resultBuffer := make([]DailySum, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("output/%s.csv", params.TableName))
+		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
