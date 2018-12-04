@@ -1,13 +1,29 @@
 package main
 
 import (
+	"fmt"
 	"os"
+	"time"
 )
 
 func main() {
 	contractID := os.Getenv("SUMAREJI_CONTRACT_ID")
 	accessToken := os.Getenv("SUMAREJI_ACCESS_TOKEN")
-	client := NewSrClient(contractID, accessToken)
+
+	t := time.Now()
+	dirName := t.Format(dirFormat)
+	if err := os.MkdirAll(fmt.Sprintf("%s", dirName), 0755); err != nil {
+		panic(err)
+	}
+
+	config := SrConfig{
+		ContractID:  contractID,
+		AccessToken: accessToken,
+		EndPoint:    "https://webapi.smaregi.jp/access/",
+		OutputDir:   dirName,
+	}
+
+	client := NewSrClient(config)
 
 	tables := []string{"Category",
 		"Store",
