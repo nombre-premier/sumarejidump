@@ -9,7 +9,8 @@ func main() {
 	accessToken := os.Getenv("SUMAREJI_ACCESS_TOKEN")
 	client := NewSrClient(contractID, accessToken)
 
-	tables := []string{"Category", "Store",
+	tables := []string{"Category",
+		"Store",
 		"Product", "ProductPrice",
 		"ProductReserveItem", "ProductReserveItemLabel",
 		"ProductStore", "ProductInventoryReservation",
@@ -17,6 +18,7 @@ func main() {
 		"Stock", "StockHistory",
 		"TransactionHead", "TransactionDetail",
 		"Bargain", "BargainStore", "BargainProduct",
+		"DailySum",
 	}
 
 	for _, t := range tables {
