@@ -86,13 +86,106 @@ func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
 	return parseRefResponse(resp)
 }
 
+func writeCSV(cw *CSVWriter, resultBuffer interface{}, resp *SrRefResponse) (*CSVWriter, error) {
+	switch buffer := resultBuffer.(type) {
+	case []Category:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []Store:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []Product:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []ProductPrice:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []ProductStore:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []ProductReseveItem:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []ProductReseveItemLabel:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []ProductInventoryReservation:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []Customer:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []Stock:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []StockHistory:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []TransactionHead:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []TransactionDetail:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []DailySum:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []Bargain:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []BargainProduct:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	case []BargainStore:
+		for i, r := range resp.Result {
+			json.Unmarshal([]byte(r.String()), &buffer[i])
+		}
+		cw.Write(buffer[:len(resp.Result)])
+	default:
+		return nil, errors.New("No buffer is matched")
+	}
+
+	return cw, nil
+}
+
 func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 	switch params.TableName {
 	case CATEGORY:
-		empData := []*Category{}
-		resultBuffer := make([]*Category, params.Limit)
+		resultBuffer := make([]Category, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -102,16 +195,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case STORE:
-		empData := []*Store{}
 		resultBuffer := make([]Store, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -121,16 +209,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT:
-		empData := []*Product{}
 		resultBuffer := make([]Product, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -140,17 +223,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
-
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT_PRICE:
-		empData := []*ProductPrice{}
 		resultBuffer := make([]ProductPrice, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -159,17 +236,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT_RESERVE_ITEM:
-		empData := []*ProductReseveItem{}
 		resultBuffer := make([]ProductReseveItem, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -178,17 +249,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT_RESERVE_ITEM_LABEL:
-		empData := []*ProductReseveItemLabel{}
 		resultBuffer := make([]ProductReseveItemLabel, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -198,16 +263,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT_STORE:
-		empData := []*ProductStore{}
 		resultBuffer := make([]ProductStore, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -216,17 +276,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case PRODUCT_INVENTORY_RESERVATION:
-		empData := []*ProductInventoryReservation{}
 		resultBuffer := make([]ProductInventoryReservation, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -235,17 +289,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case CUSTOMER:
-		empData := []*Customer{}
 		resultBuffer := make([]Customer, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -254,17 +302,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case STOCK:
-		empData := []*Stock{}
 		resultBuffer := make([]Stock, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -274,16 +316,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case STOCK_HISTORY:
-		empData := []*StockHistory{}
 		resultBuffer := make([]StockHistory, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -293,16 +330,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case TRANSACTION_HEAD:
-		empData := []*TransactionHead{}
 		resultBuffer := make([]TransactionHead, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -312,16 +344,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case TRANSACTION_DETAIL:
-		empData := []*TransactionDetail{}
 		resultBuffer := make([]TransactionDetail, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -331,16 +358,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case BARGAIN:
-		empData := []*Bargain{}
 		resultBuffer := make([]Bargain, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -349,17 +371,12 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		if err != nil {
 			return nil, err
 		}
+		return writeCSV(cw, resultBuffer, resp)
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
 	case BARGAIN_PRODUCT:
-		empData := []*BargainProduct{}
 		resultBuffer := make([]BargainProduct, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -369,16 +386,11 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 			return nil, err
 		}
 
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		return writeCSV(cw, resultBuffer, resp)
 	case BARGAIN_STORE:
-		empData := []*BargainStore{}
 		resultBuffer := make([]BargainStore, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
@@ -394,10 +406,9 @@ func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
 		cw.Write(resultBuffer[:len(resp.Result)])
 		return cw, nil
 	case DAILY_SUM:
-		empData := []*DailySum{}
 		resultBuffer := make([]DailySum, params.Limit)
 
-		cw, err := NewCSVWriter(empData, fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
+		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
 		if err != nil {
 			return nil, err
 		}
