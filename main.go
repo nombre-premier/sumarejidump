@@ -25,28 +25,15 @@ func main() {
 
 	client := NewSrClient(config)
 
-	tables := []string{"Category",
-		"Store",
-		"Product", "ProductPrice",
-		"ProductReserveItem", "ProductReserveItemLabel",
-		"ProductStore", "ProductInventoryReservation",
-		"Customer",
-		"Stock", "StockHistory",
-		"TransactionHead", "TransactionDetail",
-		"Bargain", "BargainStore", "BargainProduct",
-		"DailySum",
-	}
-
-	for _, t := range tables {
-		params, err := NewSrRefParamsWithTableName(t)
+	for _, t := range srTableMetas {
+		params, err := NewSrRefParamsWithTableName(t.Name)
 		if err != nil {
 			panic(err)
 		}
 
-		cw, err := client.DumpTableToCSV(params)
+		_, err = client.DumpTableToCSV(params)
 		if err != nil {
 			panic(err)
 		}
-		cw.Close()
 	}
 }
