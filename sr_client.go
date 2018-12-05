@@ -62,14 +62,14 @@ func parseRefResponse(resp *http.Response) (*SrRefResponse, error) {
 	return &refResponse, nil
 }
 
-func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
-	jsonBytes, err := json.Marshal(params)
+func (sc *SrClient) Request(p SrRefParams) (*SrRefResponse, error) {
+	jsonBytes, err := json.Marshal(p)
 	if err != nil {
 		return nil, err
 	}
 	data := url.Values{}
-	data.Set("proc_name", params.ProcName)
-	data.Add("params", string(jsonBytes))
+	data.Set("proc_name", p.ProcName)
+	data.Add("p", string(jsonBytes))
 
 	r, err := http.NewRequest("POST", sc.config.EndPoint, strings.NewReader(data.Encode()))
 	if err != nil {
@@ -86,57 +86,60 @@ func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
 	return parseRefResponse(resp)
 }
 
-func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
-	var handler SrCSVHandlerIf
-	var err error
-	output := fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName)
-	switch params.TableName {
-	case CATEGORY:
-		handler, err = NewCategoryCSV(params.Limit, output)
-	case STORE:
-		handler, err = NewStoreCSV(params.Limit, output)
-	case PRODUCT:
-		handler, err = NewProductCSV(params.Limit, output)
-	case PRODUCT_PRICE:
-		handler, err = NewProductPriceCSV(params.Limit, output)
-	case PRODUCT_RESERVE_ITEM:
-		handler, err = NewProductReseveItemCSV(params.Limit, output)
-	case PRODUCT_RESERVE_ITEM_LABEL:
-		handler, err = NewProductReseveItemLabelCSV(params.Limit, output)
-	case PRODUCT_STORE:
-		handler, err = NewProductStoreCSV(params.Limit, output)
-	case PRODUCT_INVENTORY_RESERVATION:
-		handler, err = NewProductInventoryReservationCSV(params.Limit, output)
-	case CUSTOMER:
-		handler, err = NewCustomerCSV(params.Limit, output)
-	case STOCK:
-		handler, err = NewStockCSV(params.Limit, output)
-	case STOCK_HISTORY:
-		handler, err = NewStockHistoryCSV(params.Limit, output)
-	case TRANSACTION_HEAD:
-		handler, err = NewTransactionHeadCSV(params.Limit, output)
-	case TRANSACTION_DETAIL:
-		handler, err = NewTransactionDetailCSV(params.Limit, output)
-	case BARGAIN:
-		handler, err = NewBargainCSV(params.Limit, output)
-	case BARGAIN_PRODUCT:
-		handler, err = NewBargainProductCSV(params.Limit, output)
-	case BARGAIN_STORE:
-		handler, err = NewBargainStoreCSV(params.Limit, output)
-	case DAILY_SUM:
-		handler, err = NewDailySumCSV(params.Limit, output)
-	default:
-		return nil, errors.New("No table name is matched")
-	}
+func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
+	output := fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, p.TableName)
+	handler, err := chooseCSVHandler(p, output)
 	if err != nil {
 		return nil, err
 	}
+	defer handler.GetCSVWriter().Close()
 
-	resp, err := sc.Request(params)
+	resp, err := sc.Request(p)
 	if err != nil {
 		return nil, err
 	}
 
 	handler.Write(resp)
 	return handler.GetCSVWriter(), nil
+}
+
+func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
+	switch p.TableName {
+	case CATEGORY:
+		return NewCategoryCSV(p.Limit, output)
+	case STORE:
+		return NewStoreCSV(p.Limit, output)
+	case PRODUCT:
+		return NewProductCSV(p.Limit, output)
+	case PRODUCT_PRICE:
+		return NewProductPriceCSV(p.Limit, output)
+	case PRODUCT_RESERVE_ITEM:
+		return NewProductReseveItemCSV(p.Limit, output)
+	case PRODUCT_RESERVE_ITEM_LABEL:
+		return NewProductReseveItemLabelCSV(p.Limit, output)
+	case PRODUCT_STORE:
+		return NewProductStoreCSV(p.Limit, output)
+	case PRODUCT_INVENTORY_RESERVATION:
+		return NewProductInventoryReservationCSV(p.Limit, output)
+	case CUSTOMER:
+		return NewCustomerCSV(p.Limit, output)
+	case STOCK:
+		return NewStockCSV(p.Limit, output)
+	case STOCK_HISTORY:
+		return NewStockHistoryCSV(p.Limit, output)
+	case TRANSACTION_HEAD:
+		return NewTransactionHeadCSV(p.Limit, output)
+	case TRANSACTION_DETAIL:
+		return NewTransactionDetailCSV(p.Limit, output)
+	case BARGAIN:
+		return NewBargainCSV(p.Limit, output)
+	case BARGAIN_PRODUCT:
+		return NewBargainProductCSV(p.Limit, output)
+	case BARGAIN_STORE:
+		return NewBargainStoreCSV(p.Limit, output)
+	case DAILY_SUM:
+		return NewDailySumCSV(p.Limit, output)
+	default:
+		return nil, errors.New("No table name is matched")
+	}
 }
