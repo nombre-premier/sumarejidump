@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/shopspring/decimal"
 )
 
 type Customer struct {
-	CustomerID           int              `json:"customerId" csv:"customerID"`
+	CustomerID           int              `json:"customerId" csv:"customerId"`
 	CustomerCode         string           `json:"customerCode" csv:"customerCode"`
 	CustomerNo           *string          `json:"customerNo" csv:"customerNo"`
 	Rank                 *string          `json:"rank" csv:"rank"`
@@ -48,4 +50,30 @@ type Customer struct {
 	StoreID              *int             `json:"storeId" csv:"storeID"`
 	InsDateTime          string           `json:"insDateTime" csv:"insDateTime"`
 	UpdDateTime          string           `json:"updDateTime" csv:"updDateTime"`
+}
+
+type CustomerCSV struct {
+	*CSVHandler
+	buf []Customer
+}
+
+func NewCustomerCSV(bufSize int, output string) (*CustomerCSV, error) {
+	buf := make([]Customer, bufSize)
+	handler, err := NewCSVHandler([]Customer{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &CustomerCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (cc *CustomerCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &cc.buf[i])
+	}
+	cc.CSVWriter.Write(cc.buf[:len(resp.Result)])
+	return cc.CSVWriter
 }

@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/shopspring/decimal"
 )
 
 type TransactionHead struct {
-	TransactionHeadID              int              `json:"transactionHeadId" csv:"transactionHeadID"`
+	TransactionHeadID              int              `json:"transactionHeadId" csv:"transactionHeadId"`
 	TransactionDateTime            string           `json:"transactionDateTime" csv:"transactionDateTime"`
 	TransactionHeadDivision        string           `json:"transactionHeadDivision" csv:"transactionHeadDivision"`
 	CancelDivision                 string           `json:"cancelDivision" csv:"cancelDivision"`
@@ -63,11 +65,11 @@ type TransactionHead struct {
 	AdjustmentDateTime             *string          `json:"adjustmentDateTime" csv:"adjustmentDateTime"`
 	SumDateTime                    string           `json:"sumDateTime" csv:"sumDateTime"`
 	CustomerRank                   *int             `json:"customerRank" csv:"customerRank"`
-	CustomerGroupID                *int             `json:"customerGroupId" csv:"customerGroupID"`
-	CustomerGroupID2               *int             `json:"customerGroupId2" csv:"customerGroupID2"`
-	CustomerGroupID3               *int             `json:"customerGroupId3" csv:"customerGroupID3"`
-	CustomerGroupID4               *int             `json:"customerGroupId4" csv:"customerGroupID4"`
-	CustomerGroupID5               *int             `json:"customerGroupId5" csv:"customerGroupID5"`
+	CustomerGroupID                *int             `json:"customerGroupId" csv:"customerGroupId"`
+	CustomerGroupID2               *int             `json:"customerGroupId2" csv:"customerGroupId2"`
+	CustomerGroupID3               *int             `json:"customerGroupId3" csv:"customerGroupId3"`
+	CustomerGroupID4               *int             `json:"customerGroupId4" csv:"customerGroupId4"`
+	CustomerGroupID5               *int             `json:"customerGroupId5" csv:"customerGroupId5"`
 	StaffID                        *int             `json:"staffId" csv:"staffID"`
 	StaffName                      *string          `json:"staffName" csv:"staffName"`
 	StaffCode                      *string          `json:"staffCode" csv:"staffCode"`
@@ -79,13 +81,13 @@ type TransactionHead struct {
 	CardCompany                    *string          `json:"cardCompany" csv:"cardCompany"`
 	Memo                           *string          `json:"memo" csv:"memo"`
 	ReceiptMemo                    *string          `json:"receiptMemo" csv:"receiptMemo"`
-	PaymentMethodID1               *int             `json:"paymentMethodId1" csv:"paymentMethodID1"`
+	PaymentMethodID1               *int             `json:"paymentMethodId1" csv:"paymentMethodId1"`
 	PaymentMethodName1             *string          `json:"paymentMethodName1" csv:"paymentMethodName1"`
 	DepositOthers1                 *decimal.Decimal `json:"depositOthers1" csv:"depositOthers1"`
-	PaymentMethodID2               *int             `json:"paymentMethodId2" csv:"paymentMethodID2"`
+	PaymentMethodID2               *int             `json:"paymentMethodId2" csv:"paymentMethodId2"`
 	PaymentMethodName2             *string          `json:"paymentMethodName2" csv:"paymentMethodName2"`
 	DepositOthers2                 *decimal.Decimal `json:"depositOthers2" csv:"depositOthers2"`
-	PaymentMethodID3               *int             `json:"paymentMethodId3" csv:"paymentMethodID3"`
+	PaymentMethodID3               *int             `json:"paymentMethodId3" csv:"paymentMethodId3"`
 	PaymentMethodName3             *string          `json:"paymentMethodName3" csv:"paymentMethodName3"`
 	DepositOthers3                 *decimal.Decimal `json:"depositOthers3" csv:"depositOthers3"`
 	Carriage                       *string          `json:"carriage" csv:"carriage"`
@@ -123,13 +125,39 @@ type TransactionHead struct {
 	UpdDateTime                    string           `json:"updDateTime" csv:"updDateTime"`
 }
 
+type TransactionHeadCSV struct {
+	*CSVHandler
+	buf []TransactionHead
+}
+
+func NewTransactionHeadCSV(bufSize int, output string) (*TransactionHeadCSV, error) {
+	buf := make([]TransactionHead, bufSize)
+	handler, err := NewCSVHandler([]TransactionHead{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionHeadCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (thc *TransactionHeadCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &thc.buf[i])
+	}
+	thc.CSVWriter.Write(thc.buf[:len(resp.Result)])
+	return thc.CSVWriter
+}
+
 type TransactionDetail struct {
-	TransactionHeadID            int              `json:"transactionHeadId" csv:"transactionHeadID"`
+	TransactionHeadID            int              `json:"transactionHeadId" csv:"transactionHeadId"`
 	TransactionDateTime          string           `json:"transactionDateTime" csv:"transactionDateTime"`
-	TransactionDetailID          int              `json:"transactionDetailId" csv:"transactionDetailID"`
-	ParentTransactionDetailID    *int             `json:"parentTransactionDetailId" csv:"parentTransactionDetailID"`
+	TransactionDetailID          int              `json:"transactionDetailId" csv:"transactionDetailId"`
+	ParentTransactionDetailID    *int             `json:"parentTransactionDetailId" csv:"parentTransactionDetailId"`
 	TransactionDetailDivision    string           `json:"transactionDetailDivision" csv:"transactionDetailDivision"`
-	ProductID                    int              `json:"productId" csv:"productID"`
+	ProductID                    int              `json:"productId" csv:"productId"`
 	ProductCode                  string           `json:"productCode" csv:"productCode"`
 	ProductName                  string           `json:"productName" csv:"productName"`
 	TaxDivision                  string           `json:"taxDivision" csv:"taxDivision"`
@@ -144,7 +172,7 @@ type TransactionDetail struct {
 	UnitDiscountSum              decimal.Decimal  `json:"unitDiscountSum" csv:"unitDiscountSum"`
 	UnitDiscountedSum            decimal.Decimal  `json:"unitDiscountedSum" csv:"unitDiscountedSum"`
 	CostSum                      decimal.Decimal  `json:"costSum" csv:"costSum"`
-	CategoryID                   int              `json:"categoryId" csv:"categoryID"`
+	CategoryID                   int              `json:"categoryId" csv:"categoryId"`
 	CategoryName                 string           `json:"categoryName" csv:"categoryName"`
 	DiscriminationNo             string           `json:"discriminationNo" csv:"discriminationNo"`
 	SalesDivision                string           `json:"salesDivision" csv:"salesDivision"`
@@ -153,7 +181,7 @@ type TransactionDetail struct {
 	TaxFreeDivision              string           `json:"taxFreeDivision" csv:"taxFreeDivision"`
 	TaxFreeCommodityPrice        decimal.Decimal  `json:"taxFreeCommodityPrice" csv:"taxFreeCommodityPrice"`
 	TaxFree                      decimal.Decimal  `json:"taxFree" csv:"taxFree"`
-	ProductBundleGroupID         *int             `json:"productBundleGroupId" csv:"productBundleGroupID"`
+	ProductBundleGroupID         *int             `json:"productBundleGroupId" csv:"productBundleGroupId"`
 	DiscountPriceProportional    decimal.Decimal  `json:"discountPriceProportional" csv:"discountPriceProportional"`
 	DiscountPointProportional    decimal.Decimal  `json:"discountPointProportional" csv:"discountPointProportional"`
 	TaxIncludeProportional       decimal.Decimal  `json:"taxIncludeProportional" csv:"taxIncludeProportional"`
@@ -183,4 +211,30 @@ type TransactionDetail struct {
 	ModifiedTaxRate              *decimal.Decimal `json:"modifiedTaxRate" csv:"modifiedTaxRate"`
 	Color                        string           `json:"color" csv:"color"`
 	Size                         string           `json:"size" csv:"size"`
+}
+
+type TransactionDetailCSV struct {
+	*CSVHandler
+	buf []TransactionDetail
+}
+
+func NewTransactionDetailCSV(bufSize int, output string) (*TransactionDetailCSV, error) {
+	buf := make([]TransactionDetail, bufSize)
+	handler, err := NewCSVHandler([]TransactionDetail{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionDetailCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (tdc *TransactionDetailCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &tdc.buf[i])
+	}
+	tdc.CSVWriter.Write(tdc.buf[:len(resp.Result)])
+	return tdc.CSVWriter
 }

@@ -1,7 +1,9 @@
 package main
 
+import "encoding/json"
+
 type Store struct {
-	StoreID                  int     `json:"storeId" csv:"storeID"`
+	StoreID                  int     `json:"storeId" csv:"storeId"`
 	StoreCode                string  `json:"storeCode" csv:"storeCode"`
 	StoreName                string  `json:"storeName" csv:"storeName"`
 	StoreAbbr                *string `json:"storeAbbr" csv:"storeAbbr"`
@@ -27,4 +29,30 @@ type Store struct {
 	PointUseDivision         string  `json:"pointUseDivision" csv:"pointUseDivision"`
 	InsDateTime              string  `json:"insDateTime" csv:"insDateTime"`
 	UpdDateTime              string  `json:"updDateTime" csv:"updDateTime"`
+}
+
+type StoreCSV struct {
+	*CSVHandler
+	buf []Store
+}
+
+func NewStoreCSV(bufSize int, output string) (*StoreCSV, error) {
+	buf := make([]Store, bufSize)
+	handler, err := NewCSVHandler([]Store{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &StoreCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (sc *StoreCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &sc.buf[i])
+	}
+	sc.CSVWriter.Write(sc.buf[:len(resp.Result)])
+	return sc.CSVWriter
 }
