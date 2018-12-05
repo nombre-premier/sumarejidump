@@ -25,17 +25,18 @@ func main() {
 
 	client := NewSrClient(config)
 
-	tables := []string{"Category",
-		"Store",
-		"Product", "ProductPrice",
-		"ProductReserveItem", "ProductReserveItemLabel",
-		"ProductStore", "ProductInventoryReservation",
-		"Customer",
-		"Stock", "StockHistory",
-		"TransactionHead", "TransactionDetail",
-		"Bargain", "BargainStore", "BargainProduct",
-		"DailySum",
-	}
+	//	tables := []string{"Category",
+	//		"Store",
+	//		"Product", "ProductPrice",
+	//		"ProductReserveItem", "ProductReserveItemLabel",
+	//		"ProductStore", "ProductInventoryReservation",
+	//		"Customer",
+	//		"Stock", "StockHistory",
+	//		"TransactionHead", "TransactionDetail",
+	//		"Bargain", "BargainStore", "BargainProduct",
+	//		"DailySum",
+	//	}
+	tables := []string{"Category"}
 
 	for _, t := range tables {
 		params, err := NewSrRefParamsWithTableName(t)

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/shopspring/decimal"
 )
 
@@ -38,6 +40,32 @@ type Product struct {
 	UpdDateTime          string          `json:"updDateTime" csv:"updDateTime"`
 }
 
+type ProductCSV struct {
+	*CSVHandler
+	buf []Product
+}
+
+func NewProductCSV(bufSize int, output string) (*ProductCSV, error) {
+	buf := make([]Product, bufSize)
+	handler, err := NewCSVHandler([]Product{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (pc *ProductCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &pc.buf[i])
+	}
+	pc.CSVWriter.Write(pc.buf[:len(resp.Result)])
+	return pc.CSVWriter
+}
+
 type ProductPrice struct {
 	ProductID     int             `json:"productId" csv:"product_id"`
 	StoreID       string          `json:"storeId" csv:"store_id"`
@@ -49,15 +77,93 @@ type ProductPrice struct {
 	UpdDateTime   string          `json:"updDateTime" csv:"upd_date_time"`
 }
 
+type ProductPriceCSV struct {
+	*CSVHandler
+	buf []ProductPrice
+}
+
+func NewProductPriceCSV(bufSize int, output string) (*ProductPriceCSV, error) {
+	buf := make([]ProductPrice, bufSize)
+	handler, err := NewCSVHandler([]ProductPrice{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductPriceCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (ppc *ProductPriceCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &ppc.buf[i])
+	}
+	ppc.CSVWriter.Write(ppc.buf[:len(resp.Result)])
+	return ppc.CSVWriter
+}
+
 type ProductReseveItem struct {
 	ProductID string `json:"productId" csv:"product_id"`
 	No        string `json:"no" csv:"no"`
 	Value     string `json:"value" csv:"value"`
 }
 
+type ProductReseveItemCSV struct {
+	*CSVHandler
+	buf []ProductReseveItem
+}
+
+func NewProductReseveItemCSV(bufSize int, output string) (*ProductReseveItemCSV, error) {
+	buf := make([]ProductReseveItem, bufSize)
+	handler, err := NewCSVHandler([]ProductReseveItem{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductReseveItemCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (pric *ProductReseveItemCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &pric.buf[i])
+	}
+	pric.CSVWriter.Write(pric.buf[:len(resp.Result)])
+	return pric.CSVWriter
+}
+
 type ProductReseveItemLabel struct {
 	No    string `json:"no" csv:"no"`
 	Label string `json:"label" csv:"label"`
+}
+
+type ProductReseveItemLabelCSV struct {
+	*CSVHandler
+	buf []ProductReseveItemLabel
+}
+
+func NewProductReseveItemLabelCSV(bufSize int, output string) (*ProductReseveItemLabelCSV, error) {
+	buf := make([]ProductReseveItemLabel, bufSize)
+	handler, err := NewCSVHandler([]ProductReseveItemLabel{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductReseveItemLabelCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (prilc *ProductReseveItemLabelCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &prilc.buf[i])
+	}
+	prilc.CSVWriter.Write(prilc.buf[:len(resp.Result)])
+	return prilc.CSVWriter
 }
 
 type ProductStore struct {
@@ -66,8 +172,60 @@ type ProductStore struct {
 	AssignDivision string `json:"assignDivision" csv:"assign_division"`
 }
 
+type ProductStoreCSV struct {
+	*CSVHandler
+	buf []ProductStore
+}
+
+func NewProductStoreCSV(bufSize int, output string) (*ProductStoreCSV, error) {
+	buf := make([]ProductStore, bufSize)
+	handler, err := NewCSVHandler([]ProductStore{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductStoreCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (psc *ProductStoreCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &psc.buf[i])
+	}
+	psc.CSVWriter.Write(psc.buf[:len(resp.Result)])
+	return psc.CSVWriter
+}
+
 type ProductInventoryReservation struct {
 	ProductID            int    `json:"productId" csv:"product_id"`
 	ReservationProductID string `json:"reservationProductId" csv:"reservation_product_id"`
 	ReservationAmount    int    `json:"reservationAmount" csv:"reservation_amount"`
+}
+
+type ProductInventoryReservationCSV struct {
+	*CSVHandler
+	buf []ProductInventoryReservation
+}
+
+func NewProductInventoryReservationCSV(bufSize int, output string) (*ProductInventoryReservationCSV, error) {
+	buf := make([]ProductInventoryReservation, bufSize)
+	handler, err := NewCSVHandler([]ProductInventoryReservation{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ProductInventoryReservationCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (pirc *ProductInventoryReservationCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &pirc.buf[i])
+	}
+	pirc.CSVWriter.Write(pirc.buf[:len(resp.Result)])
+	return pirc.CSVWriter
 }

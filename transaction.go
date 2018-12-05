@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/shopspring/decimal"
 )
 
@@ -123,6 +125,32 @@ type TransactionHead struct {
 	UpdDateTime                    string           `json:"updDateTime" csv:"updDateTime"`
 }
 
+type TransactionHeadCSV struct {
+	*CSVHandler
+	buf []TransactionHead
+}
+
+func NewTransactionHeadCSV(bufSize int, output string) (*TransactionHeadCSV, error) {
+	buf := make([]TransactionHead, bufSize)
+	handler, err := NewCSVHandler([]TransactionHead{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionHeadCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (thc *TransactionHeadCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &thc.buf[i])
+	}
+	thc.CSVWriter.Write(thc.buf[:len(resp.Result)])
+	return thc.CSVWriter
+}
+
 type TransactionDetail struct {
 	TransactionHeadID            int              `json:"transactionHeadId" csv:"transactionHeadID"`
 	TransactionDateTime          string           `json:"transactionDateTime" csv:"transactionDateTime"`
@@ -183,4 +211,30 @@ type TransactionDetail struct {
 	ModifiedTaxRate              *decimal.Decimal `json:"modifiedTaxRate" csv:"modifiedTaxRate"`
 	Color                        string           `json:"color" csv:"color"`
 	Size                         string           `json:"size" csv:"size"`
+}
+
+type TransactionDetailCSV struct {
+	*CSVHandler
+	buf []TransactionDetail
+}
+
+func NewTransactionDetailCSV(bufSize int, output string) (*TransactionDetailCSV, error) {
+	buf := make([]TransactionDetail, bufSize)
+	handler, err := NewCSVHandler([]TransactionDetail{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionDetailCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (tdc *TransactionDetailCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &tdc.buf[i])
+	}
+	tdc.CSVWriter.Write(tdc.buf[:len(resp.Result)])
+	return tdc.CSVWriter
 }

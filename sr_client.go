@@ -86,344 +86,57 @@ func (sc *SrClient) Request(params SrRefParams) (*SrRefResponse, error) {
 	return parseRefResponse(resp)
 }
 
-func writeCSV(cw *CSVWriter, resultBuffer interface{}, resp *SrRefResponse) (*CSVWriter, error) {
-	switch buffer := resultBuffer.(type) {
-	case []Category:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []Store:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []Product:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []ProductPrice:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []ProductStore:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []ProductReseveItem:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []ProductReseveItemLabel:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []ProductInventoryReservation:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []Customer:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []Stock:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []StockHistory:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []TransactionHead:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []TransactionDetail:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []DailySum:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []Bargain:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []BargainProduct:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	case []BargainStore:
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &buffer[i])
-		}
-		cw.Write(buffer[:len(resp.Result)])
-	default:
-		return nil, errors.New("No buffer is matched")
-	}
-
-	return cw, nil
-}
-
 func (sc *SrClient) DumpTableToCSV(params SrRefParams) (*CSVWriter, error) {
+	var handler SrCSVHandlerIf
+	var err error
+	output := fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName)
 	switch params.TableName {
 	case CATEGORY:
-		resultBuffer := make([]Category, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewCategoryCSV(params.Limit, output)
 	case STORE:
-		resultBuffer := make([]Store, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewStoreCSV(params.Limit, output)
 	case PRODUCT:
-		resultBuffer := make([]Product, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductCSV(params.Limit, output)
 	case PRODUCT_PRICE:
-		resultBuffer := make([]ProductPrice, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductPriceCSV(params.Limit, output)
 	case PRODUCT_RESERVE_ITEM:
-		resultBuffer := make([]ProductReseveItem, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductReseveItemCSV(params.Limit, output)
 	case PRODUCT_RESERVE_ITEM_LABEL:
-		resultBuffer := make([]ProductReseveItemLabel, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductReseveItemLabelCSV(params.Limit, output)
 	case PRODUCT_STORE:
-		resultBuffer := make([]ProductStore, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductStoreCSV(params.Limit, output)
 	case PRODUCT_INVENTORY_RESERVATION:
-		resultBuffer := make([]ProductInventoryReservation, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewProductInventoryReservationCSV(params.Limit, output)
 	case CUSTOMER:
-		resultBuffer := make([]Customer, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewCustomerCSV(params.Limit, output)
 	case STOCK:
-		resultBuffer := make([]Stock, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewStockCSV(params.Limit, output)
 	case STOCK_HISTORY:
-		resultBuffer := make([]StockHistory, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewStockHistoryCSV(params.Limit, output)
 	case TRANSACTION_HEAD:
-		resultBuffer := make([]TransactionHead, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewTransactionHeadCSV(params.Limit, output)
 	case TRANSACTION_DETAIL:
-		resultBuffer := make([]TransactionDetail, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewTransactionDetailCSV(params.Limit, output)
 	case BARGAIN:
-		resultBuffer := make([]Bargain, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-		return writeCSV(cw, resultBuffer, resp)
-
+		handler, err = NewBargainCSV(params.Limit, output)
 	case BARGAIN_PRODUCT:
-		resultBuffer := make([]BargainProduct, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		return writeCSV(cw, resultBuffer, resp)
+		handler, err = NewBargainProductCSV(params.Limit, output)
 	case BARGAIN_STORE:
-		resultBuffer := make([]BargainStore, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		handler, err = NewBargainStoreCSV(params.Limit, output)
 	case DAILY_SUM:
-		resultBuffer := make([]DailySum, params.Limit)
-
-		cw, err := NewCSVWriter(resultBuffer[:0], fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, params.TableName))
-		if err != nil {
-			return nil, err
-		}
-
-		resp, err := sc.Request(params)
-		if err != nil {
-			return nil, err
-		}
-
-		for i, r := range resp.Result {
-			json.Unmarshal([]byte(r.String()), &resultBuffer[i])
-		}
-		cw.Write(resultBuffer[:len(resp.Result)])
-		return cw, nil
+		handler, err = NewDailySumCSV(params.Limit, output)
 	default:
 		return nil, errors.New("No table name is matched")
 	}
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := sc.Request(params)
+	if err != nil {
+		return nil, err
+	}
+
+	handler.Write(resp)
+	return handler.GetCSVWriter(), nil
 }

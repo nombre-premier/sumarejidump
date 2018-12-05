@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+
 	"github.com/shopspring/decimal"
 )
 
@@ -73,6 +75,32 @@ type DailySum struct {
 	UpdDateTime                      string          `json:"updDateTime" csv:"updDateTime"`
 	SalesTotalNonSalesTargetDivision string          `json:"salesTotalNonSalesTargetDivision" csv:"salesTotalNonSalesTargetDivision"`
 	TotalTaxFreeDivision             string          `json:"totalTaxFreeDivision" csv:"totalTaxFreeDivision"`
+}
+
+type DailySumCSV struct {
+	*CSVHandler
+	buf []DailySum
+}
+
+func NewDailySumCSV(bufSize int, output string) (*DailySumCSV, error) {
+	buf := make([]DailySum, bufSize)
+	handler, err := NewCSVHandler([]DailySum{}, output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &DailySumCSV{
+		handler,
+		buf,
+	}, nil
+}
+
+func (dsc *DailySumCSV) Write(resp *SrRefResponse) *CSVWriter {
+	for i, r := range resp.Result {
+		json.Unmarshal([]byte(r.String()), &dsc.buf[i])
+	}
+	dsc.CSVWriter.Write(dsc.buf[:len(resp.Result)])
+	return dsc.CSVWriter
 }
 
 type OtherSales struct {
