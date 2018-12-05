@@ -69,7 +69,7 @@ func (sc *SrClient) Request(p SrRefParams) (*SrRefResponse, error) {
 	}
 	data := url.Values{}
 	data.Set("proc_name", p.ProcName)
-	data.Add("p", string(jsonBytes))
+	data.Add("params", string(jsonBytes))
 
 	r, err := http.NewRequest("POST", sc.config.EndPoint, strings.NewReader(data.Encode()))
 	if err != nil {
