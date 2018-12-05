@@ -7,10 +7,10 @@ import (
 )
 
 type Bargain struct {
-	BargainID   int    `json:"bargainId"`
-	BargainName string `json:"bargainName"`
-	TermStart   string `json:"termStart"`
-	TermEnd     string `json:"termEnd"`
+	BargainID   int    `json:"bargainId" csv:"bargainId"`
+	BargainName string `json:"bargainName" csv:"bargainName"`
+	TermStart   string `json:"termStart" csv:"termStart"`
+	TermEnd     string `json:"termEnd" csv:"termEnd"`
 }
 
 type BargainCSV struct {
@@ -40,12 +40,12 @@ func (bc *BargainCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type BargainProduct struct {
-	BargainProductID int             `json:"bargainProductId"`
-	BargainID        int             `json:"bargainId"`
-	TargetDivision   string          `json:"targetDivision"`
-	TargetID         string          `json:"targetId"`
-	Division         string          `json:"division"`
-	Value            decimal.Decimal `json:"value"`
+	BargainProductID int             `json:"bargainProductId" csv:"bargainProductId"`
+	BargainID        int             `json:"bargainId" csv:"bargainId"`
+	TargetDivision   string          `json:"targetDivision" csv:"targetDivision"`
+	TargetID         string          `json:"targetId" csv:"targetId"`
+	Division         string          `json:"division" csv:"division"`
+	Value            decimal.Decimal `json:"value" csv:"value"`
 }
 
 type BargainProductCSV struct {
@@ -75,9 +75,9 @@ func (bpc *BargainProductCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type BargainStore struct {
-	BargainStoreID int `json:"bargainStoreId"`
-	BargainID      int `json:"bargainId"`
-	StoreID        int `json:"storeId"`
+	BargainStoreID int `json:"bargainStoreId" csv:"bargainStoreId"`
+	BargainID      int `json:"bargainId" csv:"bargainId"`
+	StoreID        int `json:"storeId" csv:"storeId"`
 }
 
 type BargainStoreCSV struct {

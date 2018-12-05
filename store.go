@@ -3,7 +3,7 @@ package main
 import "encoding/json"
 
 type Store struct {
-	StoreID                  int     `json:"storeId" csv:"storeID"`
+	StoreID                  int     `json:"storeId" csv:"storeId"`
 	StoreCode                string  `json:"storeCode" csv:"storeCode"`
 	StoreName                string  `json:"storeName" csv:"storeName"`
 	StoreAbbr                *string `json:"storeAbbr" csv:"storeAbbr"`

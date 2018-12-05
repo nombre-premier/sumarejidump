@@ -8,8 +8,8 @@ import (
 
 type DailySum struct {
 	SumDate                          string          `json:"sumDate" csv:"sumDate"`
-	StoreID                          int             `json:"storeId" csv:"storeID"`
-	CashDrawerID                     int             `json:"cashDrawerId" csv:"cashDrawerID"`
+	StoreID                          int             `json:"storeId" csv:"storeId"`
+	CashDrawerID                     int             `json:"cashDrawerId" csv:"cashDrawerId"`
 	Status                           string          `json:"status" csv:"status"`
 	SalesTotal                       decimal.Decimal `json:"salesTotal" csv:"salesTotal"`
 	Discount                         decimal.Decimal `json:"discount" csv:"discount"`

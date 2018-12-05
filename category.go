@@ -3,7 +3,7 @@ package main
 import "encoding/json"
 
 type Category struct {
-	CategoryID         int     `json:"categoryId" csv:"categoryID"`
+	CategoryID         int     `json:"categoryId" csv:"categoryId"`
 	CategoryCode       string  `json:"categoryCode" csv:"categoryCode"`
 	CategoryName       string  `json:"categoryName" csv:"categoryName"`
 	CategoryAbbr       string  `json:"categoryAbbr" csv:"categoryAbbr"`

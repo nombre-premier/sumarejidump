@@ -7,8 +7,8 @@ import (
 )
 
 type Product struct {
-	ProductID            int             `json:"productId" csv:"productID"`
-	CategoryID           int             `json:"categoryId" csv:"categoryID"`
+	ProductID            int             `json:"productId" csv:"productId"`
+	CategoryID           int             `json:"categoryId" csv:"categoryId"`
 	ProductCode          string          `json:"productCode" csv:"productCode"`
 	ProductName          string          `json:"productName" csv:"productName"`
 	ProductKana          string          `json:"productKana" csv:"productKana"`
@@ -67,14 +67,14 @@ func (pc *ProductCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductPrice struct {
-	ProductID     int             `json:"productId" csv:"product_id"`
-	StoreID       string          `json:"storeId" csv:"store_id"`
-	PriceDivision string          `json:"priceDivision" csv:"price_division"`
-	StartDate     string          `json:"startDate" csv:"start_date"`
-	EndDate       string          `json:"endDate" csv:"end_date"`
+	ProductID     int             `json:"productId" csv:"productId"`
+	StoreID       string          `json:"storeId" csv:"storeId"`
+	PriceDivision string          `json:"priceDivision" csv:"priceDivision"`
+	StartDate     string          `json:"startDate" csv:"startDate"`
+	EndDate       string          `json:"endDate" csv:"endDate"`
 	Price         decimal.Decimal `json:"price" csv:"price"`
-	InsDateTime   string          `json:"insDateTime" csv:"ins_date_time"`
-	UpdDateTime   string          `json:"updDateTime" csv:"upd_date_time"`
+	InsDateTime   string          `json:"insDateTime" csv:"insDateTime"`
+	UpdDateTime   string          `json:"updDateTime" csv:"updDateTime"`
 }
 
 type ProductPriceCSV struct {
@@ -104,7 +104,7 @@ func (ppc *ProductPriceCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductReseveItem struct {
-	ProductID string `json:"productId" csv:"product_id"`
+	ProductID string `json:"productId" csv:"productId"`
 	No        string `json:"no" csv:"no"`
 	Value     string `json:"value" csv:"value"`
 }
@@ -167,9 +167,9 @@ func (prilc *ProductReseveItemLabelCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductStore struct {
-	ProductID      int    `json:"productId" csv:"product_id"`
-	StoreID        int    `json:"storeId" csv:"store_id"`
-	AssignDivision string `json:"assignDivision" csv:"assign_division"`
+	ProductID      int    `json:"productId" csv:"productId"`
+	StoreID        int    `json:"storeId" csv:"storeId"`
+	AssignDivision string `json:"assignDivision" csv:"assignDivision"`
 }
 
 type ProductStoreCSV struct {
@@ -199,9 +199,9 @@ func (psc *ProductStoreCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductInventoryReservation struct {
-	ProductID            int    `json:"productId" csv:"product_id"`
-	ReservationProductID string `json:"reservationProductId" csv:"reservation_product_id"`
-	ReservationAmount    int    `json:"reservationAmount" csv:"reservation_amount"`
+	ProductID            int    `json:"productId" csv:"productId"`
+	ReservationProductID string `json:"reservationProductId" csv:"reservationProductId"`
+	ReservationAmount    int    `json:"reservationAmount" csv:"reservationAmount"`
 }
 
 type ProductInventoryReservationCSV struct {

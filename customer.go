@@ -7,7 +7,7 @@ import (
 )
 
 type Customer struct {
-	CustomerID           int              `json:"customerId" csv:"customerID"`
+	CustomerID           int              `json:"customerId" csv:"customerId"`
 	CustomerCode         string           `json:"customerCode" csv:"customerCode"`
 	CustomerNo           *string          `json:"customerNo" csv:"customerNo"`
 	Rank                 *string          `json:"rank" csv:"rank"`
