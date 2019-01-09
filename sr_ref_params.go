@@ -61,7 +61,7 @@ type SrTableMeta struct {
 	ProcName string
 }
 
-var srTableMetas = []SrTableMeta{
+var SrTableMetas = []SrTableMeta{
 	SrTableMeta{Name: CATEGORY, Limit: 1000, ProcName: CATEGORY_REF},
 	SrTableMeta{Name: STORE, Limit: 1000, ProcName: STORE_REF},
 	SrTableMeta{Name: PRODUCT, Limit: 1000, ProcName: PRODUCT_REF},
@@ -82,7 +82,7 @@ var srTableMetas = []SrTableMeta{
 }
 
 func GetTableMetaByName(tableName string) *SrTableMeta {
-	for _, t := range srTableMetas {
+	for _, t := range SrTableMetas {
 		if t.Name == tableName {
 			return &t
 		}

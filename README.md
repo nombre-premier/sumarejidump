@@ -5,17 +5,25 @@ Just dump sumareji tables into CSV
 ## Usage
 
 ```
-sumarejidump [table_name] [option]
+NAME:
+   sumarejidump - Just dump sumareji data
 
-Just dump sumareji tables.
-SUMAREJI_CONTRACT_ID and SUMAREJI_ACCESS_TOKEN must be stored in environmental variable.
+USAGE:
+   sumarejidump [command] [options] [table_name]
 
-table_name
-the name of table for dump. default all tables.
+VERSION:
+   0.0.1
 
-option
--c condition
--d output directory
+COMMANDS:
+     help, h  Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --token value, -t value        sumareji access token [$SUMAREJI_ACCESS_TOKEN]
+   --contract_id value, -i value  sumareji contract_id [$SUMAREJI_CONTRACT_ID]
+   --conditions value, -c value   filter data by given conditon(s)
+   --output value, -o value       output dir name, default: yyyyMMDDhhmmss
+   --help, -h                     show help
+   --version, -v                  print the version
 ```
 
 - The output CSV file name is the name of table.
