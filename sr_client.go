@@ -139,6 +139,20 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewBargainStoreCSV(p.Limit, output)
 	case DAILY_SUM:
 		return NewDailySumCSV(p.Limit, output)
+	case SHIPPING:
+		return NewShippingCSV(p.Limit, output)
+	case SHIPPING_DETAIL:
+		return NewShippingDetailCSV(p.Limit, output)
+	case RECEIVING:
+		return NewReceivingCSV(p.Limit, output)
+	case RECEIVING_DETAIL:
+		return NewReceivingDetailCSV(p.Limit, output)
+	case STOCKTAKING_INFO:
+		return NewStocktakingInfoCSV(p.Limit, output)
+	case STOCKTAKING_HEAD:
+		return NewStocktakingHeadCSV(p.Limit, output)
+	case STOCKTAKING_DETAIL:
+		return NewStocktakingDetailCSV(p.Limit, output)
 	default:
 		return nil, errors.New("No table name is matched")
 	}

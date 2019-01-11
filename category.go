@@ -3,21 +3,21 @@ package main
 import "encoding/json"
 
 type Category struct {
-	CategoryID         int     `json:"categoryId" csv:"categoryId"`
-	CategoryCode       string  `json:"categoryCode" csv:"categoryCode"`
-	CategoryName       string  `json:"categoryName" csv:"categoryName"`
-	CategoryAbbr       string  `json:"categoryAbbr" csv:"categoryAbbr"`
-	CategoryGroupID    *int    `json:"categoryGroupId" csv:"categoryGroupID"`
-	ParentCategoryID   *int    `json:"parentCategoryId" csv:"parentCategoryID"`
-	Level              int     `json:"level" csv:"level"`
-	DisplaySequence    int     `json:"displaySequence" csv:"displaySequence"`
-	DisplayFlag        string  `json:"displayFlag" csv:"displayFlag"`
-	PointNotApplicable string  `json:"pointNotApplicable" csv:"pointNotApplicable"`
-	TaxFreeDivision    string  `json:"taxFreeDivision" csv:"taxFreeDivision"`
-	Color              *string `json:"color" csv:"color"`
-	Tag                *string `json:"tag" csv:"tag"`
-	InsDateTime        string  `json:"insDateTime" csv:"insDateTime"`
-	UpdDateTime        string  `json:"updDateTime" csv:"updDateTime"`
+	CategoryID         json.Number  `json:"categoryId" csv:"categoryId"`
+	CategoryCode       string       `json:"categoryCode" csv:"categoryCode"`
+	CategoryName       string       `json:"categoryName" csv:"categoryName"`
+	CategoryAbbr       string       `json:"categoryAbbr" csv:"categoryAbbr"`
+	CategoryGroupID    *json.Number `json:"categoryGroupId" csv:"categoryGroupID"`
+	ParentCategoryID   *json.Number `json:"parentCategoryId" csv:"parentCategoryID"`
+	Level              json.Number  `json:"level" csv:"level"`
+	DisplaySequence    json.Number  `json:"displaySequence" csv:"displaySequence"`
+	DisplayFlag        string       `json:"displayFlag" csv:"displayFlag"`
+	PointNotApplicable string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
+	TaxFreeDivision    string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
+	Color              *string      `json:"color" csv:"color"`
+	Tag                *string      `json:"tag" csv:"tag"`
+	InsDateTime        string       `json:"insDateTime" csv:"insDateTime"`
+	UpdDateTime        string       `json:"updDateTime" csv:"updDateTime"`
 }
 
 type CategoryCSV struct {
