@@ -41,21 +41,21 @@ func (cc *ReceivingCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ReceivingDetail struct {
-	ReceivingID        int     `json:"receivingId" csv:"receivingId"`
-	ProductID          int     `json:"productId" csv:"productId"`
-	ProductCode        string  `json:"productCode" csv:"productCode"`
-	ProductName        string  `json:"productName" csv:"productName"`
-	Size               string  `json:"size" csv:"size"`
-	Color              string  `json:"color" csv:"color"`
-	GroupCode          *string `json:"groupCode" csv:"groupCode"`
-	SupplierProductNo  *string `json:"supplierProductNo" csv:"supplierProductNo"`
-	ScheduledQuantity  string  `json:"scheduledQuantity" csv:"scheduledQuantity"`
-	InspectionQuantity string  `json:"inspectionQuantity" csv:"inspectionQuantity"`
-	StockoutQuantity   string  `json:"stockoutQuantity" csv:"stockoutQuantity"`
-	StockoutReason     *string `json:"stockoutReason" csv:"stockoutReason"`
-	InspectionDate     string  `json:"inspectionDate" csv:"inspectionDate"`
-	Status             string  `json:"status" csv:"status"`
-	Modified           string  `json:"modified" csv:"modified"`
+	ReceivingID        json.Number `json:"receivingId" csv:"receivingId"`
+	ProductID          json.Number `json:"productId" csv:"productId"`
+	ProductCode        string      `json:"productCode" csv:"productCode"`
+	ProductName        string      `json:"productName" csv:"productName"`
+	Size               string      `json:"size" csv:"size"`
+	Color              string      `json:"color" csv:"color"`
+	GroupCode          *string     `json:"groupCode" csv:"groupCode"`
+	SupplierProductNo  *string     `json:"supplierProductNo" csv:"supplierProductNo"`
+	ScheduledQuantity  string      `json:"scheduledQuantity" csv:"scheduledQuantity"`
+	InspectionQuantity string      `json:"inspectionQuantity" csv:"inspectionQuantity"`
+	StockoutQuantity   string      `json:"stockoutQuantity" csv:"stockoutQuantity"`
+	StockoutReason     *string     `json:"stockoutReason" csv:"stockoutReason"`
+	InspectionDate     string      `json:"inspectionDate" csv:"inspectionDate"`
+	Status             string      `json:"status" csv:"status"`
+	Modified           string      `json:"modified" csv:"modified"`
 }
 
 type ReceivingDetailCSV struct {
