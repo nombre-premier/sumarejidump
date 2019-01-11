@@ -3,10 +3,10 @@ package main
 import "encoding/json"
 
 type Stock struct {
-	StoreID     int    `json:"storeId" csv:"storeId"`
-	ProductID   int    `json:"productId" csv:"productId"`
-	StockAmount string `json:"stockAmount" csv:"stockAmount"`
-	UpdDateTime string `json:"updDateTime" csv:"updDateTime"`
+	StoreID     json.Number `json:"storeId" csv:"storeId"`
+	ProductID   json.Number `json:"productId" csv:"productId"`
+	StockAmount string      `json:"stockAmount" csv:"stockAmount"`
+	UpdDateTime string      `json:"updDateTime" csv:"updDateTime"`
 }
 
 type StockCSV struct {
@@ -36,16 +36,16 @@ func (sc *StockCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type StockHistory struct {
-	ID             int    `json:"id" csv:"id"`
-	UpdDateTime    string `json:"updDateTime" csv:"updDateTime"`
-	TargetDateTime string `json:"targetDateTime" csv:"targetDateTime"`
-	ProductID      int    `json:"productId" csv:"productId"`
-	StoreID        int    `json:"storeId" csv:"storeId"`
-	Amount         int    `json:"amount" csv:"amount"`
-	StockAmount    int    `json:"stockAmount" csv:"stockAmount"`
-	StockDivision  string `json:"stockDivision" csv:"stockDivision"`
-	FromStoreID    *int   `json:"fromStoreId" csv:"fromStoreId"`
-	ToStoreID      *int   `json:"toStoreId" csv:"toStoreId"`
+	ID             json.Number  `json:"id" csv:"id"`
+	UpdDateTime    string       `json:"updDateTime" csv:"updDateTime"`
+	TargetDateTime string       `json:"targetDateTime" csv:"targetDateTime"`
+	ProductID      json.Number  `json:"productId" csv:"productId"`
+	StoreID        json.Number  `json:"storeId" csv:"storeId"`
+	Amount         json.Number  `json:"amount" csv:"amount"`
+	StockAmount    json.Number  `json:"stockAmount" csv:"stockAmount"`
+	StockDivision  string       `json:"stockDivision" csv:"stockDivision"`
+	FromStoreID    *json.Number `json:"fromStoreId" csv:"fromStoreId"`
+	ToStoreID      *json.Number `json:"toStoreId" csv:"toStoreId"`
 }
 
 type StockHistoryCSV struct {
