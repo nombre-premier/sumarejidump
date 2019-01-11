@@ -7,7 +7,7 @@ import (
 )
 
 type Customer struct {
-	CustomerID           int              `json:"customerId" csv:"customerId"`
+	CustomerID           json.Number      `json:"customerId" csv:"customerId"`
 	CustomerCode         string           `json:"customerCode" csv:"customerCode"`
 	CustomerNo           *string          `json:"customerNo" csv:"customerNo"`
 	Rank                 *string          `json:"rank" csv:"rank"`
@@ -47,7 +47,7 @@ type Customer struct {
 	FavoriteList         *string          `json:"favoriteList" csv:"favoriteList"`
 	BrowsingList         *string          `json:"browsingList" csv:"browsingList"`
 	Status               string           `json:"status" csv:"status"`
-	StoreID              *int             `json:"storeId" csv:"storeID"`
+	StoreID              *json.Number     `json:"storeId" csv:"storeID"`
 	InsDateTime          string           `json:"insDateTime" csv:"insDateTime"`
 	UpdDateTime          string           `json:"updDateTime" csv:"updDateTime"`
 }

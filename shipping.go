@@ -3,20 +3,20 @@ package main
 import "encoding/json"
 
 type Shipping struct {
-	ShippingID                         int     `json:"shippingId" csv:"shippingId"`
-	ShippingStoreID                    int     `json:"shippingStoreId" csv:"shippingStoreId"`
-	ReceivingStoreID                   int     `json:"receivingStoreId" csv:"receivingStoreId"`
-	ReceivingExpectedDateFrom          string  `json:"receivingExpectedDateFrom" csv:"receivingExpectedDateFrom"`
-	ReceivingExpectedDateTo            string  `json:"receivingExpectedDateTo" csv:"receivingExpectedDateTo"`
-	ShippingDate                       string  `json:"shippingDate" csv:"shippingDate"`
-	ReceivingDesiredDate               *string `json:"receivingDesiredDate" csv:"receivingDesiredDate"`
-	Memo                               string  `json:"memo" csv:"memo"`
-	Status                             string  `json:"status" csv:"status"`
-	ModificationRequestStatus          string  `json:"modificationRequestStatus" csv:"modificationRequestStatus"`
-	ModificationRequestDateTime        *string `json:"modificationRequestDateTime" csv:"modificationRequestDateTime"`
-	ModificationRequestCheckedDateTime *string `json:"modificationRequestCheckedDateTime" csv:"modificationRequestCheckedDateTime"`
-	IdentificationNo                   *string `json:"identificationNo" csv:"identificationNo"`
-	Modified                           string  `json:"modified" csv:"modified"`
+	ShippingID                         json.Number `json:"shippingId" csv:"shippingId"`
+	ShippingStoreID                    json.Number `json:"shippingStoreId" csv:"shippingStoreId"`
+	ReceivingStoreID                   json.Number `json:"receivingStoreId" csv:"receivingStoreId"`
+	ReceivingExpectedDateFrom          string      `json:"receivingExpectedDateFrom" csv:"receivingExpectedDateFrom"`
+	ReceivingExpectedDateTo            string      `json:"receivingExpectedDateTo" csv:"receivingExpectedDateTo"`
+	ShippingDate                       string      `json:"shippingDate" csv:"shippingDate"`
+	ReceivingDesiredDate               *string     `json:"receivingDesiredDate" csv:"receivingDesiredDate"`
+	Memo                               string      `json:"memo" csv:"memo"`
+	Status                             string      `json:"status" csv:"status"`
+	ModificationRequestStatus          string      `json:"modificationRequestStatus" csv:"modificationRequestStatus"`
+	ModificationRequestDateTime        *string     `json:"modificationRequestDateTime" csv:"modificationRequestDateTime"`
+	ModificationRequestCheckedDateTime *string     `json:"modificationRequestCheckedDateTime" csv:"modificationRequestCheckedDateTime"`
+	IdentificationNo                   *string     `json:"identificationNo" csv:"identificationNo"`
+	Modified                           string      `json:"modified" csv:"modified"`
 }
 
 type ShippingCSV struct {
@@ -46,17 +46,17 @@ func (cc *ShippingCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ShippingDetail struct {
-	ShippingID        int     `json:"shippingId"`
-	ProductID         int     `json:"productId"`
-	ProductCode       string  `json:"productCode"`
-	ProductName       string  `json:"productName"`
-	Size              string  `json:"size"`
-	Color             string  `json:"color"`
-	GroupCode         *string `json:"groupCode"`
-	SupplierProductNo *string `json:"supplierProductNo"`
-	RequestQuantity   *string `json:"requestQuantity"`
-	Quantity          string  `json:"quantity"`
-	Modified          string  `json:"modified"`
+	ShippingID        json.Number `json:"shippingId"`
+	ProductID         json.Number `json:"productId"`
+	ProductCode       string      `json:"productCode"`
+	ProductName       string      `json:"productName"`
+	Size              string      `json:"size"`
+	Color             string      `json:"color"`
+	GroupCode         *string     `json:"groupCode"`
+	SupplierProductNo *string     `json:"supplierProductNo"`
+	RequestQuantity   *string     `json:"requestQuantity"`
+	Quantity          string      `json:"quantity"`
+	Modified          string      `json:"modified"`
 }
 
 type ShippingDetailCSV struct {

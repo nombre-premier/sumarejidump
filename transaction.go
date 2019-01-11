@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/shopspring/decimal"
 )
@@ -146,13 +147,14 @@ func NewTransactionHeadCSV(bufSize int, output string) (*TransactionHeadCSV, err
 func (thc *TransactionHeadCSV) Write(resp *SrRefResponse) *CSVWriter {
 	for i, r := range resp.Result {
 		json.Unmarshal([]byte(r.String()), &thc.buf[i])
+		fmt.Println(thc.buf[i])
 	}
 	thc.CSVWriter.Write(thc.buf[:len(resp.Result)])
 	return thc.CSVWriter
 }
 
 type TransactionDetail struct {
-	TransactionHeadID            int              `json:"transactionHeadId" csv:"transactionHeadId"`
+	TransactionHeadID            json.Number      `json:"transactionHeadId" csv:"transactionHeadId"`
 	TransactionDateTime          string           `json:"transactionDateTime" csv:"transactionDateTime"`
 	TransactionDetailID          int              `json:"transactionDetailId" csv:"transactionDetailId"`
 	ParentTransactionDetailID    *int             `json:"parentTransactionDetailId" csv:"parentTransactionDetailId"`

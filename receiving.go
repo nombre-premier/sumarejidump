@@ -3,15 +3,15 @@ package main
 import "encoding/json"
 
 type Receiving struct {
-	ReceivingID      string      `json:"receivingId" csv:"receivingId"`
-	ShippingID       string      `json:"shippingId" csv:"shippingId"`
-	ShippingStoreID  string      `json:"shippingStoreId" csv:"shippingStoreId"`
-	ReceivingStoreID string      `json:"receivingStoreId" csv:"receivingStoreId"`
-	ReceivingDate    string      `json:"receivingDate" csv:"receivingDate"`
-	Memo             string      `json:"memo" csv:"memo"`
-	Status           string      `json:"status" csv:"status"`
-	IdentificationNo interface{} `json:"identificationNo" csv:"identificationNo"`
-	Modified         string      `json:"modified" csv:"modified"`
+	ReceivingID      string  `json:"receivingId" csv:"receivingId"`
+	ShippingID       string  `json:"shippingId" csv:"shippingId"`
+	ShippingStoreID  string  `json:"shippingStoreId" csv:"shippingStoreId"`
+	ReceivingStoreID string  `json:"receivingStoreId" csv:"receivingStoreId"`
+	ReceivingDate    string  `json:"receivingDate" csv:"receivingDate"`
+	Memo             string  `json:"memo" csv:"memo"`
+	Status           string  `json:"status" csv:"status"`
+	IdentificationNo *string `json:"identificationNo" csv:"identificationNo"`
+	Modified         string  `json:"modified" csv:"modified"`
 }
 
 type ReceivingCSV struct {
