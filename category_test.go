@@ -13,7 +13,7 @@ import (
 	"gopkg.in/h2non/gock.v1"
 )
 
-func TestMockBodyFile(t *testing.T) {
+func TestCategory(t *testing.T) {
 	defer gock.Off()
 
 	dir, err := ioutil.TempDir("", "category")
