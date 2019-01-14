@@ -94,12 +94,22 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	defer handler.GetCSVWriter().Close()
 
-	resp, err := sc.Request(p)
-	if err != nil {
-		return nil, err
+	resp := &SrRefResponse{}
+
+	for {
+		resp, err = sc.Request(p)
+		if err != nil {
+			return nil, err
+		}
+		handler.Write(resp)
+
+		if resp.TotalCount <= p.Limit*p.Page {
+			break
+		} else {
+			p.Page = p.Page + 1
+		}
 	}
 
-	handler.Write(resp)
 	return handler.GetCSVWriter(), nil
 }
 
