@@ -2,6 +2,8 @@
 
 Just dump sumareji tables into CSV
 
+[![CircleCI](https://circleci.com/gh/nombre-premier/sumarejidump.svg?style=svg)](https://circleci.com/gh/nombre-premier/sumarejidump)
+
 ## Usage
 
 ```
