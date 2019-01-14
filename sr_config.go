@@ -5,4 +5,5 @@ type SrConfig struct {
 	ContractID  string
 	AccessToken string
 	EndPoint    string
+	TableNames  []string
 }
