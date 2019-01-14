@@ -22,7 +22,7 @@ func TestMockBodyFile(t *testing.T) {
 	}
 	defer os.RemoveAll(dir) // clean up
 
-	gock.New("https://webapi.smaregi.jp/").
+	gock.New("https://webapi.smaregi.jp").
 		Post("/access").
 		MatchHeader("X_contract_id", "(.*)").
 		MatchHeader("X_access_token", "(.*)").
