@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/urfave/cli"
@@ -32,7 +31,7 @@ func CreateCliApp() *cli.App {
 			Usage: "filter data by given conditon(s)",
 		},
 		// TODO: implement dir config
-		cli.StringSliceFlag{
+		cli.StringFlag{
 			Name:  "output, o",
 			Usage: "output dir name, default: yyyyMMDDhhmmss",
 		},
@@ -54,32 +53,8 @@ func cliAction(c *cli.Context) error {
 		AccessToken: c.String("token"),
 		EndPoint:    "https://webapi.smaregi.jp/access/",
 		OutputDir:   dirName,
+		TableNames:  []string{c.Args().Get(0)},
 	}
 
-	client := NewSrClient(config)
-	var tables []string = make([]string, 0, len(SrTableMetas))
-	tableName := c.Args().Get(0)
-
-	for _, t := range SrTableMetas {
-		if tableName == "" || strings.EqualFold(t.Name, tableName) {
-			// if tableName is not given, dump all tables
-			// TODO: handle multiple tables
-			tables = append(tables, t.Name)
-		}
-	}
-
-	for _, t := range tables {
-		params, err := NewSrRefParamsWithTableName(t)
-		if err != nil {
-			panic(err)
-		}
-
-		cw, err := client.DumpTableToCSV(params)
-		if err != nil {
-			panic(err)
-		}
-		cw.Close()
-	}
-	return nil
-
+	return Main(config)
 }

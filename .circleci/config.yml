@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.10
+
+    working_directory: /go/src/github.com/nombre-premier/sumarejidump
+    steps:
+      - checkout
+      - run:
+          name: ensure
+          command: |
+            if [ ! -d vendor ]; then
+              if ! type dep >/dev/null 2>&1; then
+                go get github.com/golang/dep/cmd/dep
+              fi
+              dep ensure
+            fi
+      - run: go test -v ./...
