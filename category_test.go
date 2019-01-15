@@ -82,7 +82,7 @@ func TestCategory(t *testing.T) {
 	}
 
 	if !reflect.DeepEqual(categories[0], &cat1) {
-		t.Fatalf("failed test expected: %q\n got: %q", cat1, *categories[0])
+		t.Fatalf("failed test expected: %v\n got: %v", cat1, *categories[0])
 	}
 
 	cat46 := Category{
@@ -103,6 +103,6 @@ func TestCategory(t *testing.T) {
 		UpdDateTime:        "2018-11-30 19:16:02",
 	}
 	if !reflect.DeepEqual(categories[45], &cat46) {
-		t.Fatalf("failed test expected: %q\n got: %q", cat46, *categories[45])
+		t.Fatalf("failed test expected: %v\n got: %v", cat46, *categories[45])
 	}
 }
