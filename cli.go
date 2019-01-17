@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/urfave/cli"
@@ -54,7 +55,23 @@ func cliAction(c *cli.Context) error {
 		EndPoint:    "https://webapi.smaregi.jp/access/",
 		OutputDir:   dirName,
 		TableNames:  []string{c.Args().Get(0)},
+		Conditions:  conditionParser(c.StringSlice("conditions")),
 	}
 
 	return Main(config)
+}
+
+func conditionParser(conditions []string) map[string]*string {
+	cond := make(map[string]*string)
+	for _, c := range conditions {
+		k := c[:strings.Index(c, ":")]
+		v := c[strings.Index(c, ":")+1:]
+		k = strings.Trim(k, " ")
+		if v == "null" {
+			cond[k] = nil
+		} else {
+			cond[k] = &v
+		}
+	}
+	return cond
 }

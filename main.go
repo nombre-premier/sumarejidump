@@ -20,7 +20,7 @@ func Main(c SrConfig) error {
 	}
 
 	for _, t := range tables {
-		params, err := NewSrRefParamsWithTableName(t)
+		params, err := NewSrRefParamsWithConfig(t, c)
 		if err != nil {
 			return err
 		}

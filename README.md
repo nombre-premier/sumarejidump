@@ -32,6 +32,17 @@ GLOBAL OPTIONS:
 - CSV header filed is same to the attribute of the table.
 - The order of CSV filed is same to the No of the table in sumareji specification.
 
+## Example
+
+```
+# sinle condition
+sumarejidump -c categoryId:1 category
+
+# multiple condtions
+sumarejidump -c categoryId >=:1 -c cateoryCode:dbss category
+```
+
+
 ## Development
 ### Requirements
 - Go 1.10+
