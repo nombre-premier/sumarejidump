@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -38,6 +38,7 @@ func main() {
 	cliApp := CreateCliApp()
 	err := cliApp.Run(os.Args)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "%s", err)
+		os.Exit(1)
 	}
 }
