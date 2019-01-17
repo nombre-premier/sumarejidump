@@ -43,7 +43,7 @@ sumarejidump -c categoryId:1 category
 sumarejidump -c categoryId >=:1 -c cateoryCode:dbss category
 
 # specify output directory name
-# default is yyyyMMDDhhmmss, such as 201901010101
+# default is yyyyMMDDhhmmss, such as 20190102030405
 sumarejidump -o result category
 ```
 
