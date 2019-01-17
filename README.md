@@ -35,11 +35,16 @@ GLOBAL OPTIONS:
 ## Example
 
 ```
-# sinle condition
+# single condition
+# condition is splited by ":" and convert into json key-value pair.
 sumarejidump -c categoryId:1 category
 
 # multiple condtions
 sumarejidump -c categoryId >=:1 -c cateoryCode:dbss category
+
+# specify output directory name
+# default is yyyyMMDDhhmmss, such as 201901010101
+sumarejidump -o result category
 ```
 
 

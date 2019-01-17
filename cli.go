@@ -44,7 +44,12 @@ func CreateCliApp() *cli.App {
 
 func cliAction(c *cli.Context) error {
 	t := time.Now()
-	dirName := t.Format(dirFormat)
+	dirName := ""
+	if c.String("output") == "" {
+		dirName = t.Format(dirFormat)
+	} else {
+		dirName = c.String("output")
+	}
 	if err := os.MkdirAll(fmt.Sprintf("%s", dirName), 0755); err != nil {
 		panic(err)
 	}
