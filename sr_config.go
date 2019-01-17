@@ -6,4 +6,5 @@ type SrConfig struct {
 	AccessToken string
 	EndPoint    string
 	TableNames  []string
+	Conditions  map[string]*string
 }
