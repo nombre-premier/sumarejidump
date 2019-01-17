@@ -21,14 +21,14 @@ func TestError14(t *testing.T) {
 
 	gock.New("https://webapi.smaregi.jp").
 		Post("/access").
-		MatchHeader("X_contract_id", "(.*)").
+		MatchHeader("X_contract_id", "").
 		MatchHeader("X_access_token", "(.*)").
 		MatchHeader("Content-Type", "application/x-www-form-urlencoded").
 		Reply(400).
 		File("./testdata/error_14.json")
 
 	c := SrConfig{
-		ContractID:  "invalid_sumareji_id",
+		ContractID:  "",
 		AccessToken: "sumareji_token",
 		EndPoint:    "https://webapi.smaregi.jp/access/",
 		OutputDir:   dir,
