@@ -39,6 +39,11 @@ func main() {
 	err := cliApp.Run(os.Args)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s", err)
-		os.Exit(1)
+		switch e := err.(type) {
+		case *SrError:
+			os.Exit(e.ErrorCode)
+		default:
+			os.Exit(1)
+		}
 	}
 }
