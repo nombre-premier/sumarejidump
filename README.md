@@ -39,7 +39,7 @@ GLOBAL OPTIONS:
 sumarejidump -c categoryId:1 category
 
 # multiple condtions
-sumarejidump -c categoryId:1 -c cateoryCode:dbss category
+sumarejidump -c categoryId >=:1 -c cateoryCode:dbss category
 ```
 
 
