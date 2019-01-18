@@ -9,19 +9,19 @@ type Product struct {
 	CategoryID           json.Number  `json:"categoryId" csv:"categoryId"`
 	ProductCode          string       `json:"productCode" csv:"productCode"`
 	ProductName          string       `json:"productName" csv:"productName"`
-	ProductKana          string       `json:"productKana" csv:"productKana"`
+	ProductKana          *string      `json:"productKana" csv:"productKana"`
 	TaxDivision          string       `json:"taxDivision" csv:"taxDivision"`
 	ProductPriceDivision string       `json:"productPriceDivision" csv:"productPriceDivision"`
-	Price                float64      `json:"price" csv:"price"`
-	CustomerPrice        float64      `json:"customerPrice" csv:"customerPrice"`
-	Cost                 float64      `json:"cost" csv:"cost"`
+	Price                json.Number  `json:"price" csv:"price"`
+	CustomerPrice        *json.Number `json:"customerPrice" csv:"customerPrice"`
+	Cost                 json.Number  `json:"cost" csv:"cost"`
 	Attribute            *string      `json:"attribute" csv:"attribute"`
-	Description          string       `json:"description" csv:"description"`
+	Description          *string      `json:"description" csv:"description"`
 	CatchCopy            *string      `json:"catchCopy" csv:"catchCopy"`
 	Size                 string       `json:"size" csv:"size"`
 	Color                string       `json:"color" csv:"color"`
 	Tag                  *string      `json:"tag" csv:"tag"`
-	GroupCode            string       `json:"groupCode" csv:"groupCode"`
+	GroupCode            *string      `json:"groupCode" csv:"groupCode"`
 	URL                  *string      `json:"url" csv:"url"`
 	DisplaySequence      *json.Number `json:"displaySequence" csv:"displaySequence"`
 	SalesDivision        string       `json:"salesDivision" csv:"salesDivision"`

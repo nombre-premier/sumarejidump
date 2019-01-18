@@ -13,6 +13,10 @@ import (
 	"gopkg.in/h2non/gock.v1"
 )
 
+func floatPtr(f float64) *float64 {
+	return &f
+}
+
 func TestProduct(t *testing.T) {
 	defer gock.Off()
 
@@ -45,7 +49,6 @@ func TestProduct(t *testing.T) {
 
 	csvFile, err := os.OpenFile(path.Join(dir, "Product.csv"), os.O_RDONLY, os.ModePerm)
 	if err != nil {
-		panic(err)
 		t.Fatalf("failed test %#v", err)
 	}
 	defer csvFile.Close()
@@ -56,8 +59,8 @@ func TestProduct(t *testing.T) {
 		t.Fatalf("failed test %#v", err)
 	}
 
-	if len(products) != 1000 {
-		t.Fatalf("Number of data should be 1000. got=%d", len(products))
+	if len(products) != 1{
+		t.Fatalf("Number of data should be 1. got=%d", len(products))
 	}
 
 	emptyStr := ""
@@ -68,19 +71,19 @@ func TestProduct(t *testing.T) {
 		CategoryID:           "2",
 		ProductCode:          "2990000000001",
 		ProductName:          "D181H223  Joined balmacaan denim coat",
-		ProductKana:          "",
+		ProductKana:          &emptyStr,
 		TaxDivision:          "1",
 		ProductPriceDivision: "1",
-		Price:                69000,
-		CustomerPrice:        0,
-		Cost:                 100000.00000,
+		Price:                json.Number("69000"),
+		CustomerPrice:        &emptyJSONNumber,
+		Cost:                 json.Number("100000.00000"),
 		Attribute:            &emptyStr,
-		Description:          "",
+		Description:          &emptyStr,
 		CatchCopy:            &emptyStr,
 		Size:                 "1",
 		Color:                "87",
 		Tag:                  &emptyStr,
-		GroupCode:            "",
+		GroupCode:            &emptyStr,
 		URL:                  &emptyStr,
 		DisplaySequence:      &emptyJSONNumber,
 		DisplayFlag:          "1",
@@ -99,42 +102,5 @@ func TestProduct(t *testing.T) {
 
 	if !reflect.DeepEqual(products[0], &pro1) {
 		t.Fatalf("failed test expected: %v\n got: %v", pro1, *products[0])
-	}
-
-	pro50 := Product{
-		ProductID:            "50",
-		CategoryID:           "3",
-		ProductCode:          "2990000000001",
-		ProductName:          "D181H223  Joined balmacaan denim coat",
-		ProductKana:          "",
-		TaxDivision:          "1",
-		ProductPriceDivision: "1",
-		Price:                69000.0000000,
-		CustomerPrice:        0,
-		Cost:                 100000.00000,
-		Attribute:            &emptyStr,
-		Description:          "",
-		CatchCopy:            &emptyStr,
-		Size:                 "1",
-		Color:                "87",
-		Tag:                  &emptyStr,
-		GroupCode:            "",
-		URL:                  &emptyStr,
-		DisplaySequence:      &emptyJSONNumber,
-		SalesDivision:        "0",
-		StockControlDivision: "0",
-		DisplayFlag:          "1",
-		Division:             "0",
-		ProductOptionGroupID: &emptyJSONNumber,
-		PointNotApplicable:   "0",
-		TaxFreeDivision:      "1",
-		SupplierProductNo:    &emptyStr,
-		StaffDiscountRate:    &emptyJSONNumber,
-		AppStartDateTime:     &emptyStr,
-		InsDateTime:          "2018/7/21 1:28",
-		UpdDateTime:          "2018/12/6 16:40",
-	}
-	if !reflect.DeepEqual(products[49], &pro50) {
-		t.Fatalf("failed test expected: %v\n got: %v", pro50, *products[49])
 	}
 }
