@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -45,7 +44,6 @@ func TestProduct(t *testing.T) {
 
 	err = Main(c)
 	if err != nil {
-		fmt.Println(err.Error())
 		t.Fatalf("failed test %#v", err)
 	}
 
@@ -101,8 +99,6 @@ func TestProduct(t *testing.T) {
 		InsDateTime:          "2018-07-21 01:28:22",
 		UpdDateTime:          "2018-12-06 16:40:43",
 	}
-	fmt.Println(pro1)
-	fmt.Println(products[0])
 
 	if !reflect.DeepEqual(products[0], &pro1) {
 		t.Fatalf("failed test expected: %v\n got: %v", pro1, *products[0])
