@@ -13,10 +13,6 @@ import (
 	"gopkg.in/h2non/gock.v1"
 )
 
-func floatPtr(f float64) *float64 {
-	return &f
-}
-
 func TestProduct(t *testing.T) {
 	defer gock.Off()
 
@@ -59,8 +55,8 @@ func TestProduct(t *testing.T) {
 		t.Fatalf("failed test %#v", err)
 	}
 
-	if len(products) != 1{
-		t.Fatalf("Number of data should be 1. got=%d", len(products))
+	if len(products) != 2 {
+		t.Fatalf("Number of data should be 2. got=%d", len(products))
 	}
 
 	emptyStr := ""
@@ -102,5 +98,42 @@ func TestProduct(t *testing.T) {
 
 	if !reflect.DeepEqual(products[0], &pro1) {
 		t.Fatalf("failed test expected: %v\n got: %v", pro1, *products[0])
+	}
+
+	pro2 := Product{
+		ProductID:            "2",
+		CategoryID:           "2",
+		ProductCode:          "2990000000002",
+		ProductName:          "D181H223  Joined balmacaan denim coat",
+		ProductKana:          &emptyStr,
+		TaxDivision:          "1",
+		ProductPriceDivision: "1",
+		Price:                json.Number("69000"),
+		CustomerPrice:        &emptyJSONNumber,
+		Cost:                 json.Number("100000.00000"),
+		Attribute:            &emptyStr,
+		Description:          &emptyStr,
+		CatchCopy:            &emptyStr,
+		Size:                 "2",
+		Color:                "87",
+		Tag:                  &emptyStr,
+		GroupCode:            &emptyStr,
+		URL:                  &emptyStr,
+		DisplaySequence:      &emptyJSONNumber,
+		DisplayFlag:          "1",
+		SalesDivision:        "0",
+		Division:             "0",
+		ProductOptionGroupID: &emptyJSONNumber,
+		StockControlDivision: "0",
+		PointNotApplicable:   "0",
+		TaxFreeDivision:      "1",
+		SupplierProductNo:    &emptyStr,
+		StaffDiscountRate:    &emptyJSONNumber,
+		AppStartDateTime:     &emptyStr,
+		InsDateTime:          "2018-07-21 01:28:22",
+		UpdDateTime:          "2018-12-06 16:40:43",
+	}
+	if !reflect.DeepEqual(products[1], &pro2) {
+		t.Fatalf("failed test expected: %v\n got: %v", pro2, *products[1])
 	}
 }
