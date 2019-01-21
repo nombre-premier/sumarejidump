@@ -116,10 +116,8 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	defer handler.GetCSVWriter().Close()
 
-	resp := &SrRefResponse{}
-
 	for {
-		resp, err = sc.Request(p)
+		resp, err := sc.Request(p)
 		if err != nil {
 			return nil, err
 		}

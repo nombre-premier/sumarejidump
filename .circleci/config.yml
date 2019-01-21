@@ -26,6 +26,7 @@ jobs:
           name: lint
           command: |
             go vet ./*.go
+            staticcheck -version
             staticcheck -tests .
 
       - run:
