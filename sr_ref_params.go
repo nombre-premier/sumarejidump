@@ -116,7 +116,7 @@ func GetTableMetaByName(tableName string) *SrTableMeta {
 func NewSrRefParamsWithConfig(tableName string, c SrConfig) (SrRefParams, error) {
 	tableMeta := GetTableMetaByName(tableName)
 	if tableMeta == nil {
-		return SrRefParams{}, errors.New("Non params is matched by table name")
+		return SrRefParams{}, errors.New("non params is matched by table name")
 	}
 
 	return SrRefParams{ProcName: tableMeta.ProcName,

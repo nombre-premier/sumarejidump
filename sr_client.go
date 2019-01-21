@@ -184,6 +184,6 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 	case STOCKTAKING_DETAIL:
 		return NewStocktakingDetailCSV(p.Limit, output)
 	default:
-		return nil, errors.New("No table name is matched")
+		return nil, errors.New("no table name is matched")
 	}
 }
