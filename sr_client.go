@@ -116,10 +116,8 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	defer handler.GetCSVWriter().Close()
 
-	resp := &SrRefResponse{}
-
 	for {
-		resp, err = sc.Request(p)
+		resp, err := sc.Request(p)
 		if err != nil {
 			return nil, err
 		}
@@ -186,6 +184,6 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 	case STOCKTAKING_DETAIL:
 		return NewStocktakingDetailCSV(p.Limit, output)
 	default:
-		return nil, errors.New("No table name is matched")
+		return nil, errors.New("no table name is matched")
 	}
 }

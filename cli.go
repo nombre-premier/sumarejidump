@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -50,7 +49,7 @@ func cliAction(c *cli.Context) error {
 	} else {
 		dirName = c.String("output")
 	}
-	if err := os.MkdirAll(fmt.Sprintf("%s", dirName), 0755); err != nil {
+	if err := os.MkdirAll(dirName, 0755); err != nil {
 		panic(err)
 	}
 
