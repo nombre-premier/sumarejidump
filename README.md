@@ -32,6 +32,22 @@ GLOBAL OPTIONS:
 - CSV header filed is same to the attribute of the table.
 - The order of CSV filed is same to the No of the table in sumareji specification.
 
+## Example
+
+```
+# single condition
+# condition is splited by ":" and convert into json key-value pair.
+sumarejidump -c categoryId:1 category
+
+# multiple condtions
+sumarejidump -c categoryId >=:1 -c cateoryCode:dbss category
+
+# specify output directory name
+# default is yyyyMMDDhhmmss, such as 20190102030405
+sumarejidump -o result category
+```
+
+
 ## Development
 ### Requirements
 - Go 1.10+

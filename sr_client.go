@@ -25,6 +25,23 @@ type SrRefResponse struct {
 	Result     []*jason.Object
 }
 
+type SrError struct {
+	ErrorCode        int    `json:"error_code"`
+	ErrorSummary     string `json:"error"`
+	ErrroDescription string `json:"error_description"`
+}
+
+func (s *SrError) Error() string {
+	jsonBytes, _ := json.MarshalIndent(s, "", "    ")
+	return string(jsonBytes)
+}
+
+func NewSrErrorFromJSONBytes(jsonBytes []byte) *SrError {
+	s := new(SrError)
+	json.Unmarshal(jsonBytes, s)
+	return s
+}
+
 func NewSrClient(config SrConfig) SrClient {
 	return SrClient{
 		config: config,
@@ -36,6 +53,11 @@ func parseRefResponse(resp *http.Response) (*SrRefResponse, error) {
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		srErr := NewSrErrorFromJSONBytes(b)
+		return nil, srErr
 	}
 
 	v, err := jason.NewObjectFromBytes(b)
@@ -94,10 +116,8 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	defer handler.GetCSVWriter().Close()
 
-	resp := &SrRefResponse{}
-
 	for {
-		resp, err = sc.Request(p)
+		resp, err := sc.Request(p)
 		if err != nil {
 			return nil, err
 		}
@@ -164,6 +184,6 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 	case STOCKTAKING_DETAIL:
 		return NewStocktakingDetailCSV(p.Limit, output)
 	default:
-		return nil, errors.New("No table name is matched")
+		return nil, errors.New("no table name is matched")
 	}
 }

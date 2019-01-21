@@ -62,13 +62,13 @@ const (
 )
 
 type SrRefParams struct {
-	ProcName   string   `json:"-"`
-	Fields     []string `json:"fields"`
-	Conditions []string `json:"conditions"`
-	Order      []string `json:"order"`
-	Limit      int      `json:"limit"`
-	Page       int      `json:"page"`
-	TableName  string   `json:"table_name"`
+	ProcName   string               `json:"-"`
+	Fields     []string             `json:"fields"`
+	Conditions []map[string]*string `json:"conditions"`
+	Order      []string             `json:"order"`
+	Limit      int                  `json:"limit"`
+	Page       int                  `json:"page"`
+	TableName  string               `json:"table_name"`
 }
 
 type SrTableMeta struct {
@@ -113,16 +113,15 @@ func GetTableMetaByName(tableName string) *SrTableMeta {
 	return nil
 }
 
-func NewSrRefParamsWithTableName(tableName string) (SrRefParams, error) {
+func NewSrRefParamsWithConfig(tableName string, c SrConfig) (SrRefParams, error) {
 	tableMeta := GetTableMetaByName(tableName)
 	if tableMeta == nil {
-		return SrRefParams{}, errors.New("Non params is matched by table name")
+		return SrRefParams{}, errors.New("non params is matched by table name")
 	}
 
 	return SrRefParams{ProcName: tableMeta.ProcName,
-		Fields: []string{}, Conditions: []string{},
+		Fields: []string{}, Conditions: []map[string]*string{c.Conditions},
 		Order: []string{}, Limit: tableMeta.Limit, Page: 1,
 		TableName: tableMeta.Name,
 	}, nil
-
 }

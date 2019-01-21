@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -20,7 +20,7 @@ func Main(c SrConfig) error {
 	}
 
 	for _, t := range tables {
-		params, err := NewSrRefParamsWithTableName(t)
+		params, err := NewSrRefParamsWithConfig(t, c)
 		if err != nil {
 			return err
 		}
@@ -38,6 +38,12 @@ func main() {
 	cliApp := CreateCliApp()
 	err := cliApp.Run(os.Args)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "%s", err)
+		switch e := err.(type) {
+		case *SrError:
+			os.Exit(e.ErrorCode)
+		default:
+			os.Exit(1)
+		}
 	}
 }
