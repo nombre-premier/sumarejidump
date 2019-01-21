@@ -45,7 +45,6 @@ func TestCategory(t *testing.T) {
 
 	csvFile, err := os.OpenFile(path.Join(dir, "Category.csv"), os.O_RDONLY, os.ModePerm)
 	if err != nil {
-		panic(err)
 		t.Fatalf("failed test %#v", err)
 	}
 	defer csvFile.Close()
