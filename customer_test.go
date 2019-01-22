@@ -13,6 +13,14 @@ import (
 	"gopkg.in/h2non/gock.v1"
 )
 
+func str2Ptr(s string) *string {
+	return &s
+}
+
+func num2Ptr(j json.Number) *json.Number {
+	return &j
+}
+
 func TestCustomer(t *testing.T) {
 	defer gock.Off()
 
@@ -62,29 +70,30 @@ func TestCustomer(t *testing.T) {
 	emptyStr := ""
 	emptyJSONNumber := json.Number("")
 
+
 	cus1 := Customer{
 		CustomerID:           json.Number("1"),
 		CustomerCode:         "01",
-		CustomerNo:           &emptyStr,
+		CustomerNo:           str2Ptr(""),
 		Rank:                 &emptyStr,
 		StaffRank:            &emptyStr,
 		LastName:             "山田",
 		FirstName:            "花子",
 		LastKana:             "ヤマダ",
 		FirstKana:            "ハナコ",
-		PostCode:             "1230045",
-		Address:              "東京都渋谷区恵比寿南1-1-1",
-		PhoneNumber:          "0337930220",
-		FaxNumber:            "0337930250",
-		MobileNumber:         "00000000000",
-		MailAddress:          "aa@hoge.co.jp",
+		PostCode:             str2Ptr("1230045"),
+		Address:              str2Ptr("東京都渋谷区恵比寿南1-1-1"),
+		PhoneNumber:          str2Ptr("0337930220"),
+		FaxNumber:            str2Ptr("0337930250"),
+		MobileNumber:         str2Ptr("00000000000"),
+		MailAddress:          str2Ptr("aa@hoge.co.jp"),
 		MailAddress2:         &emptyStr,
 		MailAddress3:         &emptyStr,
 		CompanyName:          &emptyStr,
 		DepartmentName:       &emptyStr,
 		ManagerialPosition:   &emptyStr,
 		Sex:                  "2",
-		BirthDate:            "2000-05-28",
+		BirthDate:            str2Ptr("2000-05-28"),
 		Mile:                 &emptyJSONNumber,
 		Point:                json.Number("0"),
 		PointExpireDate:      &emptyStr,
@@ -98,12 +107,12 @@ func TestCustomer(t *testing.T) {
 		Nationality:          &emptyStr,
 		AlphabetName:         &emptyStr,
 		MailReceiveFlag:      "1",
-		Note:                 "スカパラのファンでそこからDBSSに初来店。初回は中目黒でルーズフィット黒を紹介購入。その後初回来店時に提案したシャギーニットをご購入。その後ルーズフィット黒2本目を取寄せ購入。\nサイズ2",
+		Note:                 str2Ptr("スカパラのファンでそこからDBSSに初来店。初回は中目黒でルーズフィット黒を紹介購入。その後初回来店時に提案したシャギーニットをご購入。その後ルーズフィット黒2本目を取寄せ購入。\nサイズ2"),
 		Note2:                &emptyStr,
 		FavoriteList:         &emptyStr,
 		BrowsingList:         &emptyStr,
 		Status:               "0",
-		StoreID:              json.Number("1"),
+		StoreID:              num2Ptr("1"),
 		InsDateTime:          "2018-08-19 15:40:50",
 		UpdDateTime:          "2019-01-03 13:30:58",
 	}
@@ -122,19 +131,19 @@ func TestCustomer(t *testing.T) {
 		FirstName:            "太郎",
 		LastKana:             "タナカ",
 		FirstKana:            "タロウ",
-		PostCode:             "4608501",
-		Address:              "愛知県名古屋市中区三の丸三丁目1番2号",
-		PhoneNumber:          "",
-		FaxNumber:            "",
-		MobileNumber:         "08000000000",
-		MailAddress:          "bbbb@hoge.com",
+		PostCode:             str2Ptr("4608501"),
+		Address:              str2Ptr("愛知県名古屋市中区三の丸三丁目1番2号"),
+		PhoneNumber:          str2Ptr(""),
+		FaxNumber:            str2Ptr(""),
+		MobileNumber:         str2Ptr("08000000000"),
+		MailAddress:          str2Ptr("bbbb@hoge.com"),
 		MailAddress2:         &emptyStr,
 		MailAddress3:         &emptyStr,
 		CompanyName:          &emptyStr,
 		DepartmentName:       &emptyStr,
 		ManagerialPosition:   &emptyStr,
 		Sex:                  "1",
-		BirthDate:            "1987-12-16",
+		BirthDate:            str2Ptr("1987-12-16"),
 		Mile:                 &emptyJSONNumber,
 		Point:                "0",
 		PointExpireDate:      &emptyStr,
@@ -148,12 +157,12 @@ func TestCustomer(t *testing.T) {
 		Nationality:          &emptyStr,
 		AlphabetName:         &emptyStr,
 		MailReceiveFlag:      "1",
-		Note:                 "2月にデニムシャツをご購入。\nZOZOでトラックフーディーのセットアップをご購入。\n5月に軍鶏アロハシャツとロングタンクトップをご購入。\n18AWの入荷連もいただいている。",
+		Note:                 str2Ptr("2月にデニムシャツをご購入。\nZOZOでトラックフーディーのセットアップをご購入。\n5月に軍鶏アロハシャツとロングタンクトップをご購入。\n18AWの入荷連もいただいている。"),
 		Note2:                &emptyStr,
 		FavoriteList:         &emptyStr,
 		BrowsingList:         &emptyStr,
 		Status:               "0",
-		StoreID:              json.Number("1"),
+		StoreID:              num2Ptr("1"),
 		InsDateTime:          "2018-08-19 15:43:03",
 		UpdDateTime:          "2018-08-24 12:37:57",
 	}
