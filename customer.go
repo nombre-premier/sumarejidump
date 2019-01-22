@@ -14,19 +14,19 @@ type Customer struct {
 	FirstName            string       `json:"firstName" csv:"firstName"`
 	LastKana             string       `json:"lastKana" csv:"lastKana"`
 	FirstKana            string       `json:"firstKana" csv:"firstKana"`
-	PostCode             *string       `json:"postCode" csv:"postCode"`
-	Address              *string       `json:"address" csv:"address"`
-	PhoneNumber          *string       `json:"phoneNumber" csv:"phoneNumber"`
-	FaxNumber            *string       `json:"faxNumber" csv:"faxNumber"`
-	MobileNumber         *string       `json:"mobileNumber" csv:"mobileNumber"`
-	MailAddress          *string       `json:"mailAddress" csv:"mailAddress"`
+	PostCode             *string      `json:"postCode" csv:"postCode"`
+	Address              *string      `json:"address" csv:"address"`
+	PhoneNumber          *string      `json:"phoneNumber" csv:"phoneNumber"`
+	FaxNumber            *string      `json:"faxNumber" csv:"faxNumber"`
+	MobileNumber         *string      `json:"mobileNumber" csv:"mobileNumber"`
+	MailAddress          *string      `json:"mailAddress" csv:"mailAddress"`
 	MailAddress2         *string      `json:"mailAddress2" csv:"mailAddress2"`
 	MailAddress3         *string      `json:"mailAddress3" csv:"mailAddress3"`
 	CompanyName          *string      `json:"companyName" csv:"companyName"`
 	DepartmentName       *string      `json:"departmentName" csv:"departmentName"`
 	ManagerialPosition   *string      `json:"managerialPosition" csv:"managerialPosition"`
 	Sex                  string       `json:"sex" csv:"sex"`
-	BirthDate            *string       `json:"birthDate" csv:"birthDate"`
+	BirthDate            *string      `json:"birthDate" csv:"birthDate"`
 	Mile                 *json.Number `json:"mile" csv:"mile"`
 	Point                json.Number  `json:"point" csv:"point"`
 	PointExpireDate      *string      `json:"pointExpireDate" csv:"pointExpireDate"`
@@ -40,12 +40,12 @@ type Customer struct {
 	Nationality          *string      `json:"nationality" csv:"nationality"`
 	AlphabetName         *string      `json:"alphabetName" csv:"alphabetName"`
 	MailReceiveFlag      string       `json:"mailReceiveFlag" csv:"mailReceiveFlag"`
-	Note                 *string       `json:"note" csv:"note"`
+	Note                 *string      `json:"note" csv:"note"`
 	Note2                *string      `json:"note2" csv:"note2"`
 	FavoriteList         *string      `json:"favoriteList" csv:"favoriteList"`
 	BrowsingList         *string      `json:"browsingList" csv:"browsingList"`
 	Status               string       `json:"status" csv:"status"`
-	StoreID              *json.Number  `json:"storeId" csv:"storeID"`
+	StoreID              *json.Number `json:"storeId" csv:"storeID"`
 	InsDateTime          string       `json:"insDateTime" csv:"insDateTime"`
 	UpdDateTime          string       `json:"updDateTime" csv:"updDateTime"`
 }
@@ -67,8 +67,6 @@ func NewCustomerCSV(bufSize int, output string) (*CustomerCSV, error) {
 		buf,
 	}, nil
 }
-
-
 
 func (cc *CustomerCSV) Write(resp *SrRefResponse) *CSVWriter {
 	for i, r := range resp.Result {
