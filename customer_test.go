@@ -70,7 +70,6 @@ func TestCustomer(t *testing.T) {
 	emptyStr := ""
 	emptyJSONNumber := json.Number("")
 
-
 	cus1 := Customer{
 		CustomerID:           json.Number("1"),
 		CustomerCode:         "01",
