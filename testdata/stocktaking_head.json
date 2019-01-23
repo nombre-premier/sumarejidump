@@ -1,0 +1,95 @@
+{
+  "total_count": "15",
+  "result": [
+    {
+      "stocktakingInfoId": "3",
+      "stocktakingHeadId": "3",
+      "divisionCode": "0",
+      "modified": "2018-08-05 18:37:55"
+    },
+    {
+      "stocktakingInfoId": "6",
+      "stocktakingHeadId": "68",
+      "divisionCode": "0",
+      "modified": "2018-09-06 19:57:57"
+    },
+    {
+      "stocktakingInfoId": "8",
+      "stocktakingHeadId": "70",
+      "divisionCode": "0",
+      "modified": "2018-09-14 18:52:26"
+    },
+    {
+      "stocktakingInfoId": "9",
+      "stocktakingHeadId": "71",
+      "divisionCode": "0",
+      "modified": "2018-09-11 13:28:26"
+    },
+    {
+      "stocktakingInfoId": "10",
+      "stocktakingHeadId": "72",
+      "divisionCode": "0",
+      "modified": "2018-10-06 14:49:30"
+    },
+    {
+      "stocktakingInfoId": "11",
+      "stocktakingHeadId": "73",
+      "divisionCode": "0",
+      "modified": "2018-10-03 16:12:34"
+    },
+    {
+      "stocktakingInfoId": "12",
+      "stocktakingHeadId": "74",
+      "divisionCode": "0",
+      "modified": "2018-11-07 17:11:13"
+    },
+    {
+      "stocktakingInfoId": "13",
+      "stocktakingHeadId": "75",
+      "divisionCode": "0",
+      "modified": "2018-11-03 19:39:31"
+    },
+    {
+      "stocktakingInfoId": "14",
+      "stocktakingHeadId": "76",
+      "divisionCode": "0",
+      "modified": "2018-11-10 00:03:21"
+    },
+    {
+      "stocktakingInfoId": "16",
+      "stocktakingHeadId": "78",
+      "divisionCode": "0",
+      "modified": "2018-12-05 20:25:52"
+    },
+    {
+      "stocktakingInfoId": "17",
+      "stocktakingHeadId": "79",
+      "divisionCode": "0",
+      "modified": "2018-12-09 23:42:47"
+    },
+    {
+      "stocktakingInfoId": "19",
+      "stocktakingHeadId": "81",
+      "divisionCode": "0",
+      "modified": "2018-12-10 13:22:35"
+    },
+    {
+      "stocktakingInfoId": "20",
+      "stocktakingHeadId": "82",
+      "divisionCode": "0",
+      "modified": "2019-01-10 22:52:24"
+    },
+    {
+      "stocktakingInfoId": "21",
+      "stocktakingHeadId": "83",
+      "divisionCode": "0",
+      "modified": "2019-01-08 19:31:58"
+    },
+    {
+      "stocktakingInfoId": "23",
+      "stocktakingHeadId": "85",
+      "divisionCode": "0",
+      "modified": "2019-01-10 15:41:16"
+    }
+  ]
+}

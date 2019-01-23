@@ -2,8 +2,6 @@ package main
 
 import (
 	"encoding/json"
-
-	"github.com/shopspring/decimal"
 )
 
 type Bargain struct {
@@ -40,12 +38,12 @@ func (bc *BargainCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type BargainProduct struct {
-	BargainProductID json.Number     `json:"bargainProductId" csv:"bargainProductId"`
-	BargainID        json.Number     `json:"bargainId" csv:"bargainId"`
-	TargetDivision   string          `json:"targetDivision" csv:"targetDivision"`
-	TargetID         string          `json:"targetId" csv:"targetId"`
-	Division         string          `json:"division" csv:"division"`
-	Value            decimal.Decimal `json:"value" csv:"value"`
+	BargainProductID json.Number `json:"bargainProductId" csv:"bargainProductId"`
+	BargainID        json.Number `json:"bargainId" csv:"bargainId"`
+	TargetDivision   string      `json:"targetDivision" csv:"targetDivision"`
+	TargetID         string      `json:"targetId" csv:"targetId"`
+	Division         string      `json:"division" csv:"division"`
+	Value            json.Number `json:"value" csv:"value"`
 }
 
 type BargainProductCSV struct {

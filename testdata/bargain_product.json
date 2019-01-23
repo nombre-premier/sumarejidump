@@ -1,0 +1,21 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "bargainProductId": "1",
+      "bargainId": "1",
+      "targetDivision": "2",
+      "targetId": "1225",
+      "division": "1",
+      "value": "30"
+    },
+    {
+      "bargainProductId": "2",
+      "bargainId": "2",
+      "targetDivision": "2",
+      "targetId": "1234",
+      "division": "1",
+      "value": "50"
+    }
+  ]
+}

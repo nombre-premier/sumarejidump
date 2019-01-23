@@ -18,7 +18,7 @@ type Store struct {
 	PriceChangeFlag          string      `json:"priceChangeFlag" csv:"priceChangeFlag"`
 	SellDivision             string      `json:"sellDivision" csv:"sellDivision"`
 	SumProcDivision          string      `json:"sumProcDivision" csv:"sumProcDivision"`
-	SumDateChangeTime        string      `json:"sumDateChangeTime" csv:"sumDateChangeTime"`
+	SumDateChangeTime        *string     `json:"sumDateChangeTime" csv:"sumDateChangeTime"`
 	SumRefColumn             string      `json:"sumRefColumn" csv:"sumRefColumn"`
 	PointNotApplicable       string      `json:"pointNotApplicable" csv:"pointNotApplicable"`
 	TaxFreeDivision          string      `json:"taxFreeDivision" csv:"taxFreeDivision"`

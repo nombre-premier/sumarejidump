@@ -87,7 +87,7 @@ type StocktakingDetail struct {
 	TransportationStockQuantity   json.Number `json:"transportationStockQuantity" csv:"transportationStockQuantity"`
 	LayawayStockQuantity          json.Number `json:"layawayStockQuantity" csv:"layawayStockQuantity"`
 	StockQuantityBeforeAdjustment json.Number `json:"stockQuantityBeforeAdjustment" csv:"stockQuantityBeforeAdjustment"`
-	Cost                          string      `json:"cost" csv:"cost"`
+	Cost                          json.Number `json:"cost" csv:"cost"`
 	Memo                          *string     `json:"memo" csv:"memo"`
 	Modified                      string      `json:"modified" csv:"modified"`
 }
