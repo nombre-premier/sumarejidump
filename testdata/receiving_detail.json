@@ -1,0 +1,39 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "receivingId": "1",
+      "productId": "621",
+      "productCode": "2000000001401",
+      "productName": "Foo",
+      "size": "3",
+      "color": "90",
+      "groupCode": null,
+      "supplierProductNo": null,
+      "scheduledQuantity": "1",
+      "inspectionQuantity": "1",
+      "stockoutQuantity": "0",
+      "stockoutReason": null,
+      "inspectionDate": "2018-08-08",
+      "status": "1",
+      "modified": "2018-08-08 19:17:02"
+    },
+    {
+      "receivingId": "1",
+      "productId": "873",
+      "productCode": "2000000003849",
+      "productName": "Bar",
+      "size": "3",
+      "color": "90",
+      "groupCode": null,
+      "supplierProductNo": null,
+      "scheduledQuantity": "1",
+      "inspectionQuantity": "1",
+      "stockoutQuantity": "0",
+      "stockoutReason": null,
+      "inspectionDate": "2018-08-08",
+      "status": "1",
+      "modified": "2018-08-08 19:17:02"
+    }
+  ]
+}
