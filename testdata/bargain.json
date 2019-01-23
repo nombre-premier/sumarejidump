@@ -1,0 +1,17 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "bargainId": "1",
+      "bargainName": "testSale",
+      "termStart": "2018-10-05",
+      "termEnd": "2018-10-31"
+    },
+    {
+      "bargainId": "2",
+      "bargainName": "testSale2",
+      "termStart": "2018-10-11",
+      "termEnd": "2019-10-31"
+    }
+  ]
+}
