@@ -56,7 +56,7 @@ func TestShipping(t *testing.T) {
 	}
 
 	if len(shippings) != 2 {
-		t.Fatalf("Number of data should be 46. got=%d", len(shippings))
+		t.Fatalf("Number of data should be 2. got=%d", len(shippings))
 	}
 
 	emptyStr := ""
@@ -99,5 +99,89 @@ func TestShipping(t *testing.T) {
 	}
 	if !reflect.DeepEqual(shippings[1], &s2) {
 		t.Fatalf("failed test expected: %v\n got: %v", s2, *shippings[45])
+	}
+}
+
+func TestShippingDetail(t *testing.T) {
+	defer gock.Off()
+
+	dir, err := ioutil.TempDir("", "shipping_detail")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer os.RemoveAll(dir) // clean up
+
+	gock.New("https://webapi.smaregi.jp").
+		Post("/access").
+		MatchHeader("X_contract_id", "(.*)").
+		MatchHeader("X_access_token", "(.*)").
+		MatchHeader("Content-Type", "application/x-www-form-urlencoded").
+		Reply(200).
+		File("./testdata/shipping_detail.json")
+
+	c := SrConfig{
+		ContractID:  "sumareji_id",
+		AccessToken: "sumareji_token",
+		EndPoint:    "https://webapi.smaregi.jp/access/",
+		OutputDir:   dir,
+		TableNames:  []string{SHIPPING_DETAIL},
+	}
+
+	err = Main(c)
+	if err != nil {
+		t.Fatalf("failed test %#v", err)
+	}
+
+	csvFile, err := os.OpenFile(path.Join(dir, "ShippingDetail.csv"), os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		t.Fatalf("failed test %#v", err)
+	}
+	defer csvFile.Close()
+
+	sds := []*ShippingDetail{}
+
+	if err := gocsv.UnmarshalFile(csvFile, &sds); err != nil { // Load clients from file
+		t.Fatalf("failed test %#v", err)
+	}
+
+	if len(sds) != 2 {
+		t.Fatalf("Number of data should be 2. got=%d", len(sds))
+	}
+
+	emptyStr := ""
+
+	s1 := ShippingDetail{
+		ShippingID:        json.Number("1"),
+		ProductID:         json.Number("621"),
+		ProductCode:       "2000000001401",
+		ProductName:       "Foo",
+		Size:              "3",
+		Color:             "90",
+		GroupCode:         &emptyStr,
+		SupplierProductNo: &emptyStr,
+		RequestQuantity:   &emptyStr,
+		Quantity:          "1",
+		Modified:          "2018-08-08 19:17:02",
+	}
+
+	if !reflect.DeepEqual(sds[0], &s1) {
+		t.Fatalf("failed test expected: %v\n got: %v", s1, *sds[0])
+	}
+
+	s2 := ShippingDetail{
+		ShippingID:        json.Number("1"),
+		ProductID:         json.Number("685"),
+		ProductCode:       "2000000002255",
+		ProductName:       "Bar",
+		Size:              "1",
+		Color:             "90",
+		GroupCode:         &emptyStr,
+		SupplierProductNo: &emptyStr,
+		RequestQuantity:   &emptyStr,
+		Quantity:          "1",
+		Modified:          "2018-08-08 19:17:02",
+	}
+	if !reflect.DeepEqual(sds[1], &s2) {
+		t.Fatalf("failed test expected: %v\n got: %v", s2, *sds[1])
 	}
 }
