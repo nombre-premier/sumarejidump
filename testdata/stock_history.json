@@ -1,0 +1,29 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "id": "1",
+            "updDateTime": "2018-07-22 11:45:45",
+            "targetDateTime": "2018-07-22 11:45:45",
+            "productId": "4",
+            "storeId": "1",
+            "amount": "1",
+            "stockAmount": "1",
+            "stockDivision": "01",
+            "fromStoreId": null,
+            "toStoreId": null
+        },
+        {
+            "id": "2",
+            "updDateTime": "2018-07-22 11:46:43",
+            "targetDateTime": "2018-07-22 11:46:43",
+            "productId": "8",
+            "storeId": "1",
+            "amount": "1",
+            "stockAmount": "1",
+            "stockDivision": "01",
+            "fromStoreId": null,
+            "toStoreId": null
+        }
+    ]
+}
