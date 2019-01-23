@@ -1,0 +1,30 @@
+{
+  "total_count": "5",
+  "result": [
+    {
+      "bargainStoreId": "1",
+      "bargainId": "1",
+      "storeId": "1"
+    },
+    {
+      "bargainStoreId": "2",
+      "bargainId": "1",
+      "storeId": "4"
+    },
+    {
+      "bargainStoreId": "3",
+      "bargainId": "1",
+      "storeId": "2"
+    },
+    {
+      "bargainStoreId": "4",
+      "bargainId": "1",
+      "storeId": "6"
+    },
+    {
+      "bargainStoreId": "5",
+      "bargainId": "1",
+      "storeId": "7"
+    }
+  ]
+}

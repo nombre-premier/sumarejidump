@@ -154,3 +154,70 @@ func TestBargainProduct(t *testing.T) {
 		t.Fatalf("failed test expected: %v\n got: %v", b2, *bps[1])
 	}
 }
+
+func TestBargainStore(t *testing.T) {
+	defer gock.Off()
+
+	dir, err := ioutil.TempDir("", "bargain_store")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer os.RemoveAll(dir) // clean up
+
+	gock.New("https://webapi.smaregi.jp").
+		Post("/access").
+		MatchHeader("X_contract_id", "(.*)").
+		MatchHeader("X_access_token", "(.*)").
+		MatchHeader("Content-Type", "application/x-www-form-urlencoded").
+		Reply(200).
+		File("./testdata/bargain_store.json")
+
+	c := SrConfig{
+		ContractID:  "sumareji_id",
+		AccessToken: "sumareji_token",
+		EndPoint:    "https://webapi.smaregi.jp/access/",
+		OutputDir:   dir,
+		TableNames:  []string{BARGAIN_STORE},
+	}
+
+	err = Main(c)
+	if err != nil {
+		t.Fatalf("failed test %#v", err)
+	}
+
+	csvFile, err := os.OpenFile(path.Join(dir, "BargainStore.csv"), os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		t.Fatalf("failed test %#v", err)
+	}
+	defer csvFile.Close()
+
+	bs := []*BargainStore{}
+
+	if err := gocsv.UnmarshalFile(csvFile, &bs); err != nil { // Load clients from file
+		t.Fatalf("failed test %#v", err)
+	}
+
+	if len(bs) != 5 {
+		t.Fatalf("Number of data should be 5. got=%d", len(bs))
+	}
+
+	b1 := BargainStore{
+		BargainStoreID: json.Number("1"),
+		BargainID:      json.Number("1"),
+		StoreID:        json.Number("1"),
+	}
+
+	if !reflect.DeepEqual(bs[0], &b1) {
+		t.Fatalf("failed test expected: %v\n got: %v", b1, *bs[0])
+	}
+
+	b5 := BargainStore{
+		BargainStoreID: json.Number("5"),
+		BargainID:      json.Number("1"),
+		StoreID:        json.Number("7"),
+	}
+
+	if !reflect.DeepEqual(bs[4], &b5) {
+		t.Fatalf("failed test expected: %v\n got: %v", b5, *bs[4])
+	}
+}
