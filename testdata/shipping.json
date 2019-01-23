@@ -1,0 +1,37 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "shippingId": "1",
+      "shippingStoreId": "2",
+      "receivingStoreId": "1",
+      "receivingExpectedDateFrom": "2018-08-08",
+      "receivingExpectedDateTo": "2018-08-08",
+      "shippingDate": "2018-08-08",
+      "receivingDesiredDate": null,
+      "memo": "在庫補填",
+      "status": "3",
+      "modificationRequestStatus": "0",
+      "modificationRequestDateTime": null,
+      "modificationRequestCheckedDateTime": null,
+      "identificationNo": null,
+      "modified": "2018-08-08 19:17:02"
+    },
+    {
+      "shippingId": "2",
+      "shippingStoreId": "1",
+      "receivingStoreId": "2",
+      "receivingExpectedDateFrom": "2018-08-10",
+      "receivingExpectedDateTo": "2018-08-12",
+      "shippingDate": "2018-08-10",
+      "receivingDesiredDate": null,
+      "memo": "中目黒より在庫移動依頼",
+      "status": "3",
+      "modificationRequestStatus": "0",
+      "modificationRequestDateTime": null,
+      "modificationRequestCheckedDateTime": null,
+      "identificationNo": null,
+      "modified": "2018-08-10 18:43:49"
+    }
+  ]
+}
