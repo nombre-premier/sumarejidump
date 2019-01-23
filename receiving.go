@@ -49,9 +49,9 @@ type ReceivingDetail struct {
 	Color              string      `json:"color" csv:"color"`
 	GroupCode          *string     `json:"groupCode" csv:"groupCode"`
 	SupplierProductNo  *string     `json:"supplierProductNo" csv:"supplierProductNo"`
-	ScheduledQuantity  string      `json:"scheduledQuantity" csv:"scheduledQuantity"`
-	InspectionQuantity string      `json:"inspectionQuantity" csv:"inspectionQuantity"`
-	StockoutQuantity   string      `json:"stockoutQuantity" csv:"stockoutQuantity"`
+	ScheduledQuantity  json.Number `json:"scheduledQuantity" csv:"scheduledQuantity"`
+	InspectionQuantity json.Number `json:"inspectionQuantity" csv:"inspectionQuantity"`
+	StockoutQuantity   json.Number `json:"stockoutQuantity" csv:"stockoutQuantity"`
 	StockoutReason     *string     `json:"stockoutReason" csv:"stockoutReason"`
 	InspectionDate     string      `json:"inspectionDate" csv:"inspectionDate"`
 	Status             string      `json:"status" csv:"status"`
