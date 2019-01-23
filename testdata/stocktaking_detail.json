@@ -1,0 +1,41 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "stocktakingInfoId": "3",
+      "stocktakingHeadId": "3",
+      "productId": "1",
+      "productCode": "30000000000001",
+      "productName": "Foo",
+      "size": "1",
+      "color": "87",
+      "groupCode": null,
+      "supplierProductNo": null,
+      "stocktakingQuantity": "0",
+      "transportationStockQuantity": "0",
+      "layawayStockQuantity": "0",
+      "stockQuantityBeforeAdjustment": "0",
+      "cost": "18815.00000",
+      "memo": null,
+      "modified": "2018-08-05 18:37:55"
+    },
+    {
+      "stocktakingInfoId": "3",
+      "stocktakingHeadId": "3",
+      "productId": "2",
+      "productCode": "30000000000002",
+      "productName": "Bar",
+      "size": "2",
+      "color": "87",
+      "groupCode": null,
+      "supplierProductNo": null,
+      "stocktakingQuantity": "0",
+      "transportationStockQuantity": "0",
+      "layawayStockQuantity": "0",
+      "stockQuantityBeforeAdjustment": "0",
+      "cost": "18815.00000",
+      "memo": null,
+      "modified": "2018-08-05 18:37:55"
+    }
+  ]
+}

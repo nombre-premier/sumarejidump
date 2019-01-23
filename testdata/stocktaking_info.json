@@ -1,0 +1,170 @@
+{
+  "total_count": "15",
+  "result": [
+    {
+      "stocktakingInfoId": "3",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-07-31",
+      "adjustmentDate": "2018-08-05 18:37:55",
+      "stocktakingCompleteDate": "2018-08-05 18:37:55",
+      "status": "2",
+      "created": "2018-07-29 12:44:13",
+      "modified": "2018-08-05 18:37:55"
+    },
+    {
+      "stocktakingInfoId": "6",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-09-30",
+      "adjustmentDate": "2018-09-06 19:57:57",
+      "stocktakingCompleteDate": "2018-09-06 19:57:57",
+      "status": "2",
+      "created": "2018-09-04 14:35:41",
+      "modified": "2018-09-06 19:57:57"
+    },
+    {
+      "stocktakingInfoId": "8",
+      "storeId": "2",
+      "divisionUnit": "0",
+      "targetDate": "2018-09-30",
+      "adjustmentDate": "2018-09-14 18:52:26",
+      "stocktakingCompleteDate": "2018-09-14 18:52:26",
+      "status": "2",
+      "created": "2018-09-05 15:02:36",
+      "modified": "2018-09-14 18:52:26"
+    },
+    {
+      "stocktakingInfoId": "9",
+      "storeId": "4",
+      "divisionUnit": "0",
+      "targetDate": "2018-09-30",
+      "adjustmentDate": "2018-09-11 13:28:26",
+      "stocktakingCompleteDate": "2018-09-11 13:28:26",
+      "status": "2",
+      "created": "2018-09-09 17:34:44",
+      "modified": "2018-09-11 13:28:26"
+    },
+    {
+      "stocktakingInfoId": "10",
+      "storeId": "2",
+      "divisionUnit": "0",
+      "targetDate": "2018-09-30",
+      "adjustmentDate": "2018-10-06 14:49:30",
+      "stocktakingCompleteDate": "2018-10-06 14:49:30",
+      "status": "2",
+      "created": "2018-09-27 13:40:11",
+      "modified": "2018-10-06 14:49:30"
+    },
+    {
+      "stocktakingInfoId": "11",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-10-31",
+      "adjustmentDate": "2018-10-03 16:12:34",
+      "stocktakingCompleteDate": "2018-10-03 16:12:34",
+      "status": "2",
+      "created": "2018-10-02 12:08:11",
+      "modified": "2018-10-03 16:12:34"
+    },
+    {
+      "stocktakingInfoId": "12",
+      "storeId": "2",
+      "divisionUnit": "0",
+      "targetDate": "2018-10-31",
+      "adjustmentDate": "2018-11-07 17:11:13",
+      "stocktakingCompleteDate": "2018-11-07 17:11:13",
+      "status": "2",
+      "created": "2018-10-31 12:10:04",
+      "modified": "2018-11-07 17:11:13"
+    },
+    {
+      "stocktakingInfoId": "13",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-11-30",
+      "adjustmentDate": "2018-11-03 19:39:31",
+      "stocktakingCompleteDate": "2018-11-03 19:39:31",
+      "status": "2",
+      "created": "2018-11-03 17:09:46",
+      "modified": "2018-11-03 19:39:31"
+    },
+    {
+      "stocktakingInfoId": "14",
+      "storeId": "4",
+      "divisionUnit": "0",
+      "targetDate": "2018-10-31",
+      "adjustmentDate": "2018-11-10 00:03:21",
+      "stocktakingCompleteDate": "2018-11-10 00:03:21",
+      "status": "2",
+      "created": "2018-11-09 19:57:57",
+      "modified": "2018-11-10 00:03:21"
+    },
+    {
+      "stocktakingInfoId": "16",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-12-31",
+      "adjustmentDate": "2018-12-05 20:25:52",
+      "stocktakingCompleteDate": "2018-12-05 20:25:52",
+      "status": "2",
+      "created": "2018-12-03 11:32:53",
+      "modified": "2018-12-05 20:25:52"
+    },
+    {
+      "stocktakingInfoId": "17",
+      "storeId": "4",
+      "divisionUnit": "0",
+      "targetDate": "2018-11-30",
+      "adjustmentDate": "2018-12-09 23:42:47",
+      "stocktakingCompleteDate": "2018-12-09 23:42:47",
+      "status": "2",
+      "created": "2018-12-03 13:42:07",
+      "modified": "2018-12-09 23:42:47"
+    },
+    {
+      "stocktakingInfoId": "19",
+      "storeId": "2",
+      "divisionUnit": "0",
+      "targetDate": "2018-11-30",
+      "adjustmentDate": "2018-12-10 13:22:35",
+      "stocktakingCompleteDate": "2018-12-10 13:22:35",
+      "status": "2",
+      "created": "2018-12-06 15:32:45",
+      "modified": "2018-12-10 13:22:35"
+    },
+    {
+      "stocktakingInfoId": "20",
+      "storeId": "4",
+      "divisionUnit": "0",
+      "targetDate": "2018-12-31",
+      "adjustmentDate": "2019-01-10 22:52:24",
+      "stocktakingCompleteDate": "2019-01-10 22:52:24",
+      "status": "2",
+      "created": "2019-01-03 19:17:10",
+      "modified": "2019-01-10 22:52:24"
+    },
+    {
+      "stocktakingInfoId": "21",
+      "storeId": "2",
+      "divisionUnit": "0",
+      "targetDate": "2018-12-31",
+      "adjustmentDate": "2019-01-08 19:31:58",
+      "stocktakingCompleteDate": "2019-01-08 19:31:58",
+      "status": "2",
+      "created": "2019-01-06 15:09:39",
+      "modified": "2019-01-08 19:31:58"
+    },
+    {
+      "stocktakingInfoId": "23",
+      "storeId": "1",
+      "divisionUnit": "0",
+      "targetDate": "2018-12-31",
+      "adjustmentDate": "2019-01-10 15:41:16",
+      "stocktakingCompleteDate": "2019-01-10 15:41:16",
+      "status": "2",
+      "created": "2019-01-06 17:05:22",
+      "modified": "2019-01-10 15:41:16"
+    }
+  ]
+}
