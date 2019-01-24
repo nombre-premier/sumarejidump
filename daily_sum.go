@@ -2,79 +2,77 @@ package main
 
 import (
 	"encoding/json"
-
-	"github.com/shopspring/decimal"
 )
 
 type DailySum struct {
-	SumDate                          string          `json:"sumDate" csv:"sumDate"`
-	StoreID                          json.Number     `json:"storeId" csv:"storeId"`
-	CashDrawerID                     json.Number     `json:"cashDrawerId" csv:"cashDrawerId"`
-	Status                           string          `json:"status" csv:"status"`
-	SalesTotal                       decimal.Decimal `json:"salesTotal" csv:"salesTotal"`
-	Discount                         decimal.Decimal `json:"discount" csv:"discount"`
-	PointDiscount                    decimal.Decimal `json:"pointDiscount" csv:"pointDiscount"`
-	TaxExcludeReceive                decimal.Decimal `json:"taxExcludeReceive" csv:"taxExcludeReceive"`
-	NonSalesTargetTotal              decimal.Decimal `json:"nonSalesTargetTotal" csv:"nonSalesTargetTotal"`
-	Total                            decimal.Decimal `json:"total" csv:"total"`
-	TotalExcludTax                   decimal.Decimal `json:"totalExcludTax" csv:"totalExcludTax"`
-	InTaxSalesTotal                  decimal.Decimal `json:"inTaxSalesTotal" csv:"inTaxSalesTotal"`
-	TaxInclude                       decimal.Decimal `json:"taxInclude" csv:"taxInclude"`
-	OutTaxSalesTotal                 decimal.Decimal `json:"outTaxSalesTotal" csv:"outTaxSalesTotal"`
-	TaxExclude                       decimal.Decimal `json:"taxExclude" csv:"taxExclude"`
-	TaxTotal                         decimal.Decimal `json:"taxTotal" csv:"taxTotal"`
-	NonTaxSalesTotal                 decimal.Decimal `json:"nonTaxSalesTotal" csv:"nonTaxSalesTotal"`
-	TaxFreeTotal                     decimal.Decimal `json:"taxFreeTotal" csv:"taxFreeTotal"`
-	NonSalesTargetTaxFreeTotal       decimal.Decimal `json:"nonSalesTargetTaxFreeTotal" csv:"nonSalesTargetTaxFreeTotal"`
-	CostTotal                        decimal.Decimal `json:"costTotal" csv:"costTotal"`
-	GrossMargin                      decimal.Decimal `json:"grossMargin" csv:"grossMargin"`
-	Amount                           json.Number     `json:"amount" csv:"amount"`
-	TransactionCount                 json.Number     `json:"transactionCount" csv:"transactionCount"`
-	ReturnAmount                     json.Number     `json:"returnAmount" csv:"returnAmount"`
-	Carriage                         decimal.Decimal `json:"carriage" csv:"carriage"`
-	Commission                       decimal.Decimal `json:"commission" csv:"commission"`
-	PreparationCash                  decimal.Decimal `json:"preparationCash" csv:"preparationCash"`
-	CashSales                        decimal.Decimal `json:"cashSales" csv:"cashSales"`
-	CreditSales                      decimal.Decimal `json:"creditSales" csv:"creditSales"`
-	OtherSalseList                   []OtherSales    `json:"otherSalseList" csv:"-"`
-	ChangeDifference                 decimal.Decimal `json:"changeDifference" csv:"changeDifference"`
-	PartPayment                      decimal.Decimal `json:"partPayment" csv:"partPayment"`
-	PartPaymentCash                  decimal.Decimal `json:"partPaymentCash" csv:"partPaymentCash"`
-	PartPaymentCredit                decimal.Decimal `json:"partPaymentCredit" csv:"partPaymentCredit"`
-	ReceivedDepositCash              decimal.Decimal `json:"receivedDepositCash" csv:"receivedDepositCash"`
-	ReceivedDepositCashTotal         decimal.Decimal `json:"receivedDepositCashTotal" csv:"receivedDepositCashTotal"`
-	ReceivedDepositCreditTotal       decimal.Decimal `json:"receivedDepositCreditTotal" csv:"receivedDepositCreditTotal"`
-	PartPaymentCancel                decimal.Decimal `json:"partPaymentCancel" csv:"partPaymentCancel"`
-	PartPaymentCashCancel            decimal.Decimal `json:"partPaymentCashCancel" csv:"partPaymentCashCancel"`
-	PartPaymentCreditCancel          decimal.Decimal `json:"partPaymentCreditCancel" csv:"partPaymentCreditCancel"`
-	Deposit                          decimal.Decimal `json:"deposit" csv:"deposit"`
-	ReturnDeposit                    decimal.Decimal `json:"returnDeposit" csv:"returnDeposit"`
-	Receipt                          decimal.Decimal `json:"receipt" csv:"receipt"`
-	Payment                          decimal.Decimal `json:"payment" csv:"payment"`
-	NonSalesCashTotal                decimal.Decimal `json:"nonSalesCashTotal" csv:"nonSalesCashTotal"`
-	NonSalesCreditTotal              decimal.Decimal `json:"nonSalesCreditTotal" csv:"nonSalesCreditTotal"`
-	NonSalesOtherTotal               decimal.Decimal `json:"nonSalesOtherTotal" csv:"nonSalesOtherTotal"`
-	NonSalesTaxFreeTotal             decimal.Decimal `json:"nonSalesTaxFreeTotal" csv:"nonSalesTaxFreeTotal"`
-	CalculateBalance                 decimal.Decimal `json:"calculateBalance" csv:"calculateBalance"`
-	RealBalance                      decimal.Decimal `json:"realBalance" csv:"realBalance"`
-	Difference                       decimal.Decimal `json:"difference" csv:"difference"`
-	Saving                           decimal.Decimal `json:"saving" csv:"saving"`
-	CarryOver                        decimal.Decimal `json:"carryOver" csv:"carryOver"`
-	TenThousandYen                   json.Number     `json:"tenThousandYen" csv:"tenThousandYen"`
-	FiveThousandYen                  json.Number     `json:"fiveThousandYen" csv:"fiveThousandYen"`
-	TwoThousandYen                   json.Number     `json:"twoThousandYen" csv:"twoThousandYen"`
-	OneThousandYen                   json.Number     `json:"oneThousandYen" csv:"oneThousandYen"`
-	FiveHundredYen                   json.Number     `json:"fiveHundredYen" csv:"fiveHundredYen"`
-	OneHundredYen                    json.Number     `json:"oneHundredYen" csv:"oneHundredYen"`
-	FiftyYen                         json.Number     `json:"fiftyYen" csv:"fiftyYen"`
-	TenYen                           json.Number     `json:"tenYen" csv:"tenYen"`
-	FiveYen                          json.Number     `json:"fiveYen" csv:"fiveYen"`
-	OneYen                           json.Number     `json:"oneYen" csv:"oneYen"`
-	Comment                          *string         `json:"comment" csv:"comment"`
-	InsDateTime                      string          `json:"insDateTime" csv:"insDateTime"`
-	UpdDateTime                      string          `json:"updDateTime" csv:"updDateTime"`
-	SalesTotalNonSalesTargetDivision string          `json:"salesTotalNonSalesTargetDivision" csv:"salesTotalNonSalesTargetDivision"`
-	TotalTaxFreeDivision             string          `json:"totalTaxFreeDivision" csv:"totalTaxFreeDivision"`
+	SumDate                          string       `json:"sumDate" csv:"sumDate"`
+	StoreID                          json.Number  `json:"storeId" csv:"storeId"`
+	CashDrawerID                     json.Number  `json:"cashDrawerId" csv:"cashDrawerId"`
+	Status                           string       `json:"status" csv:"status"`
+	SalesTotal                       json.Number  `json:"salesTotal" csv:"salesTotal"`
+	Discount                         json.Number  `json:"discount" csv:"discount"`
+	PointDiscount                    json.Number  `json:"pointDiscount" csv:"pointDiscount"`
+	TaxExcludeReceive                json.Number  `json:"taxExcludeReceive" csv:"taxExcludeReceive"`
+	NonSalesTargetTotal              json.Number  `json:"nonSalesTargetTotal" csv:"nonSalesTargetTotal"`
+	Total                            json.Number  `json:"total" csv:"total"`
+	TotalExcludTax                   json.Number  `json:"totalExcludTax" csv:"totalExcludTax"`
+	InTaxSalesTotal                  json.Number  `json:"inTaxSalesTotal" csv:"inTaxSalesTotal"`
+	TaxInclude                       json.Number  `json:"taxInclude" csv:"taxInclude"`
+	OutTaxSalesTotal                 json.Number  `json:"outTaxSalesTotal" csv:"outTaxSalesTotal"`
+	TaxExclude                       json.Number  `json:"taxExclude" csv:"taxExclude"`
+	TaxTotal                         json.Number  `json:"taxTotal" csv:"taxTotal"`
+	NonTaxSalesTotal                 json.Number  `json:"nonTaxSalesTotal" csv:"nonTaxSalesTotal"`
+	TaxFreeTotal                     json.Number  `json:"taxFreeTotal" csv:"taxFreeTotal"`
+	NonSalesTargetTaxFreeTotal       json.Number  `json:"nonSalesTargetTaxFreeTotal" csv:"nonSalesTargetTaxFreeTotal"`
+	CostTotal                        json.Number  `json:"costTotal" csv:"costTotal"`
+	GrossMargin                      json.Number  `json:"grossMargin" csv:"grossMargin"`
+	Amount                           json.Number  `json:"amount" csv:"amount"`
+	TransactionCount                 json.Number  `json:"transactionCount" csv:"transactionCount"`
+	ReturnAmount                     json.Number  `json:"returnAmount" csv:"returnAmount"`
+	Carriage                         json.Number  `json:"carriage" csv:"carriage"`
+	Commission                       json.Number  `json:"commission" csv:"commission"`
+	PreparationCash                  json.Number  `json:"preparationCash" csv:"preparationCash"`
+	CashSales                        json.Number  `json:"cashSales" csv:"cashSales"`
+	CreditSales                      json.Number  `json:"creditSales" csv:"creditSales"`
+	OtherSalseList                   []OtherSales `json:"otherSalseList" csv:"-"`
+	ChangeDifference                 json.Number  `json:"changeDifference" csv:"changeDifference"`
+	PartPayment                      json.Number  `json:"partPayment" csv:"partPayment"`
+	PartPaymentCash                  json.Number  `json:"partPaymentCash" csv:"partPaymentCash"`
+	PartPaymentCredit                json.Number  `json:"partPaymentCredit" csv:"partPaymentCredit"`
+	ReceivedDepositCash              json.Number  `json:"receivedDepositCash" csv:"receivedDepositCash"`
+	ReceivedDepositCashTotal         json.Number  `json:"receivedDepositCashTotal" csv:"receivedDepositCashTotal"`
+	ReceivedDepositCreditTotal       json.Number  `json:"receivedDepositCreditTotal" csv:"receivedDepositCreditTotal"`
+	PartPaymentCancel                json.Number  `json:"partPaymentCancel" csv:"partPaymentCancel"`
+	PartPaymentCashCancel            json.Number  `json:"partPaymentCashCancel" csv:"partPaymentCashCancel"`
+	PartPaymentCreditCancel          json.Number  `json:"partPaymentCreditCancel" csv:"partPaymentCreditCancel"`
+	Deposit                          json.Number  `json:"deposit" csv:"deposit"`
+	ReturnDeposit                    json.Number  `json:"returnDeposit" csv:"returnDeposit"`
+	Receipt                          json.Number  `json:"receipt" csv:"receipt"`
+	Payment                          json.Number  `json:"payment" csv:"payment"`
+	NonSalesCashTotal                json.Number  `json:"nonSalesCashTotal" csv:"nonSalesCashTotal"`
+	NonSalesCreditTotal              json.Number  `json:"nonSalesCreditTotal" csv:"nonSalesCreditTotal"`
+	NonSalesOtherTotal               json.Number  `json:"nonSalesOtherTotal" csv:"nonSalesOtherTotal"`
+	NonSalesTaxFreeTotal             json.Number  `json:"nonSalesTaxFreeTotal" csv:"nonSalesTaxFreeTotal"`
+	CalculateBalance                 json.Number  `json:"calculateBalance" csv:"calculateBalance"`
+	RealBalance                      json.Number  `json:"realBalance" csv:"realBalance"`
+	Difference                       json.Number  `json:"difference" csv:"difference"`
+	Saving                           json.Number  `json:"saving" csv:"saving"`
+	CarryOver                        json.Number  `json:"carryOver" csv:"carryOver"`
+	TenThousandYen                   json.Number  `json:"tenThousandYen" csv:"tenThousandYen"`
+	FiveThousandYen                  json.Number  `json:"fiveThousandYen" csv:"fiveThousandYen"`
+	TwoThousandYen                   json.Number  `json:"twoThousandYen" csv:"twoThousandYen"`
+	OneThousandYen                   json.Number  `json:"oneThousandYen" csv:"oneThousandYen"`
+	FiveHundredYen                   json.Number  `json:"fiveHundredYen" csv:"fiveHundredYen"`
+	OneHundredYen                    json.Number  `json:"oneHundredYen" csv:"oneHundredYen"`
+	FiftyYen                         json.Number  `json:"fiftyYen" csv:"fiftyYen"`
+	TenYen                           json.Number  `json:"tenYen" csv:"tenYen"`
+	FiveYen                          json.Number  `json:"fiveYen" csv:"fiveYen"`
+	OneYen                           json.Number  `json:"oneYen" csv:"oneYen"`
+	Comment                          *string      `json:"comment" csv:"comment"`
+	InsDateTime                      string       `json:"insDateTime" csv:"insDateTime"`
+	UpdDateTime                      string       `json:"updDateTime" csv:"updDateTime"`
+	SalesTotalNonSalesTargetDivision string       `json:"salesTotalNonSalesTargetDivision" csv:"salesTotalNonSalesTargetDivision"`
+	TotalTaxFreeDivision             string       `json:"totalTaxFreeDivision" csv:"totalTaxFreeDivision"`
 }
 
 type DailySumCSV struct {
@@ -104,9 +102,9 @@ func (dsc *DailySumCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type OtherSales struct {
-	ID                        json.Number     `json:"id" csv:"id"`
-	Name                      string          `json:"name" csv:"name"`
-	PaymentMethodDivision     string          `json:"paymentMethodDivision" csv:"paymentMethodDivision"`
-	PaymentMethodDivisionName string          `json:"paymentMethodDivisionName" csv:"paymentMethodDivisionName"`
-	Sales                     decimal.Decimal `json:"sales" csv:"sales"`
+	ID                        json.Number `json:"id" csv:"id"`
+	Name                      string      `json:"name" csv:"name"`
+	PaymentMethodDivision     string      `json:"paymentMethodDivision" csv:"paymentMethodDivision"`
+	PaymentMethodDivisionName string      `json:"paymentMethodDivisionName" csv:"paymentMethodDivisionName"`
+	Sales                     json.Number `json:"sales" csv:"sales"`
 }
