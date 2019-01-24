@@ -123,10 +123,10 @@ var SrTableMetas = []SrTableMeta{
 	SrTableMeta{Name: LOSS_DETAIL, Limit: 1000, ProcName: LOSS_REF},
 	SrTableMeta{Name: SHIPMENT, Limit: 1000, ProcName: SHIPMENT_REF},
 	SrTableMeta{Name: SHIPMENT_DETAIL, Limit: 1000, ProcName: SHIPMENT_REF},
-	SrTableMeta{Name: STORAGE_INFO, Limit: 1000, ProcName: SHIPMENT_REF},
-	SrTableMeta{Name: STORAGE_INFO_DELIVERY, Limit: 1000, ProcName: SHIPMENT_REF},
-	SrTableMeta{Name: STORAGE_INFO_PRODUCT, Limit: 1000, ProcName: SHIPMENT_REF},
-	SrTableMeta{Name: STORAGE_INFO_DELIVERY_PRODUCT, Limit: 1000, ProcName: SHIPMENT_REF},
+	SrTableMeta{Name: STORAGE_INFO, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_DELIVERY, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_PRODUCT, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_DELIVERY_PRODUCT, Limit: 1000, ProcName: STORAGE_INFO_REF},
 }
 
 func GetTableMetaByName(tableName string) *SrTableMeta {
