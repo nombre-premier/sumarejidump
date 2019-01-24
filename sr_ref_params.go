@@ -60,7 +60,7 @@ const (
 	STOCKTAKING_HEAD   = "StocktakingHead"
 	STOCKTAKING_DETAIL = "StocktakingDetail"
 
-	// los_ref
+	// loss_ref
 	LOSS_REF    = "loss_ref"
 	LOSS        = "Loss"
 	LOSS_DETAIL = "LossDetail"
