@@ -64,6 +64,11 @@ const (
 	LOSS_REF    = "loss_ref"
 	LOSS        = "Loss"
 	LOSS_DETAIL = "LossDetail"
+
+	//shipment_ref
+	SHIPMENT_REF    = "shipment_ref"
+	SHIPMENT        = "Shipment"
+	SHIPMENT_DETAIL = "ShipmentDetail"
 )
 
 type SrRefParams struct {
@@ -109,6 +114,8 @@ var SrTableMetas = []SrTableMeta{
 	SrTableMeta{Name: STOCKTAKING_DETAIL, Limit: 1000, ProcName: STOCKTAKING_REF},
 	SrTableMeta{Name: LOSS, Limit: 1000, ProcName: LOSS_REF},
 	SrTableMeta{Name: LOSS_DETAIL, Limit: 1000, ProcName: LOSS_REF},
+	SrTableMeta{Name: SHIPMENT, Limit: 1000, ProcName: SHIPMENT_REF},
+	SrTableMeta{Name: SHIPMENT_DETAIL, Limit: 1000, ProcName: SHIPMENT_REF},
 }
 
 func GetTableMetaByName(tableName string) *SrTableMeta {
