@@ -191,6 +191,14 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewShipmentCSV(p.Limit, output)
 	case SHIPMENT_DETAIL:
 		return NewShipmentDetailCSV(p.Limit, output)
+	case STORAGE_INFO:
+		return NewStorageInfoCSV(p.Limit, output)
+	case STORAGE_INFO_DELIVERY:
+		return NewStorageInfoDeliveryCSV(p.Limit, output)
+	case STORAGE_INFO_PRODUCT:
+		return NewStorageInfoProductCSV(p.Limit, output)
+	case STORAGE_INFO_DELIVERY_PRODUCT:
+		return NewStorageInfoDeliveryProductCSV(p.Limit, output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}

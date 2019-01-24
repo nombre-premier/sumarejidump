@@ -1,0 +1,19 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "storageInfoId": "1",
+            "storageStoreId": "1",
+            "storageExpectedDateFrom": "2019-01-30",
+            "storageExpectedDateTo": "2019-02-02",
+            "modified": "2019-01-24 11:38:20"
+        },
+        {
+            "storageInfoId": "2",
+            "storageStoreId": "1",
+            "storageExpectedDateFrom": "2019-01-24",
+            "storageExpectedDateTo": "2019-01-30",
+            "modified": "2019-01-24 11:40:29"
+        }
+    ]
+}
