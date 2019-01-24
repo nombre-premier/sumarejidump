@@ -5,12 +5,12 @@ import (
 )
 
 type StorageInfo struct {
-	StorageInfoID    json.Number `json:"storageInfoId" csv:"storageInfoId`
-	RecipientOrderID json.Number `json:"recipientOrderId" csv:"recipientOrderId`
-	OrderedDate      string      `json:"orderedDate" csv:"orderedDate`
-	Status           string      `json:"status" csv:"status`
-	IdentificationNo *string     `json:"identificationNo" csv:"identificationNo`
-	Modified         string      `json:"modified" csv:"modified`
+	StorageInfoID    json.Number `json:"storageInfoId" csv:"storageInfoId"`
+	RecipientOrderID json.Number `json:"recipientOrderId" csv:"recipientOrderId"`
+	OrderedDate      string      `json:"orderedDate" csv:"orderedDate"`
+	Status           string      `json:"status" csv:"status"`
+	IdentificationNo *string     `json:"identificationNo" csv:"identificationNo"`
+	Modified         string      `json:"modified" csv:"modified"`
 }
 
 type StorageInfoCSV struct {
