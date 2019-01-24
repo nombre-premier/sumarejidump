@@ -1,0 +1,29 @@
+{
+    "total_count": "3",
+    "result": [
+        {
+            "lossId": "1",
+            "productId": "29",
+            "productCode": "2000002000105",
+            "productName": "コットントラウザーズ(SS)",
+            "size": "ＳＳ",
+            "color": "ベージュ",
+            "groupCode": "bottoms002",
+            "supplierProductNo": null,
+            "quantity": "1",
+            "modified": "2019-01-24 10:40:45"
+        },
+        {
+            "lossId": "3",
+            "productId": "12",
+            "productCode": "2000001000120",
+            "productName": "チェックシャツ(L)",
+            "size": "Ｌ",
+            "color": "ブルー",
+            "groupCode": "tops002",
+            "supplierProductNo": null,
+            "quantity": "1",
+            "modified": "2019-01-24 10:42:36"
+        }
+    ]
+}
