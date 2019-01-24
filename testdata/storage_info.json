@@ -1,0 +1,21 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "storageInfoId": "1",
+            "recipientOrderId": "1",
+            "orderedDate": "2019-01-24",
+            "status": "2",
+            "identificationNo": null,
+            "modified": "2019-01-24 11:38:20"
+        },
+        {
+            "storageInfoId": "2",
+            "recipientOrderId": "2",
+            "orderedDate": "2019-01-03",
+            "status": "2",
+            "identificationNo": null,
+            "modified": "2019-01-24 11:40:29"
+        }
+    ]
+}
