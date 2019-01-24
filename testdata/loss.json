@@ -1,0 +1,23 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "lossId": "1",
+            "storeId": "1",
+            "division": "2",
+            "memo": "店内混雑で気づいたらなくなっていた。",
+            "lossDatetime": "2019-01-01 00:00:00",
+            "identificationNo": null,
+            "modified": "2019-01-24 10:40:45"
+        },
+        {
+            "lossId": "3",
+            "storeId": "1",
+            "division": "1",
+            "memo": "袖に穴が空いているため",
+            "lossDatetime": "2019-01-23 00:00:00",
+            "identificationNo": null,
+            "modified": "2019-01-24 10:42:36"
+        }
+    ]
+}
