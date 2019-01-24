@@ -144,9 +144,9 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 	case PRODUCT_PRICE:
 		return NewProductPriceCSV(p.Limit, output)
 	case PRODUCT_RESERVE_ITEM:
-		return NewProductReseveItemCSV(p.Limit, output)
+		return NewProductReserveItemCSV(p.Limit, output)
 	case PRODUCT_RESERVE_ITEM_LABEL:
-		return NewProductReseveItemLabelCSV(p.Limit, output)
+		return NewProductReserveItemLabelCSV(p.Limit, output)
 	case PRODUCT_STORE:
 		return NewProductStoreCSV(p.Limit, output)
 	case PRODUCT_INVENTORY_RESERVATION:
