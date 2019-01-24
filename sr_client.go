@@ -187,6 +187,10 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewLossCSV(p.Limit, output)
 	case LOSS_DETAIL:
 		return NewLossDetailCSV(p.Limit, output)
+	case SHIPMENT:
+		return NewShipmentCSV(p.Limit, output)
+	case SHIPMENT_DETAIL:
+		return NewShipmentDetailCSV(p.Limit, output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}

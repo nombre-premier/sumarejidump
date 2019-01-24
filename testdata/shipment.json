@@ -1,0 +1,29 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "shipmentId": "2",
+            "shipmentStoreId": "3",
+            "recipientType": "3",
+            "recipientId": "1",
+            "recipientName": "本社",
+            "shipmentDivision": "0",
+            "shipmentDate": "2019-01-22",
+            "status": "2",
+            "identificationNo": null,
+            "modified": "2019-01-24 11:25:00"
+        },
+        {
+            "shipmentId": "4",
+            "shipmentStoreId": "3",
+            "recipientType": "3",
+            "recipientId": "2",
+            "recipientName": "本社",
+            "shipmentDivision": "2",
+            "shipmentDate": "2019-01-29",
+            "status": "2",
+            "identificationNo": null,
+            "modified": "2019-01-24 11:29:59"
+        }
+    ]
+}
