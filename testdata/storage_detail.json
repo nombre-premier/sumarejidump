@@ -1,0 +1,43 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "storageId": "1",
+            "productId": "1",
+            "productCode": "2000001000014",
+            "productName": "ユニセックススウェット(S)",
+            "size": "S",
+            "color": "レッド",
+            "groupCode": "tops001",
+            "supplierProductNo": null,
+            "cost": null,
+            "scheduledQuantity": "2",
+            "inspectionQuantity": "2",
+            "stockoutQuantity": "0",
+            "stockoutReason": "",
+            "inspectionDate": "2019-01-24",
+            "compulsoryCompleteFlag": "0",
+            "status": "1",
+            "modified": "2019-01-24 12:07:41"
+        },
+        {
+            "storageId": "1",
+            "productId": "2",
+            "productCode": "2000001000021",
+            "productName": "ユニセックススウェット(M)",
+            "size": "M",
+            "color": "レッド",
+            "groupCode": "tops001",
+            "supplierProductNo": null,
+            "cost": null,
+            "scheduledQuantity": "2",
+            "inspectionQuantity": "2",
+            "stockoutQuantity": "0",
+            "stockoutReason": "",
+            "inspectionDate": "2019-01-24",
+            "compulsoryCompleteFlag": "0",
+            "status": "1",
+            "modified": "2019-01-24 12:07:41"
+        }
+    ]
+}
