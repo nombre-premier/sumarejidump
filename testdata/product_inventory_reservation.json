@@ -1,0 +1,15 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "productId": "1203",
+            "reservationProductId": "553",
+            "reservationAmount": "1"
+        },
+        {
+            "productId": "1203",
+            "reservationProductId": "554",
+            "reservationAmount": "1"
+        }
+    ]
+}

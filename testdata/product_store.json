@@ -1,0 +1,15 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "productId": "1225",
+            "storeId": "1",
+            "assignDivision": "0"
+        },
+        {
+            "productId": "1225",
+            "storeId": "2",
+            "assignDivision": "0"
+        }
+    ]
+}

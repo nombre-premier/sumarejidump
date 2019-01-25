@@ -65,14 +65,14 @@ func (pc *ProductCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductPrice struct {
-	ProductID     int     `json:"productId" csv:"productId"`
-	StoreID       string  `json:"storeId" csv:"storeId"`
-	PriceDivision string  `json:"priceDivision" csv:"priceDivision"`
-	StartDate     string  `json:"startDate" csv:"startDate"`
-	EndDate       string  `json:"endDate" csv:"endDate"`
-	Price         float64 `json:"price" csv:"price"`
-	InsDateTime   string  `json:"insDateTime" csv:"insDateTime"`
-	UpdDateTime   string  `json:"updDateTime" csv:"updDateTime"`
+	ProductID     json.Number `json:"productId" csv:"productId"`
+	StoreID       string      `json:"storeId" csv:"storeId"`
+	PriceDivision string      `json:"priceDivision" csv:"priceDivision"`
+	StartDate     string      `json:"startDate" csv:"startDate"`
+	EndDate       string      `json:"endDate" csv:"endDate"`
+	Price         json.Number `json:"price" csv:"price"`
+	InsDateTime   string      `json:"insDateTime" csv:"insDateTime"`
+	UpdDateTime   string      `json:"updDateTime" csv:"updDateTime"`
 }
 
 type ProductPriceCSV struct {
@@ -102,9 +102,9 @@ func (ppc *ProductPriceCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductReserveItem struct {
-	ProductID string `json:"productId" csv:"productId"`
-	No        string `json:"no" csv:"no"`
-	Value     string `json:"value" csv:"value"`
+	ProductID json.Number `json:"productId" csv:"productId"`
+	No        json.Number `json:"no" csv:"no"`
+	Value     string      `json:"value" csv:"value"`
 }
 
 type ProductReserveItemCSV struct {
@@ -134,8 +134,8 @@ func (pric *ProductReserveItemCSV) Write(resp *SrRefResponse) *CSVWriter {
 }
 
 type ProductReserveItemLabel struct {
-	No    string `json:"no" csv:"no"`
-	Label string `json:"label" csv:"label"`
+	No    json.Number `json:"no" csv:"no"`
+	Label string      `json:"label" csv:"label"`
 }
 
 type ProductReserveItemLabelCSV struct {

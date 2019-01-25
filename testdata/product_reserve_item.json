@@ -1,0 +1,15 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "productId": "1",
+            "no": "1",
+            "value": "ゆったりデザイン"
+        },
+        {
+            "productId": "1",
+            "no": "2",
+            "value": "★色落注意★"
+        }
+    ]
+}
