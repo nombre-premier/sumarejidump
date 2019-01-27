@@ -4,6 +4,13 @@ Just dump sumareji tables into CSV
 
 [![CircleCI](https://circleci.com/gh/nombre-premier/sumarejidump/tree/develop.svg?style=svg&circle-token=3bb90d1b5de2b384f57eda79ba9de8722b532c3b)](https://circleci.com/gh/nombre-premier/sumarejidump/tree/develop)
 
+
+## Instration
+
+```
+ go get github.com/nombre-premier/sumarejidump
+```
+
 ## Usage
 
 ```
@@ -14,7 +21,7 @@ USAGE:
    sumarejidump [command] [options] [table_name]
 
 VERSION:
-   0.0.1
+   0.1.0
 
 COMMANDS:
      help, h  Shows a list of commands or help for one command
