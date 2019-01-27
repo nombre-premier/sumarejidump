@@ -25,12 +25,10 @@ func CreateCliApp() *cli.App {
 			Usage:  "sumareji contract_id",
 			EnvVar: "SUMAREJI_CONTRACT_ID",
 		},
-		// TODO: implement conditions
 		cli.StringSliceFlag{
 			Name:  "conditions, c",
 			Usage: "filter data by given conditon(s)",
 		},
-		// TODO: implement dir config
 		cli.StringFlag{
 			Name:  "output, o",
 			Usage: "output dir name, default: yyyyMMDDhhmmss",
