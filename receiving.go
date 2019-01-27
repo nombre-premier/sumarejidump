@@ -3,15 +3,15 @@ package main
 import "encoding/json"
 
 type Receiving struct {
-	ReceivingID      string  `json:"receivingId" csv:"receivingId"`
-	ShippingID       string  `json:"shippingId" csv:"shippingId"`
-	ShippingStoreID  string  `json:"shippingStoreId" csv:"shippingStoreId"`
-	ReceivingStoreID string  `json:"receivingStoreId" csv:"receivingStoreId"`
-	ReceivingDate    string  `json:"receivingDate" csv:"receivingDate"`
-	Memo             string  `json:"memo" csv:"memo"`
-	Status           string  `json:"status" csv:"status"`
-	IdentificationNo *string `json:"identificationNo" csv:"identificationNo"`
-	Modified         string  `json:"modified" csv:"modified"`
+	ReceivingID      json.Number `json:"receivingId" csv:"receivingId"`
+	ShippingID       json.Number `json:"shippingId" csv:"shippingId"`
+	ShippingStoreID  json.Number `json:"shippingStoreId" csv:"shippingStoreId"`
+	ReceivingStoreID json.Number `json:"receivingStoreId" csv:"receivingStoreId"`
+	ReceivingDate    string      `json:"receivingDate" csv:"receivingDate"`
+	Memo             string      `json:"memo" csv:"memo"`
+	Status           string      `json:"status" csv:"status"`
+	IdentificationNo *string     `json:"identificationNo" csv:"identificationNo"`
+	Modified         string      `json:"modified" csv:"modified"`
 }
 
 type ReceivingCSV struct {
@@ -49,9 +49,9 @@ type ReceivingDetail struct {
 	Color              string      `json:"color" csv:"color"`
 	GroupCode          *string     `json:"groupCode" csv:"groupCode"`
 	SupplierProductNo  *string     `json:"supplierProductNo" csv:"supplierProductNo"`
-	ScheduledQuantity  string      `json:"scheduledQuantity" csv:"scheduledQuantity"`
-	InspectionQuantity string      `json:"inspectionQuantity" csv:"inspectionQuantity"`
-	StockoutQuantity   string      `json:"stockoutQuantity" csv:"stockoutQuantity"`
+	ScheduledQuantity  json.Number `json:"scheduledQuantity" csv:"scheduledQuantity"`
+	InspectionQuantity json.Number `json:"inspectionQuantity" csv:"inspectionQuantity"`
+	StockoutQuantity   json.Number `json:"stockoutQuantity" csv:"stockoutQuantity"`
 	StockoutReason     *string     `json:"stockoutReason" csv:"stockoutReason"`
 	InspectionDate     string      `json:"inspectionDate" csv:"inspectionDate"`
 	Status             string      `json:"status" csv:"status"`

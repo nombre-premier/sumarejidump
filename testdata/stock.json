@@ -1,0 +1,17 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "storeId": "1",
+            "productId": "1",
+            "stockAmount": "0",
+            "updDateTime": "2018-09-25 12:50:50"
+        },
+        {
+            "storeId": "2",
+            "productId": "1",
+            "stockAmount": "0",
+            "updDateTime": "2018-07-28 12:38:42"
+        }
+    ]
+}

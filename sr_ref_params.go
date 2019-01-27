@@ -59,6 +59,28 @@ const (
 	STOCKTAKING_INFO   = "StocktakingInfo"
 	STOCKTAKING_HEAD   = "StocktakingHead"
 	STOCKTAKING_DETAIL = "StocktakingDetail"
+
+	// loss_ref
+	LOSS_REF    = "loss_ref"
+	LOSS        = "Loss"
+	LOSS_DETAIL = "LossDetail"
+
+	//shipment_ref
+	SHIPMENT_REF    = "shipment_ref"
+	SHIPMENT        = "Shipment"
+	SHIPMENT_DETAIL = "ShipmentDetail"
+
+	//storage_info_ref
+	STORAGE_INFO_REF              = "storage_info_ref"
+	STORAGE_INFO                  = "StorageInfo"
+	STORAGE_INFO_DELIVERY         = "StorageInfoDelivery"
+	STORAGE_INFO_PRODUCT          = "StorageInfoProduct"
+	STORAGE_INFO_DELIVERY_PRODUCT = "StorageInfoDeliveryProduct"
+
+	//storage
+	STORAGE_REF    = "storage_ref"
+	STORAGE        = "Storage"
+	STORAGE_DETAIL = "StorageDetail"
 )
 
 type SrRefParams struct {
@@ -102,6 +124,16 @@ var SrTableMetas = []SrTableMeta{
 	SrTableMeta{Name: STOCKTAKING_INFO, Limit: 1000, ProcName: STOCKTAKING_REF},
 	SrTableMeta{Name: STOCKTAKING_HEAD, Limit: 1000, ProcName: STOCKTAKING_REF},
 	SrTableMeta{Name: STOCKTAKING_DETAIL, Limit: 1000, ProcName: STOCKTAKING_REF},
+	SrTableMeta{Name: LOSS, Limit: 1000, ProcName: LOSS_REF},
+	SrTableMeta{Name: LOSS_DETAIL, Limit: 1000, ProcName: LOSS_REF},
+	SrTableMeta{Name: SHIPMENT, Limit: 1000, ProcName: SHIPMENT_REF},
+	SrTableMeta{Name: SHIPMENT_DETAIL, Limit: 1000, ProcName: SHIPMENT_REF},
+	SrTableMeta{Name: STORAGE_INFO, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_DELIVERY, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_PRODUCT, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE_INFO_DELIVERY_PRODUCT, Limit: 1000, ProcName: STORAGE_INFO_REF},
+	SrTableMeta{Name: STORAGE, Limit: 1000, ProcName: STORAGE_REF},
+	SrTableMeta{Name: STORAGE_DETAIL, Limit: 1000, ProcName: STORAGE_REF},
 }
 
 func GetTableMetaByName(tableName string) *SrTableMeta {

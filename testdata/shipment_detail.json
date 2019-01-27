@@ -1,0 +1,33 @@
+{
+    "total_count": "2",
+    "result": [
+        {
+            "shipmentId": "1",
+            "productId": "47",
+            "productCode": "2000003000012",
+            "productName": "サンダル(24)",
+            "size": "24",
+            "color": "ブラック",
+            "groupCode": "foot001",
+            "supplierProductNo": null,
+            "cost": "3000.00000",
+            "quantity": "1",
+            "memo": "",
+            "modified": "2019-01-24 11:23:10"
+        },
+        {
+            "shipmentId": "1",
+            "productId": "48",
+            "productCode": "2000003000029",
+            "productName": "サンダル(26)",
+            "size": "26",
+            "color": "ブラック",
+            "groupCode": "foot001",
+            "supplierProductNo": null,
+            "cost": "3000.00000",
+            "quantity": "1",
+            "memo": "",
+            "modified": "2019-01-24 11:23:10"
+        }
+    ]
+}

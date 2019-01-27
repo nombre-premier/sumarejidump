@@ -144,9 +144,9 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 	case PRODUCT_PRICE:
 		return NewProductPriceCSV(p.Limit, output)
 	case PRODUCT_RESERVE_ITEM:
-		return NewProductReseveItemCSV(p.Limit, output)
+		return NewProductReserveItemCSV(p.Limit, output)
 	case PRODUCT_RESERVE_ITEM_LABEL:
-		return NewProductReseveItemLabelCSV(p.Limit, output)
+		return NewProductReserveItemLabelCSV(p.Limit, output)
 	case PRODUCT_STORE:
 		return NewProductStoreCSV(p.Limit, output)
 	case PRODUCT_INVENTORY_RESERVATION:
@@ -183,6 +183,26 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewStocktakingHeadCSV(p.Limit, output)
 	case STOCKTAKING_DETAIL:
 		return NewStocktakingDetailCSV(p.Limit, output)
+	case LOSS:
+		return NewLossCSV(p.Limit, output)
+	case LOSS_DETAIL:
+		return NewLossDetailCSV(p.Limit, output)
+	case SHIPMENT:
+		return NewShipmentCSV(p.Limit, output)
+	case SHIPMENT_DETAIL:
+		return NewShipmentDetailCSV(p.Limit, output)
+	case STORAGE_INFO:
+		return NewStorageInfoCSV(p.Limit, output)
+	case STORAGE_INFO_DELIVERY:
+		return NewStorageInfoDeliveryCSV(p.Limit, output)
+	case STORAGE_INFO_PRODUCT:
+		return NewStorageInfoProductCSV(p.Limit, output)
+	case STORAGE_INFO_DELIVERY_PRODUCT:
+		return NewStorageInfoDeliveryProductCSV(p.Limit, output)
+	case STORAGE:
+		return NewStorageCSV(p.Limit, output)
+	case STORAGE_DETAIL:
+		return NewStorageDetailCSV(p.Limit, output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}

@@ -1,0 +1,27 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "receivingId": "1",
+      "shippingId": "1",
+      "shippingStoreId": "2",
+      "receivingStoreId": "1",
+      "receivingDate": "2018-08-08",
+      "memo": "在庫補填",
+      "status": "2",
+      "identificationNo": null,
+      "modified": "2018-08-08 19:17:02"
+    },
+    {
+      "receivingId": "2",
+      "shippingId": "2",
+      "shippingStoreId": "1",
+      "receivingStoreId": "2",
+      "receivingDate": "2018-08-10",
+      "memo": "中目黒より在庫移動依頼",
+      "status": "2",
+      "identificationNo": null,
+      "modified": "2018-08-10 18:43:49"
+    }
+  ]
+}
