@@ -2,10 +2,10 @@
 
 Just dump sumareji tables into CSV
 
-[![CircleCI](https://circleci.com/gh/nombre-premier/sumarejidump/tree/develop.svg?style=svg&circle-token=3bb90d1b5de2b384f57eda79ba9de8722b532c3b)](https://circleci.com/gh/nombre-premier/sumarejidump/tree/develop)
+[![CircleCI](https://circleci.com/gh/nombre-premier/sumarejidump/tree/master.svg?style=svg)](https://circleci.com/gh/nombre-premier/sumarejidump/tree/master)
 
 
-## Instration
+## Installation
 
 ```
  go get github.com/nombre-premier/sumarejidump
