@@ -45,7 +45,7 @@ type Customer struct {
 	FavoriteList         *string      `json:"favoriteList" csv:"favoriteList"`
 	BrowsingList         *string      `json:"browsingList" csv:"browsingList"`
 	Status               string       `json:"status" csv:"status"`
-	StoreID              *json.Number `json:"storeId" csv:"storeID"`
+	StoreID              *json.Number `json:"storeId" csv:"storeId"`
 	InsDateTime          string       `json:"insDateTime" csv:"insDateTime"`
 	UpdDateTime          string       `json:"updDateTime" csv:"updDateTime"`
 }

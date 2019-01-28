@@ -28,7 +28,7 @@ type Product struct {
 	StockControlDivision string       `json:"stockControlDivision" csv:"stockControlDivision"`
 	DisplayFlag          string       `json:"displayFlag" csv:"displayFlag"`
 	Division             string       `json:"division" csv:"division"`
-	ProductOptionGroupID *json.Number `json:"productOptionGroupId" csv:"productOptionGroupID"`
+	ProductOptionGroupID *json.Number `json:"productOptionGroupId" csv:"productOptionGroupId"`
 	PointNotApplicable   string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
 	TaxFreeDivision      string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
 	SupplierProductNo    *string      `json:"supplierProductNo" csv:"supplierProductNo"`
