@@ -7,8 +7,8 @@ type Category struct {
 	CategoryCode       string       `json:"categoryCode" csv:"categoryCode"`
 	CategoryName       string       `json:"categoryName" csv:"categoryName"`
 	CategoryAbbr       string       `json:"categoryAbbr" csv:"categoryAbbr"`
-	CategoryGroupID    *json.Number `json:"categoryGroupId" csv:"categoryGroupID"`
-	ParentCategoryID   *json.Number `json:"parentCategoryId" csv:"parentCategoryID"`
+	CategoryGroupID    *json.Number `json:"categoryGroupId" csv:"categoryGroupId"`
+	ParentCategoryID   *json.Number `json:"parentCategoryId" csv:"parentCategoryId"`
 	Level              json.Number  `json:"level" csv:"level"`
 	DisplaySequence    json.Number  `json:"displaySequence" csv:"displaySequence"`
 	DisplayFlag        string       `json:"displayFlag" csv:"displayFlag"`

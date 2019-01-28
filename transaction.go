@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-
 )
 
 type TransactionHead struct {
@@ -10,7 +9,7 @@ type TransactionHead struct {
 	TransactionDateTime            string       `json:"transactionDateTime" csv:"transactionDateTime"`
 	TransactionHeadDivision        string       `json:"transactionHeadDivision" csv:"transactionHeadDivision"`
 	CancelDivision                 string       `json:"cancelDivision" csv:"cancelDivision"`
-	UnitNonDiscountsubtotal        json.Number `json:"unitNonDiscountsubtotal" csv:"unitNonDiscountsubtotal"`
+	UnitNonDiscountsubtotal        json.Number  `json:"unitNonDiscountsubtotal" csv:"unitNonDiscountsubtotal"`
 	UnitDiscountsubtotal           json.Number  `json:"unitDiscountsubtotal" csv:"unitDiscountsubtotal"`
 	Subtotal                       json.Number  `json:"subtotal" csv:"subtotal"`
 	SubtotalDiscountPrice          json.Number  `json:"subtotalDiscountPrice" csv:"subtotalDiscountPrice"`
@@ -53,12 +52,12 @@ type TransactionHead struct {
 	AdjustmentMile                 *json.Number `json:"adjustmentMile" csv:"adjustmentMile"`
 	AdjustmentMileDivision         *string      `json:"adjustmentMileDivision" csv:"adjustmentMileDivision"`
 	AdjustmentMileValue            *json.Number `json:"adjustmentMileValue" csv:"adjustmentMileValue"`
-	StoreID                        json.Number  `json:"storeId" csv:"storeID"`
+	StoreID                        json.Number  `json:"storeId" csv:"storeId"`
 	StoreCode                      string       `json:"storeCode" csv:"storeCode"`
-	TerminalID                     json.Number  `json:"terminalId" csv:"terminalID"`
-	CustomerID                     *json.Number `json:"customerId" csv:"customerID"`
+	TerminalID                     json.Number  `json:"terminalId" csv:"terminalId"`
+	CustomerID                     *json.Number `json:"customerId" csv:"customerId"`
 	CustomerCode                   *string      `json:"customerCode" csv:"customerCode"`
-	TerminalTranID                 string       `json:"terminalTranId" csv:"terminalTranID"`
+	TerminalTranID                 string       `json:"terminalTranId" csv:"terminalTranId"`
 	TerminalTranDateTime           string       `json:"terminalTranDateTime" csv:"terminalTranDateTime"`
 	SumDivision                    string       `json:"sumDivision" csv:"sumDivision"`
 	AdjustmentDateTime             *string      `json:"adjustmentDateTime" csv:"adjustmentDateTime"`
@@ -69,7 +68,7 @@ type TransactionHead struct {
 	CustomerGroupID3               *json.Number `json:"customerGroupId3" csv:"customerGroupId3"`
 	CustomerGroupID4               *json.Number `json:"customerGroupId4" csv:"customerGroupId4"`
 	CustomerGroupID5               *json.Number `json:"customerGroupId5" csv:"customerGroupId5"`
-	StaffID                        *json.Number `json:"staffId" csv:"staffID"`
+	StaffID                        *json.Number `json:"staffId" csv:"staffId"`
 	StaffName                      *string      `json:"staffName" csv:"staffName"`
 	StaffCode                      *string      `json:"staffCode" csv:"staffCode"`
 	PaymentCount                   *string      `json:"paymentCount" csv:"paymentCount"`
@@ -106,20 +105,20 @@ type TransactionHead struct {
 	MileageLabel                   string       `json:"mileageLabel" csv:"mileageLabel"`
 	CustomerPinCode                *string      `json:"customerPinCode" csv:"customerPinCode"`
 	DisposeDivision                string       `json:"disposeDivision" csv:"disposeDivision"`
-	DisposeServerTransactionHeadID json.Number  `json:"disposeServerTransactionHeadId" csv:"disposeServerTransactionHeadID"`
+	DisposeServerTransactionHeadID json.Number  `json:"disposeServerTransactionHeadId" csv:"disposeServerTransactionHeadId"`
 	CancelDateTime                 *string      `json:"cancelDateTime" csv:"cancelDateTime"`
 	SellDivision                   string       `json:"sellDivision" csv:"sellDivision"`
 	TaxRate                        json.Number  `json:"taxRate" csv:"taxRate"`
 	TaxRounding                    string       `json:"taxRounding" csv:"taxRounding"`
 	DiscountRoundingDivision       string       `json:"discountRoundingDivision" csv:"discountRoundingDivision"`
-	TransactionUUID                string       `json:"transactionUuid" csv:"transactionUUID"`
+	TransactionUUID                string       `json:"transactionUuid" csv:"transactionUuid"`
 	GiftReceiptValidDays           *json.Number `json:"giftReceiptValidDays" csv:"giftReceiptValidDays"`
 	ReceiptIssueNumberOfTimes      json.Number  `json:"receiptIssueNumberOfTimes" csv:"receiptIssueNumberOfTimes"`
-	PickupTransactionHeadID        *json.Number `json:"pickupTransactionHeadId" csv:"pickupTransactionHeadID"`
+	PickupTransactionHeadID        *json.Number `json:"pickupTransactionHeadId" csv:"pickupTransactionHeadId"`
 	PickUpDate                     *string      `json:"pickUpDate" csv:"pickUpDate"`
 	PartPayment                    *json.Number `json:"partPayment" csv:"partPayment"`
 	PartPaymentClass               *string      `json:"partPaymentClass" csv:"partPaymentClass"`
-	LayawayServerTransactionHeadID *json.Number `json:"layawayServerTransactionHeadId" csv:"layawayServerTransactionHeadID"`
+	LayawayServerTransactionHeadID *json.Number `json:"layawayServerTransactionHeadId" csv:"layawayServerTransactionHeadId"`
 	DisabledEdit                   *string      `json:"disabledEdit" csv:"disabledEdit"`
 	UpdDateTime                    string       `json:"updDateTime" csv:"updDateTime"`
 }
@@ -199,7 +198,7 @@ type TransactionDetail struct {
 	StaffDiscountDivision        *json.Number `json:"staffDiscountDivision" csv:"staffDiscountDivision"`
 	ApplyStaffDiscountRate       *json.Number `json:"applyStaffDiscountRate" csv:"applyStaffDiscountRate"`
 	ApplyStaffDiscountPrice      *json.Number `json:"applyStaffDiscountPrice" csv:"applyStaffDiscountPrice"`
-	BargainID                    *json.Number `json:"bargainId" csv:"bargainID"`
+	BargainID                    *json.Number `json:"bargainId" csv:"bargainId"`
 	BargainName                  *string      `json:"bargainName" csv:"bargainName"`
 	BargainDivision              *string      `json:"bargainDivision" csv:"bargainDivision"`
 	BargainValue                 *json.Number `json:"bargainValue" csv:"bargainValue"`
