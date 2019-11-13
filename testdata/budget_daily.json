@@ -1,0 +1,17 @@
+{
+  "total_count": "2",
+  "result": [
+    {
+      "storeId": "1",
+      "ym": "201908",
+      "day": "01",
+      "salesTargetDaily": "100000"
+    },
+    {
+      "storeId": "1",
+      "ym": "201908",
+      "day": "02",
+      "salesTargetDaily": "120000"
+    }
+  ]
+}
