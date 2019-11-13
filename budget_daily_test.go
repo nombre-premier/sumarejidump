@@ -60,10 +60,10 @@ func TestBudgetDaily(t *testing.T) {
 	}
 
 	bd1 := BudgetDaily{
-		StoreID:     json.Number("1"),
-		YM:   json.Number("201908"),
-		Day: "01",
-		SalesTargetDaily: "100000",
+		StoreID:          json.Number("1"),
+		YM:               "201908",
+		Day:              "01",
+		SalesTargetDaily: json.Number("100000"),
 	}
 
 	if !reflect.DeepEqual(budgetDailys[0], &bd1) {
@@ -71,10 +71,10 @@ func TestBudgetDaily(t *testing.T) {
 	}
 
 	bd2 := BudgetDaily{
-		StoreID:     json.Number("1"),
-		YM:   json.Number("201908"),
-		Day: "02",
-		SalesTargetDaily: "120000",
+		StoreID:          json.Number("1"),
+		YM:               "201908",
+		Day:              "02",
+		SalesTargetDaily: json.Number("120000"),
 	}
 
 	if !reflect.DeepEqual(budgetDailys[1], &bd2) {
