@@ -4,9 +4,9 @@ import "encoding/json"
 
 type BudgetDaily struct {
 	StoreID          json.Number `json:"storeId" csv:"storeId"`
-	YM               json.Number `json:"ym" csv:"ym"`
+	YM               string      `json:"ym" csv:"ym"`
 	Day              string      `json:"day" csv:"day"`
-	SalesTargetDaily string      `json:"salesTargetDaily" csv:"salesTargetDaily"`
+	SalesTargetDaily json.Number `json:"salesTargetDaily" csv:"salesTargetDaily"`
 }
 
 type BudgetDailyCSV struct {
