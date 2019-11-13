@@ -203,6 +203,8 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewStorageCSV(p.Limit, output)
 	case STORAGE_DETAIL:
 		return NewStorageDetailCSV(p.Limit, output)
+	case BUDGET_DAILY:
+		return NewBudgetDailyCSV(p.Limit, output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}
