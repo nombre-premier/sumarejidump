@@ -30,6 +30,10 @@
             "taxFreeDivision": "1",
             "supplierProductNo": null,
             "staffDiscountRate": null,
+            "useCategoryReduceTax": 0,
+            "reduceTaxId": null,
+            "reduceTaxPrice": "69000",
+            "reduceTaxCustomerPrice": "69000",
             "appStartDateTime": null,
             "insDateTime": "2018-07-21 01:28:22",
             "updDateTime": "2018-12-06 16:40:43"
@@ -64,6 +68,10 @@
             "taxFreeDivision": "1",
             "supplierProductNo": null,
             "staffDiscountRate": null,
+            "useCategoryReduceTax": 0,
+            "reduceTaxId": null,
+            "reduceTaxPrice": "69000",
+            "reduceTaxCustomerPrice": "69000",
             "appStartDateTime": null,
             "insDateTime": "2018-07-21 01:28:22",
             "updDateTime": "2018-12-06 16:40:43"
