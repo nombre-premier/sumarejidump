@@ -5,37 +5,41 @@ import (
 )
 
 type Product struct {
-	ProductID            json.Number  `json:"productId" csv:"productId"`
-	CategoryID           json.Number  `json:"categoryId" csv:"categoryId"`
-	ProductCode          string       `json:"productCode" csv:"productCode"`
-	ProductName          string       `json:"productName" csv:"productName"`
-	ProductKana          *string      `json:"productKana" csv:"productKana"`
-	TaxDivision          string       `json:"taxDivision" csv:"taxDivision"`
-	ProductPriceDivision string       `json:"productPriceDivision" csv:"productPriceDivision"`
-	Price                json.Number  `json:"price" csv:"price"`
-	CustomerPrice        *json.Number `json:"customerPrice" csv:"customerPrice"`
-	Cost                 json.Number  `json:"cost" csv:"cost"`
-	Attribute            *string      `json:"attribute" csv:"attribute"`
-	Description          *string      `json:"description" csv:"description"`
-	CatchCopy            *string      `json:"catchCopy" csv:"catchCopy"`
-	Size                 string       `json:"size" csv:"size"`
-	Color                string       `json:"color" csv:"color"`
-	Tag                  *string      `json:"tag" csv:"tag"`
-	GroupCode            *string      `json:"groupCode" csv:"groupCode"`
-	URL                  *string      `json:"url" csv:"url"`
-	DisplaySequence      *json.Number `json:"displaySequence" csv:"displaySequence"`
-	SalesDivision        string       `json:"salesDivision" csv:"salesDivision"`
-	StockControlDivision string       `json:"stockControlDivision" csv:"stockControlDivision"`
-	DisplayFlag          string       `json:"displayFlag" csv:"displayFlag"`
-	Division             string       `json:"division" csv:"division"`
-	ProductOptionGroupID *json.Number `json:"productOptionGroupId" csv:"productOptionGroupId"`
-	PointNotApplicable   string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
-	TaxFreeDivision      string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
-	SupplierProductNo    *string      `json:"supplierProductNo" csv:"supplierProductNo"`
-	StaffDiscountRate    *json.Number `json:"staffDiscountRate" csv:"staffDiscountRate"`
-	AppStartDateTime     *string      `json:"appStartDateTime" csv:"appStartDateTime"`
-	InsDateTime          string       `json:"insDateTime" csv:"insDateTime"`
-	UpdDateTime          string       `json:"updDateTime" csv:"updDateTime"`
+	ProductID              json.Number  `json:"productId" csv:"productId"`
+	CategoryID             json.Number  `json:"categoryId" csv:"categoryId"`
+	ProductCode            string       `json:"productCode" csv:"productCode"`
+	ProductName            string       `json:"productName" csv:"productName"`
+	ProductKana            *string      `json:"productKana" csv:"productKana"`
+	TaxDivision            string       `json:"taxDivision" csv:"taxDivision"`
+	ProductPriceDivision   string       `json:"productPriceDivision" csv:"productPriceDivision"`
+	Price                  json.Number  `json:"price" csv:"price"`
+	CustomerPrice          *json.Number `json:"customerPrice" csv:"customerPrice"`
+	Cost                   json.Number  `json:"cost" csv:"cost"`
+	Attribute              *string      `json:"attribute" csv:"attribute"`
+	Description            *string      `json:"description" csv:"description"`
+	CatchCopy              *string      `json:"catchCopy" csv:"catchCopy"`
+	Size                   string       `json:"size" csv:"size"`
+	Color                  string       `json:"color" csv:"color"`
+	Tag                    *string      `json:"tag" csv:"tag"`
+	GroupCode              *string      `json:"groupCode" csv:"groupCode"`
+	URL                    *string      `json:"url" csv:"url"`
+	DisplaySequence        *json.Number `json:"displaySequence" csv:"displaySequence"`
+	SalesDivision          string       `json:"salesDivision" csv:"salesDivision"`
+	StockControlDivision   string       `json:"stockControlDivision" csv:"stockControlDivision"`
+	DisplayFlag            string       `json:"displayFlag" csv:"displayFlag"`
+	Division               string       `json:"division" csv:"division"`
+	ProductOptionGroupID   *json.Number `json:"productOptionGroupId" csv:"productOptionGroupId"`
+	PointNotApplicable     string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
+	TaxFreeDivision        string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
+	SupplierProductNo      *string      `json:"supplierProductNo" csv:"supplierProductNo"`
+	StaffDiscountRate      *json.Number `json:"staffDiscountRate" csv:"staffDiscountRate"`
+	UseCategoryReduceTax   json.Number  `json:"useCategoryReduceTax" csv:"useCategoryReduceTax"`
+	ReduceTaxId            *json.Number `json:"reduceTaxId" csv:"reduceTaxId"`
+	ReduceTaxPrice         json.Number  `json:"reduceTaxPrice" csv:"reduceTaxPrice"`
+	ReduceTaxCustomerPrice json.Number  `json:"reduceTaxCustomerPrice" csv:"reduceTaxCustomerPrice"`
+	AppStartDateTime       *string      `json:"appStartDateTime" csv:"appStartDateTime"`
+	InsDateTime            string       `json:"insDateTime" csv:"insDateTime"`
+	UpdDateTime            string       `json:"updDateTime" csv:"updDateTime"`
 }
 
 type ProductCSV struct {
