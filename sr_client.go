@@ -147,8 +147,8 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 
 				// 指定範囲の全件数よりLimit*page数が大きくなった場合、最後の要素のIDを保持しておく
 				if resp.TotalCount <= p.Limit*p.Page {
-					dat :=  map[string]string{}
-					lastObj := resp.Result[len(resp.Result) - 1]
+					dat := map[string]string{}
+					lastObj := resp.Result[len(resp.Result)-1]
 					if err := json.Unmarshal([]byte(lastObj.String()), &dat); err != nil {
 						panic(err)
 					}
