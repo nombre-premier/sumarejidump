@@ -12,7 +12,7 @@ func CreateCliApp() *cli.App {
 	app := cli.NewApp()
 	app.Name = "sumarejidump"
 	app.Usage = "Just dump sumareji data"
-	app.Version = "0.1.0"
+	app.Version = "0.1.1"
 	app.UsageText = "sumarejidump [command] [options] [table_name]"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
