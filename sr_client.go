@@ -117,7 +117,8 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	defer handler.GetCSVWriter().Close()
 	isAll := false
-	if len(p.Conditions) == 0 {
+	// Conditionsの最初の要素に検索条件が入る。検索条件が無い場合は全件検索
+	if len(p.Conditions[0]) == 0 {
 		isAll = true
 	}
 	// StockHistory、TransactionHead、TransactionDetailテーブルで全件検索の場合は範囲指定をする
