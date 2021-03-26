@@ -12,10 +12,12 @@ type TransactionHead struct {
 	UnitNonDiscountsubtotal        json.Number  `json:"unitNonDiscountsubtotal" csv:"unitNonDiscountsubtotal"`
 	UnitDiscountsubtotal           json.Number  `json:"unitDiscountsubtotal" csv:"unitDiscountsubtotal"`
 	Subtotal                       json.Number  `json:"subtotal" csv:"subtotal"`
+	SubtotalForDiscount            json.Number  `json:"subtotalForDiscount" csv:"subtotalForDiscount"`
 	SubtotalDiscountPrice          json.Number  `json:"subtotalDiscountPrice" csv:"subtotalDiscountPrice"`
 	SubtotalDiscountRate           json.Number  `json:"subtotalDiscountRate" csv:"subtotalDiscountRate"`
 	SubtotalDiscountDivision       *json.Number `json:"subtotalDiscountDivision" csv:"subtotalDiscountDivision"`
 	PointDiscount                  json.Number  `json:"pointDiscount" csv:"pointDiscount"`
+	CouponDiscount                 json.Number  `json:"couponDiscount" csv:"couponDiscount"`
 	Total                          json.Number  `json:"total" csv:"total"`
 	TaxExclude                     json.Number  `json:"taxExclude" csv:"taxExclude"`
 	TaxInclude                     json.Number  `json:"taxInclude" csv:"taxInclude"`
@@ -162,7 +164,7 @@ type TransactionDetail struct {
 	Price                        json.Number  `json:"price" csv:"price"`
 	SalesPrice                   json.Number  `json:"salesPrice" csv:"salesPrice"`
 	UnitDiscountPrice            json.Number  `json:"unitDiscountPrice" csv:"unitDiscountPrice"`
-	UnitDiscountRate             json.Number  `json:"unitDiscountRate" csv:"unitDiscountRate"`
+	UnitDiscountRate             *json.Number `json:"unitDiscountRate" csv:"unitDiscountRate"`
 	UnitDiscountDivision         *json.Number `json:"unitDiscountDivision" csv:"unitDiscountDivision"`
 	Cost                         *json.Number `json:"cost" csv:"cost"`
 	Quantity                     json.Number  `json:"quantity" csv:"quantity"`
@@ -176,12 +178,14 @@ type TransactionDetail struct {
 	SalesDivision                string       `json:"salesDivision" csv:"salesDivision"`
 	ProductDivision              string       `json:"productDivision" csv:"productDivision"`
 	PointNotApplicable           string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
+	CalcDiscount                 string       `json:"calcDiscount" csv:"calcDiscount""`
 	TaxFreeDivision              string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
 	TaxFreeCommodityPrice        json.Number  `json:"taxFreeCommodityPrice" csv:"taxFreeCommodityPrice"`
 	TaxFree                      json.Number  `json:"taxFree" csv:"taxFree"`
 	ProductBundleGroupID         *json.Number `json:"productBundleGroupId" csv:"productBundleGroupId"`
 	DiscountPriceProportional    json.Number  `json:"discountPriceProportional" csv:"discountPriceProportional"`
 	DiscountPointProportional    json.Number  `json:"discountPointProportional" csv:"discountPointProportional"`
+	DiscountCouponProportional   json.Number  `json:"discountCouponProportional" csv:"discountCouponProportional"`
 	TaxIncludeProportional       json.Number  `json:"taxIncludeProportional" csv:"taxIncludeProportional"`
 	TaxExcludeProportional       json.Number  `json:"taxExcludeProportional" csv:"taxExcludeProportional"`
 	ProductBundleProportional    json.Number  `json:"productBundleProportional" csv:"productBundleProportional"`
@@ -189,7 +193,7 @@ type TransactionDetail struct {
 	BargainDiscountProportional  json.Number  `json:"bargainDiscountProportional" csv:"bargainDiscountProportional"`
 	RoundingPriceProportional    json.Number  `json:"roundingPriceProportional" csv:"roundingPriceProportional"`
 	InventoryReservationDivision string       `json:"inventoryReservationDivision" csv:"inventoryReservationDivision"`
-	GroupCode                    string       `json:"groupCode" csv:"groupCode"`
+	GroupCode                    *string      `json:"groupCode" csv:"groupCode"`
 	UpdDateTime                  string       `json:"updDateTime" csv:"updDateTime"`
 	ProductStaffDiscountRate     *json.Number `json:"productStaffDiscountRate" csv:"productStaffDiscountRate"`
 	StaffRank                    *string      `json:"staffRank" csv:"staffRank"`
@@ -207,6 +211,9 @@ type TransactionDetail struct {
 	TaxRate                      json.Number  `json:"taxRate" csv:"taxRate"`
 	StandardTaxRate              json.Number  `json:"standardTaxRate" csv:"standardTaxRate"`
 	ModifiedTaxRate              *json.Number `json:"modifiedTaxRate" csv:"modifiedTaxRate"`
+	ReduceTaxID                  *json.Number `json:"reduceTaxId" csv:"reduceTaxId"`
+	ReduceTaxName                *string      `json:"reduceTaxName" csv:"reduceTaxName"`
+	ReduceTaxRate                *json.Number `json:"reduceTaxRate" csv:"reduceTaxRate"`
 	Color                        string       `json:"color" csv:"color"`
 	Size                         string       `json:"size" csv:"size"`
 }
