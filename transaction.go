@@ -178,7 +178,7 @@ type TransactionDetail struct {
 	SalesDivision                string       `json:"salesDivision" csv:"salesDivision"`
 	ProductDivision              string       `json:"productDivision" csv:"productDivision"`
 	PointNotApplicable           string       `json:"pointNotApplicable" csv:"pointNotApplicable"`
-	CalcDiscount                 string       `json:"calcDiscount" csv:"calcDiscount""`
+	CalcDiscount                 string       `json:"calcDiscount" csv:"calcDiscount"`
 	TaxFreeDivision              string       `json:"taxFreeDivision" csv:"taxFreeDivision"`
 	TaxFreeCommodityPrice        json.Number  `json:"taxFreeCommodityPrice" csv:"taxFreeCommodityPrice"`
 	TaxFree                      json.Number  `json:"taxFree" csv:"taxFree"`
