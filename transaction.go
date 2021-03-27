@@ -13,26 +13,26 @@ type TransactionHead struct {
 	UnitDiscountsubtotal           *json.Number `json:"unitDiscountsubtotal" csv:"unitDiscountsubtotal"`
 	Subtotal                       *json.Number `json:"subtotal" csv:"subtotal"`
 	SubtotalForDiscount            *json.Number `json:"subtotalForDiscount" csv:"subtotalForDiscount"`
-	SubtotalDiscountPrice          json.Number  `json:"subtotalDiscountPrice" csv:"subtotalDiscountPrice"`
-	SubtotalDiscountRate           json.Number  `json:"subtotalDiscountRate" csv:"subtotalDiscountRate"`
+	SubtotalDiscountPrice          *json.Number `json:"subtotalDiscountPrice" csv:"subtotalDiscountPrice"`
+	SubtotalDiscountRate           *json.Number `json:"subtotalDiscountRate" csv:"subtotalDiscountRate"`
 	SubtotalDiscountDivision       *json.Number `json:"subtotalDiscountDivision" csv:"subtotalDiscountDivision"`
-	PointDiscount                  json.Number  `json:"pointDiscount" csv:"pointDiscount"`
-	CouponDiscount                 json.Number  `json:"couponDiscount" csv:"couponDiscount"`
+	PointDiscount                  *json.Number `json:"pointDiscount" csv:"pointDiscount"`
+	CouponDiscount                 *json.Number `json:"couponDiscount" csv:"couponDiscount"`
 	Total                          *json.Number `json:"total" csv:"total"`
 	TaxExclude                     json.Number  `json:"taxExclude" csv:"taxExclude"`
 	TaxInclude                     json.Number  `json:"taxInclude" csv:"taxInclude"`
 	RoundingDivision               string       `json:"roundingDivision" csv:"roundingDivision"`
-	RoundingPrice                  json.Number  `json:"roundingPrice" csv:"roundingPrice"`
-	CashTotal                      json.Number  `json:"cashTotal" csv:"cashTotal"`
+	RoundingPrice                  *json.Number `json:"roundingPrice" csv:"roundingPrice"`
+	CashTotal                      *json.Number `json:"cashTotal" csv:"cashTotal"`
 	CreditTotal                    *json.Number `json:"creditTotal" csv:"creditTotal"`
 	Deposit                        *json.Number `json:"deposit" csv:"deposit"`
 	DepositCash                    *json.Number `json:"depositCash" csv:"depositCash"`
 	DepositCredit                  *json.Number `json:"depositCredit" csv:"depositCredit"`
-	Charge                         json.Number  `json:"charge" csv:"charge"`
+	Charge                         *json.Number `json:"charge" csv:"charge"`
 	ChangeDifference               json.Number  `json:"changeDifference" csv:"changeDifference"`
 	Amount                         *json.Number `json:"amount" csv:"amount"`
-	ReturnAmount                   json.Number  `json:"returnAmount" csv:"returnAmount"`
-	CostTotal                      json.Number  `json:"costTotal" csv:"costTotal"`
+	ReturnAmount                   *json.Number `json:"returnAmount" csv:"returnAmount"`
+	CostTotal                      *json.Number `json:"costTotal" csv:"costTotal"`
 	SalesHeadDivision              string       `json:"salesHeadDivision" csv:"salesHeadDivision"`
 	InTaxSalesTotal                json.Number  `json:"inTaxSalesTotal" csv:"inTaxSalesTotal"`
 	OutTaxSalesTotal               json.Number  `json:"outTaxSalesTotal" csv:"outTaxSalesTotal"`
@@ -45,25 +45,25 @@ type TransactionHead struct {
 	NonSalesTargetAmount           json.Number  `json:"nonSalesTargetAmount" csv:"nonSalesTargetAmount"`
 	NonSalesTargetReturnAmount     json.Number  `json:"nonSalesTargetReturnAmount" csv:"nonSalesTargetReturnAmount"`
 	NewPoint                       json.Number  `json:"newPoint" csv:"newPoint"`
-	SpendPoint                     json.Number  `json:"spendPoint" csv:"spendPoint"`
+	SpendPoint                     *json.Number `json:"spendPoint" csv:"spendPoint"`
 	Point                          *json.Number `json:"point" csv:"point"`
-	TotalPoint                     json.Number  `json:"totalPoint" csv:"totalPoint"`
+	TotalPoint                     *json.Number `json:"totalPoint" csv:"totalPoint"`
 	CurrentMile                    *json.Number `json:"currentMile" csv:"currentMile"`
 	EarnMile                       *json.Number `json:"earnMile" csv:"earnMile"`
 	TotalMile                      *json.Number `json:"totalMile" csv:"totalMile"`
 	AdjustmentMile                 *json.Number `json:"adjustmentMile" csv:"adjustmentMile"`
 	AdjustmentMileDivision         *string      `json:"adjustmentMileDivision" csv:"adjustmentMileDivision"`
 	AdjustmentMileValue            *json.Number `json:"adjustmentMileValue" csv:"adjustmentMileValue"`
-	StoreID                        json.Number  `json:"storeId" csv:"storeId"`
-	StoreCode                      string       `json:"storeCode" csv:"storeCode"`
-	TerminalID                     json.Number  `json:"terminalId" csv:"terminalId"`
+	StoreID                        *json.Number `json:"storeId" csv:"storeId"`
+	StoreCode                      *string      `json:"storeCode" csv:"storeCode"`
+	TerminalID                     *json.Number `json:"terminalId" csv:"terminalId"`
 	CustomerID                     *json.Number `json:"customerId" csv:"customerId"`
 	CustomerCode                   *string      `json:"customerCode" csv:"customerCode"`
-	TerminalTranID                 string       `json:"terminalTranId" csv:"terminalTranId"`
+	TerminalTranID                 *string      `json:"terminalTranId" csv:"terminalTranId"`
 	TerminalTranDateTime           string       `json:"terminalTranDateTime" csv:"terminalTranDateTime"`
 	SumDivision                    string       `json:"sumDivision" csv:"sumDivision"`
 	AdjustmentDateTime             *string      `json:"adjustmentDateTime" csv:"adjustmentDateTime"`
-	SumDateTime                    string       `json:"sumDateTime" csv:"sumDateTime"`
+	SumDateTime                    *string      `json:"sumDateTime" csv:"sumDateTime"`
 	CustomerRank                   *json.Number `json:"customerRank" csv:"customerRank"`
 	CustomerGroupID                *json.Number `json:"customerGroupId" csv:"customerGroupId"`
 	CustomerGroupID2               *json.Number `json:"customerGroupId2" csv:"customerGroupId2"`
@@ -92,28 +92,28 @@ type TransactionHead struct {
 	DepositOthers3                 *json.Number `json:"depositOthers3" csv:"depositOthers3"`
 	Carriage                       *string      `json:"carriage" csv:"carriage"`
 	Commission                     *string      `json:"commission" csv:"commission"`
-	GuestNumbers                   json.Number  `json:"guestNumbers" csv:"guestNumbers"`
+	GuestNumbers                   *json.Number `json:"guestNumbers" csv:"guestNumbers"`
 	TaxFreeSalesDivision           string       `json:"taxFreeSalesDivision" csv:"taxFreeSalesDivision"`
-	NetTaxFreeGeneralTaxInclude    json.Number  `json:"netTaxFreeGeneralTaxInclude" csv:"netTaxFreeGeneralTaxInclude"`
-	NetTaxFreeGeneralTaxExclude    json.Number  `json:"netTaxFreeGeneralTaxExclude" csv:"netTaxFreeGeneralTaxExclude"`
-	NetTaxFreeConsumableTaxInclude json.Number  `json:"netTaxFreeConsumableTaxInclude" csv:"netTaxFreeConsumableTaxInclude"`
-	NetTaxFreeConsumableTaxExclude json.Number  `json:"netTaxFreeConsumableTaxExclude" csv:"netTaxFreeConsumableTaxExclude"`
+	NetTaxFreeGeneralTaxInclude    *json.Number `json:"netTaxFreeGeneralTaxInclude" csv:"netTaxFreeGeneralTaxInclude"`
+	NetTaxFreeGeneralTaxExclude    *json.Number `json:"netTaxFreeGeneralTaxExclude" csv:"netTaxFreeGeneralTaxExclude"`
+	NetTaxFreeConsumableTaxInclude *json.Number `json:"netTaxFreeConsumableTaxInclude" csv:"netTaxFreeConsumableTaxInclude"`
+	NetTaxFreeConsumableTaxExclude *json.Number `json:"netTaxFreeConsumableTaxExclude" csv:"netTaxFreeConsumableTaxExclude"`
 	Tags                           *string      `json:"tags" csv:"tags"`
 	PointGivingDivision            *string      `json:"pointGivingDivision" csv:"pointGivingDivision"`
 	PointGivingUnitPrice           *json.Number `json:"pointGivingUnitPrice" csv:"pointGivingUnitPrice"`
 	PointGivingUnit                *json.Number `json:"pointGivingUnit" csv:"pointGivingUnit"`
 	PointSpendDivision             *string      `json:"pointSpendDivision" csv:"pointSpendDivision"`
-	MileageDivision                string       `json:"mileageDivision" csv:"mileageDivision"`
-	MileageLabel                   string       `json:"mileageLabel" csv:"mileageLabel"`
+	MileageDivision                *string      `json:"mileageDivision" csv:"mileageDivision"`
+	MileageLabel                   *string      `json:"mileageLabel" csv:"mileageLabel"`
 	CustomerPinCode                *string      `json:"customerPinCode" csv:"customerPinCode"`
 	DisposeDivision                string       `json:"disposeDivision" csv:"disposeDivision"`
-	DisposeServerTransactionHeadID json.Number  `json:"disposeServerTransactionHeadId" csv:"disposeServerTransactionHeadId"`
+	DisposeServerTransactionHeadID *json.Number `json:"disposeServerTransactionHeadId" csv:"disposeServerTransactionHeadId"`
 	CancelDateTime                 *string      `json:"cancelDateTime" csv:"cancelDateTime"`
 	SellDivision                   string       `json:"sellDivision" csv:"sellDivision"`
-	TaxRate                        json.Number  `json:"taxRate" csv:"taxRate"`
-	TaxRounding                    string       `json:"taxRounding" csv:"taxRounding"`
+	TaxRate                        *json.Number `json:"taxRate" csv:"taxRate"`
+	TaxRounding                    *string      `json:"taxRounding" csv:"taxRounding"`
 	DiscountRoundingDivision       string       `json:"discountRoundingDivision" csv:"discountRoundingDivision"`
-	TransactionUUID                string       `json:"transactionUuid" csv:"transactionUuid"`
+	TransactionUUID                *string      `json:"transactionUuid" csv:"transactionUuid"`
 	GiftReceiptValidDays           *json.Number `json:"giftReceiptValidDays" csv:"giftReceiptValidDays"`
 	ReceiptIssueNumberOfTimes      json.Number  `json:"receiptIssueNumberOfTimes" csv:"receiptIssueNumberOfTimes"`
 	PickupTransactionHeadID        *json.Number `json:"pickupTransactionHeadId" csv:"pickupTransactionHeadId"`
