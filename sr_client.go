@@ -110,23 +110,82 @@ func (sc *SrClient) Request(p SrRefParams) (*SrRefResponse, error) {
 
 func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	output := fmt.Sprintf("%s/%s.csv", sc.config.OutputDir, p.TableName)
+
 	handler, err := chooseCSVHandler(p, output)
 	if err != nil {
 		return nil, err
 	}
 	defer handler.GetCSVWriter().Close()
+	isAll := false
+	// Conditionsの最初の要素に検索条件が入る。検索条件が無い場合は全件検索
+	if len(p.Conditions[0]) == 0 {
+		isAll = true
+	}
+	// StockHistory、TransactionHead、TransactionDetailテーブルで全件検索の場合は範囲指定をする
+	if (p.TableName == "StockHistory" || p.TableName == "TransactionHead" || p.TableName == "TransactionDetail") && isAll {
+		startNum := 0
+		// 1回あたりの指定可能範囲は10万件まで。idで10万までを範囲指定する
+		endNum := 100000
+		for {
+			var lastId int
+			startNumStr := strconv.Itoa(startNum)
+			endNumStr := strconv.Itoa(endNum)
+			// 10万件の範囲指定＆id昇順にソートして取得
+			if p.TableName == "StockHistory" {
+				p.Order = []string{"id"}
+				p.Conditions[0] = map[string]*string{"id >": &startNumStr, "id <=": &endNumStr}
+			} else {
+				p.Order = []string{"transactionHeadId"}
+				p.Conditions[0] = map[string]*string{"transactionHeadId >": &startNumStr, "transactionHeadId <=": &endNumStr}
+			}
 
-	for {
-		resp, err := sc.Request(p)
-		if err != nil {
-			return nil, err
+			for {
+				resp, err := sc.Request(p)
+				if err != nil {
+					return nil, err
+				}
+				handler.Write(resp)
+
+				// 指定範囲の全件数よりLimit*page数が大きくなった場合、最後の要素のIDを保持しておく
+				if resp.TotalCount <= p.Limit*p.Page {
+					dat := map[string]string{}
+					lastObj := resp.Result[len(resp.Result)-1]
+					if err := json.Unmarshal([]byte(lastObj.String()), &dat); err != nil {
+						panic(err)
+					}
+					if p.TableName == "StockHistory" {
+						lastId, _ = strconv.Atoi(dat["id"])
+					} else {
+						lastId, _ = strconv.Atoi(dat["transactionHeadId"])
+					}
+					// page数をリセット
+					p.Page = 1
+					break
+				} else {
+					p.Page = p.Page + 1
+				}
+			}
+			// 次の10万件取得用の範囲を設定
+			if lastId == endNum {
+				startNum = endNum
+				endNum += 100000
+			} else {
+				break
+			}
 		}
-		handler.Write(resp)
+	} else {
+		for {
+			resp, err := sc.Request(p)
+			if err != nil {
+				return nil, err
+			}
+			handler.Write(resp)
 
-		if resp.TotalCount <= p.Limit*p.Page {
-			break
-		} else {
-			p.Page = p.Page + 1
+			if resp.TotalCount <= p.Limit*p.Page {
+				break
+			} else {
+				p.Page = p.Page + 1
+			}
 		}
 	}
 
