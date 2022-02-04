@@ -123,7 +123,7 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 	// StockHistory、TransactionHead、TransactionDetailテーブルで全件検索の場合は範囲指定をする
 	if (p.TableName == "StockHistory" || p.TableName == "TransactionHead" || p.TableName == "TransactionDetail") && isAll {
-		startNum := 0
+		startNum := 1
 		// 1回あたりの指定可能範囲は10万件まで。idで10万までを範囲指定する
 		endNum := 100000
 		for {
@@ -133,10 +133,10 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 			// 10万件の範囲指定＆id昇順にソートして取得
 			if p.TableName == "StockHistory" {
 				p.Order = []string{"id"}
-				p.Conditions[0] = map[string]*string{"id >": &startNumStr, "id <=": &endNumStr}
+				p.Conditions[0] = map[string]*string{"id >=": &startNumStr, "id <=": &endNumStr}
 			} else {
 				p.Order = []string{"transactionHeadId"}
-				p.Conditions[0] = map[string]*string{"transactionHeadId >": &startNumStr, "transactionHeadId <=": &endNumStr}
+				p.Conditions[0] = map[string]*string{"transactionHeadId >=": &startNumStr, "transactionHeadId <=": &endNumStr}
 			}
 
 			for {
@@ -167,7 +167,7 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 			}
 			// 次の10万件取得用の範囲を設定
 			if lastId == endNum {
-				startNum = endNum
+				startNum = endNum + 1
 				endNum += 100000
 			} else {
 				break
