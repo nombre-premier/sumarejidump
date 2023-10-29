@@ -12,10 +12,13 @@ clean:
 	$(GOCLEAN)
 	rm -f  bin/$(BINARY_NAME)
 
-dep:
-	dep ensure
+mod-tidy:
+	$(GOCMD) mod tidy
 
-dep-update:
-	dep update
+mod-download:
+	$(GOCMD) mod download
+
+mod-verify:
+	$(GOCMD) mod verify
 
 # TODO test
