@@ -25,11 +25,19 @@ func Main(c SrConfig) error {
 			return err
 		}
 
-		cw, err := client.DumpTableToCSV(params)
-		if err != nil {
-			return err
+		if c.FileFormat == "parquet" {
+			fw, err := client.DumpTableToParquet(params)
+			if err != nil {
+				return err
+			}
+			fw.Close()
+		} else {
+			fw, err := client.DumpTableToCSV(params)
+			if err != nil {
+				return err
+			}
+			fw.Close()
 		}
-		cw.Close()
 	}
 	return nil
 }
