@@ -11,6 +11,9 @@ import (
 	"strings"
 
 	"github.com/antonholmquist/jason"
+	"github.com/xitongsys/parquet-go-source/local"
+	"github.com/xitongsys/parquet-go/writer"
+	"github.com/xitongsys/parquet-go/parquet"
 )
 
 const dirFormat = "20060102150405"
@@ -190,6 +193,52 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	}
 
 	return handler.GetCSVWriter(), nil
+}
+
+type Student struct {
+    Name   string `parquet:"name=name, type=UTF8"`
+    Age    int32  `parquet:"name=age, type=INT32"`
+    Weight int32  `parquet:"name=weight, type=INT32"`
+}
+
+func DumpTableToParquet(p SrRefParams) (*writer.ParquetWriter, error) {
+ // 出力先のファイルパスを指定
+  filePath := "local.parquet"
+  // Parquetファイルをローカルに作成
+  fw, err := local.NewLocalFileWriter(filePath)
+  if err != nil {
+      fmt.Println("Can't create local file", err)
+      return nil, err
+  }
+
+  // Parquet writerを作成
+  pw, err := writer.NewParquetWriter(fw, new(Student), 2)
+  if err != nil {
+      fmt.Println("Can't create parquet writer", err)
+      return pw, err
+  }
+  pw.RowGroupSize = 128 * 1024 * 1024 //128M
+  pw.CompressionType = parquet.CompressionCodec_SNAPPY
+
+  num := 10
+  for i := 0; i < num; i++ {
+      stu := Student{
+          Name:   "StudentName",
+          Age:    int32(20 + i%5),
+          Weight: int32(50 + i%100),
+      }
+      if err = pw.Write(stu); err != nil {
+          fmt.Println("Write error", err)
+      }
+  }
+
+  if err = pw.WriteStop(); err != nil {
+      fmt.Println("WriteStop error", err)
+      return pw, err
+  }
+
+  fmt.Println("Write Finished")
+	return pw, nil
 }
 
 func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
