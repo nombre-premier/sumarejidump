@@ -13,17 +13,17 @@ import (
 // --------------------------------------------------------------------------
 // Conversion interfaces
 
+var (
+	marshalerType              = reflect.TypeOf(new(TypeMarshaller)).Elem()
+	textMarshalerType          = reflect.TypeOf(new(encoding.TextMarshaler)).Elem()
+	unmarshalerType            = reflect.TypeOf(new(TypeUnmarshaller)).Elem()
+	unmarshalCSVWithFieldsType = reflect.TypeOf(new(TypeUnmarshalCSVWithFields)).Elem()
+)
+
 // TypeMarshaller is implemented by any value that has a MarshalCSV method
 // This converter is used to convert the value to it string representation
 type TypeMarshaller interface {
 	MarshalCSV() (string, error)
-}
-
-// Stringer is implemented by any value that has a String method
-// This converter is used to convert the value to it string representation
-// This converter will be used if your value does not implement TypeMarshaller
-type Stringer interface {
-	String() string
 }
 
 // TypeUnmarshaller is implemented by any value that has an UnmarshalCSV method
@@ -32,31 +32,28 @@ type TypeUnmarshaller interface {
 	UnmarshalCSV(string) error
 }
 
+// TypeUnmarshalCSVWithFields can be implemented on whole structs to allow for whole structures to customized internal vs one off fields
+type TypeUnmarshalCSVWithFields interface {
+	UnmarshalCSVWithFields(key, value string) error
+}
+
 // NoUnmarshalFuncError is the custom error type to be raised in case there is no unmarshal function defined on type
 type NoUnmarshalFuncError struct {
-	msg string
+	t reflect.Type
 }
 
 func (e NoUnmarshalFuncError) Error() string {
-	return e.msg
+	return "No known conversion from string to " + e.t.Name() + ", it does not implement TypeUnmarshaller"
 }
 
 // NoMarshalFuncError is the custom error type to be raised in case there is no marshal function defined on type
 type NoMarshalFuncError struct {
-	msg string
+	ty reflect.Type
 }
 
 func (e NoMarshalFuncError) Error() string {
-	return e.msg
+	return "No known conversion from " + e.ty.String() + " to string, " + e.ty.String() + " does not implement TypeMarshaller nor Stringer"
 }
-
-var (
-	stringerType        = reflect.TypeOf((*Stringer)(nil)).Elem()
-	marshallerType      = reflect.TypeOf((*TypeMarshaller)(nil)).Elem()
-	unMarshallerType    = reflect.TypeOf((*TypeUnmarshaller)(nil)).Elem()
-	textMarshalerType   = reflect.TypeOf((*encoding.TextMarshaler)(nil)).Elem()
-	textUnMarshalerType = reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem()
-)
 
 // --------------------------------------------------------------------------
 // Conversion helpers
@@ -132,7 +129,8 @@ func toInt(in interface{}) (int64, error) {
 		if s == "" {
 			return 0, nil
 		}
-		return strconv.ParseInt(s, 0, 64)
+		out := strings.SplitN(s, ".", 2)
+		return strconv.ParseInt(out[0], 0, 64)
 	case reflect.Bool:
 		if inValue.Bool() {
 			return 1, nil
@@ -191,6 +189,7 @@ func toFloat(in interface{}) (float64, error) {
 		if s == "" {
 			return 0, nil
 		}
+		s = strings.Replace(s, ",", ".", -1)
 		return strconv.ParseFloat(s, 64)
 	case reflect.Bool:
 		if inValue.Bool() {
@@ -287,7 +286,11 @@ func setField(field reflect.Value, value string, omitEmpty bool) error {
 					return err
 				}
 				field.SetFloat(f)
-			case reflect.Slice:
+			case reflect.Slice, reflect.Struct:
+				if value == "" {
+					return nil
+				}
+
 				err := json.Unmarshal([]byte(value), field.Addr().Interface())
 				if err != nil {
 					return err
@@ -304,8 +307,7 @@ func setField(field reflect.Value, value string, omitEmpty bool) error {
 
 func getFieldAsString(field reflect.Value) (str string, err error) {
 	switch field.Kind() {
-	case reflect.Interface:
-	case reflect.Ptr:
+	case reflect.Interface, reflect.Ptr:
 		if field.IsNil() {
 			return "", nil
 		}
@@ -316,20 +318,15 @@ func getFieldAsString(field reflect.Value) (str string, err error) {
 		case string:
 			return field.String(), nil
 		case bool:
-			str, err = toString(field.Bool())
-			if err != nil {
-				return str, err
+			if field.Bool() {
+				return "true", nil
+			} else {
+				return "false", nil
 			}
 		case int, int8, int16, int32, int64:
-			str, err = toString(field.Int())
-			if err != nil {
-				return str, err
-			}
+			return fmt.Sprintf("%v", field.Int()), nil
 		case uint, uint8, uint16, uint32, uint64:
-			str, err = toString(field.Uint())
-			if err != nil {
-				return str, err
-			}
+			return fmt.Sprintf("%v", field.Uint()), nil
 		case float32:
 			str, err = toString(float32(field.Float()))
 			if err != nil {
@@ -376,6 +373,15 @@ func getFieldAsString(field reflect.Value) (str string, err error) {
 					if err != nil {
 						return str, err
 					}
+				case reflect.Slice:
+					fallthrough
+				case reflect.Array:
+					b, err := json.Marshal(field.Addr().Interface())
+					if err != nil {
+						return str, err
+					}
+
+					str = string(b)
 				}
 			} else {
 				return str, nil
@@ -387,6 +393,26 @@ func getFieldAsString(field reflect.Value) (str string, err error) {
 
 // --------------------------------------------------------------------------
 // Un/serializations helpers
+
+func canMarshal(t reflect.Type) bool {
+	// Struct that implements any of the text or CSV marshaling interfaces
+	if t.Implements(marshalerType) ||
+		t.Implements(textMarshalerType) ||
+		t.Implements(unmarshalerType) ||
+		t.Implements(unmarshalCSVWithFieldsType) {
+		return true
+	}
+
+	// Pointer to a struct that implements any of the text or CSV marshaling interfaces
+	t = reflect.PtrTo(t)
+	if t.Implements(marshalerType) ||
+		t.Implements(textMarshalerType) ||
+		t.Implements(unmarshalerType) ||
+		t.Implements(unmarshalCSVWithFieldsType) {
+		return true
+	}
+	return false
+}
 
 func unmarshall(field reflect.Value, value string) error {
 	dupField := field
@@ -406,7 +432,7 @@ func unmarshall(field reflect.Value, value string) error {
 			}
 		}
 
-		return NoUnmarshalFuncError{"No known conversion from string to " + field.Type().String() + ", " + field.Type().String() + " does not implement TypeUnmarshaller"}
+		return NoUnmarshalFuncError{field.Type()}
 	}
 	for dupField.Kind() == reflect.Interface || dupField.Kind() == reflect.Ptr {
 		if dupField.IsNil() {
@@ -419,7 +445,7 @@ func unmarshall(field reflect.Value, value string) error {
 	if dupField.CanAddr() {
 		return unMarshallIt(dupField.Addr())
 	}
-	return NoUnmarshalFuncError{"No known conversion from string to " + field.Type().String() + ", " + field.Type().String() + " does not implement TypeUnmarshaller"}
+	return NoUnmarshalFuncError{field.Type()}
 }
 
 func marshall(field reflect.Value) (value string, err error) {
@@ -442,13 +468,13 @@ func marshall(field reflect.Value) (value string, err error) {
 			}
 
 			// Otherwise try to use Stringer
-			fieldStringer, ok := fieldIface.(Stringer)
+			fieldStringer, ok := fieldIface.(fmt.Stringer)
 			if ok {
 				return fieldStringer.String(), nil
 			}
 		}
 
-		return value, NoMarshalFuncError{"No known conversion from " + field.Type().String() + " to string, " + field.Type().String() + " does not implement TypeMarshaller nor Stringer"}
+		return value, NoMarshalFuncError{field.Type()}
 	}
 	for dupField.Kind() == reflect.Interface || dupField.Kind() == reflect.Ptr {
 		if dupField.IsNil() {
@@ -457,7 +483,7 @@ func marshall(field reflect.Value) (value string, err error) {
 		dupField = dupField.Elem()
 	}
 	if dupField.CanAddr() {
-		return marshallIt(dupField.Addr())
+		dupField = dupField.Addr()
 	}
-	return value, NoMarshalFuncError{"No known conversion from " + field.Type().String() + " to string, " + field.Type().String() + " does not implement TypeMarshaller nor Stringer"}
+	return marshallIt(dupField)
 }

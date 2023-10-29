@@ -1,0 +1,12 @@
+# github.com/antonholmquist/jason v1.0.0
+## explicit
+github.com/antonholmquist/jason
+# github.com/gocarina/gocsv v0.0.0-20230616125104-99d496ca653d
+## explicit; go 1.13
+github.com/gocarina/gocsv
+# github.com/urfave/cli v1.20.0
+## explicit
+github.com/urfave/cli
+# gopkg.in/h2non/gock.v1 v1.0.12
+## explicit
+gopkg.in/h2non/gock.v1
