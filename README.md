@@ -7,8 +7,13 @@ Just dump sumareji tables into CSV
 
 ## Installation
 
-```
- go get github.com/nombre-premier/sumarejidump
+Ensure you have Go 1.11 or later installed, then:
+
+```bash
+git clone https://github.com/nombre-premier/sumarejidump.git
+cd sumarejidump
+make mod-download
+make build
 ```
 
 ## Usage
@@ -21,7 +26,7 @@ USAGE:
    sumarejidump [command] [options] [table_name]
 
 VERSION:
-   0.1.0
+   0.2.0
 
 COMMANDS:
      help, h  Shows a list of commands or help for one command
@@ -57,7 +62,7 @@ sumarejidump -o result category
 
 ## Development
 ### Requirements
-- Go 1.10+
+- Go 1.11+
 
 ### Coding Convention
 Follow [Golang official Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
