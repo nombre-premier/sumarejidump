@@ -11,10 +11,6 @@ import (
 	"strings"
 
 	"github.com/antonholmquist/jason"
-	"github.com/xitongsys/parquet-go-source/local"
-	"github.com/xitongsys/parquet-go/source"
-	"github.com/xitongsys/parquet-go/writer"
-	"github.com/xitongsys/parquet-go/parquet"
 )
 
 const dirFormat = "20060102150405"
@@ -196,47 +192,30 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 	return handler.GetCSVWriter(), nil
 }
 
-type Student struct {
-    Name   string `parquet:"name=name, type=BYTE_ARRAY, convertedtype=UTF8"`
-    Age    int32  `parquet:"name=age, type=INT32"`
-    Weight int32  `parquet:"name=weight, type=INT32"`
-}
+func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
+	output := fmt.Sprintf("%s/%s.parquet", sc.config.OutputDir, p.TableName)
 
-func (sc *SrClient) DumpTableToParquet(p SrRefParams) (source.ParquetFile, error) {
-  filePath := "local.parquet"
-  fw, err := local.NewLocalFileWriter(filePath)
-  if err != nil {
-      fmt.Println("Can't create local file", err)
-      return nil, err
-  }
+	handler, err := chooseParquetHandler(p, output)
+	if err != nil {
+		return nil, err
+	}
+	defer handler.GetParquetWriter().Close()
 
-  pw, err := writer.NewParquetWriter(fw, new(Student), 2)
-  if err != nil {
-      fmt.Println("Can't create parquet writer", err)
-      return fw, err
-  }
-  pw.RowGroupSize = 128 * 1024 * 1024 //128M
-  pw.CompressionType = parquet.CompressionCodec_SNAPPY
+	for {
+		resp, err := sc.Request(p)
+		if err != nil {
+			return nil, err
+		}
+		handler.Write(resp)
 
-  num := 10
-  for i := 0; i < num; i++ {
-      stu := Student{
-          Name:   "StudentName",
-          Age:    int32(20 + i%5),
-          Weight: int32(50 + i%100),
-      }
-      if err = pw.Write(stu); err != nil {
-          fmt.Println("Write error", err)
-      }
-  }
+		if resp.TotalCount <= p.Limit*p.Page {
+			break
+		} else {
+			p.Page = p.Page + 1
+		}
+	}
 
-  if err = pw.WriteStop(); err != nil {
-      fmt.Println("WriteStop error", err)
-      return fw, err
-  }
-
-  fmt.Println("Write Finished")
-	return fw, nil
+	return handler.GetParquetWriter(), nil
 }
 
 func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
@@ -311,6 +290,15 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 		return NewStorageDetailCSV(p.Limit, output)
 	case BUDGET_DAILY:
 		return NewBudgetDailyCSV(p.Limit, output)
+	default:
+		return nil, errors.New("no table name is matched")
+	}
+}
+
+func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, error) {
+	switch p.TableName {
+	case CATEGORY:
+		return NewCategoryParquet(p.Limit, output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}
