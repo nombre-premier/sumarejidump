@@ -297,6 +297,8 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 
 func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, error) {
 	switch p.TableName {
+	case CATEGORY:
+		return NewCategoryParquet(output)
 	case BUDGET_DAILY:
 		return NewBudgetDailyParquet(output)
 	default:
