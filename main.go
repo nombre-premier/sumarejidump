@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"runtime/debug"
 )
 
 func Main(c SrConfig) error {
@@ -26,16 +27,17 @@ func Main(c SrConfig) error {
 		}
 
 		if c.FileFormat == "parquet" {
-			fw, err := client.DumpTableToParquet(params)
+			_, err := client.DumpTableToParquet(params)
 			if err != nil {
 				return err
 			}
-			fw.Close()
+			fmt.Printf("Dumped %s successfully\n", t)
 		} else {
 			fw, err := client.DumpTableToCSV(params)
 			if err != nil {
 				return err
 			}
+			// FIXME: Close() is called twice
 			fw.Close()
 		}
 	}
@@ -46,7 +48,9 @@ func main() {
 	cliApp := CreateCliApp()
 	err := cliApp.Run(os.Args)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s", err)
+		fmt.Printf("Error: %v\n", err)
+		fmt.Printf("Stack Trace:\n%s\n", debug.Stack())
+
 		switch e := err.(type) {
 		case *SrError:
 			os.Exit(e.ErrorCode)

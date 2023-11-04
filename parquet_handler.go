@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/xitongsys/parquet-go-source/local"
 )
 
@@ -18,7 +19,7 @@ type ParquetHandler struct {
 func NewParquetHandler(header interface{}, output string) (*ParquetHandler, error) {
 	pw, err := NewParquetWriter(header, output)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to initiate ParquetWriter: %w", err)
 	}
 	return &ParquetHandler{
 		ParquetWriter: pw,

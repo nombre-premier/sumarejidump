@@ -193,18 +193,18 @@ func (sc *SrClient) DumpTableToCSV(p SrRefParams) (*CSVWriter, error) {
 }
 
 func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
-	output := fmt.Sprintf("%s/%s.parquet", sc.config.OutputDir, p.TableName)
+	output := fmt.Sprintf("%s/%s.snappy.parquet", sc.config.OutputDir, p.TableName)
 
 	handler, err := chooseParquetHandler(p, output)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to choose parquet handler: %w", err)
 	}
 	defer handler.GetParquetWriter().Close()
 
 	for {
 		resp, err := sc.Request(p)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to request with params: %w", err)
 		}
 		handler.Write(resp)
 
@@ -297,8 +297,8 @@ func chooseCSVHandler(p SrRefParams, output string) (SrCSVHandlerIf, error) {
 
 func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, error) {
 	switch p.TableName {
-	case CATEGORY:
-		return NewCategoryParquet(p.Limit, output)
+	case BUDGET_DAILY:
+		return NewBudgetDailyParquet(output)
 	default:
 		return nil, errors.New("no table name is matched")
 	}

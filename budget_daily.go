@@ -1,6 +1,9 @@
 package main
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type BudgetDaily struct {
 	StoreID          json.Number `json:"storeId" csv:"storeId"`
@@ -9,9 +12,21 @@ type BudgetDaily struct {
 	SalesTargetDaily json.Number `json:"salesTargetDaily" csv:"salesTargetDaily"`
 }
 
+type BudgetDailyParquetSchema struct {
+	StoreID 				 int64  `parquet:"name=storeId, type=INT64"`
+	YM      				 string `parquet:"name=ym, type=BYTE_ARRAY, convertedtype=UTF8", encoding=PLAIN_DICTIONARY`
+	Day     				 string `parquet:"name=day, type=BYTE_ARRAY, convertedtype=UTF8", encoding=PLAIN_DICTIONARY`
+	SalesTargetDaily int64  `parquet:"name=salesTargetDaily, type=INT64"`
+}
+
 type BudgetDailyCSV struct {
 	*CSVHandler
 	buf []BudgetDaily
+}
+
+type BudgetDailyParquet struct {
+	*ParquetHandler
+	buf []BudgetDailyParquetSchema
 }
 
 func NewBudgetDailyCSV(bufSize int, output string) (*BudgetDailyCSV, error) {
@@ -25,6 +40,27 @@ func NewBudgetDailyCSV(bufSize int, output string) (*BudgetDailyCSV, error) {
 		handler,
 		buf,
 	}, nil
+}
+
+func NewBudgetDailyParquet(output string) (*BudgetDailyParquet, error) {
+	ph, err := NewParquetHandler(new(BudgetDailyParquetSchema), output)
+	if err != nil {
+		return nil, fmt.Errorf("failed to initiate ParquetHandler: %w\n", err)
+	}
+	return &BudgetDailyParquet{
+		ParquetHandler: ph,
+	}, nil
+}
+
+func (cp *BudgetDailyParquet) Write(resp *SrRefResponse) error {
+	for _, r := range resp.Result {
+		var budgetDaily BudgetDailyParquetSchema
+		json.Unmarshal([]byte(r.String()), &budgetDaily)
+		if err := cp.ParquetHandler.ParquetWriter.Write(budgetDaily); err != nil {
+			return fmt.Errorf("failed to write parquet: %w\n", err)
+		}
+	}
+	return nil
 }
 
 func (bdc *BudgetDailyCSV) Write(resp *SrRefResponse) *CSVWriter {
