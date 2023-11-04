@@ -18,3 +18,5 @@
 .envrc
 
 bin
+
+/vendor/
