@@ -12,7 +12,7 @@ Ensure you have Go 1.11 or later installed, then:
 ```bash
 git clone https://github.com/nombre-premier/sumarejidump.git
 cd sumarejidump
-make mod-download
+make vendor
 make build
 ```
 
