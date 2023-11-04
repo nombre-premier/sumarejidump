@@ -24,22 +24,21 @@ type Category struct {
 }
 
 type CategoryParquetSchema struct {
-	CategoryID         int64   `parquet:"name=categoryId, type=INT64"`
-	CategoryCode       string  `parquet:"name=categoryCode, type=BYTE_ARRAY, convertedtype=UTF8"`
-	CategoryName       string  `parquet:"name=categoryName, type=BYTE_ARRAY, convertedtype=UTF8"`
-	CategoryAbbr       string  `parquet:"name=categoryAbbr, type=BYTE_ARRAY, convertedtype=UTF8"`
-	CategoryGroupID    *int64  `parquet:"name=categoryGroupId, type=INT64, repetitiontype=OPTIONAL"`
-	ParentCategoryID   *int64  `parquet:"name=parentCategoryId, type=INT64, repetitiontype=OPTIONAL"`
+	CategoryID         int64   `parquet:"name=category_id, type=INT64"`
+	CategoryCode       string  `parquet:"name=category_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CategoryName       string  `parquet:"name=category_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CategoryAbbr       string  `parquet:"name=category_abbr, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CategoryGroupID    *int64  `parquet:"name=category_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	ParentCategoryID   *int64  `parquet:"name=parent_category_id, type=INT64, repetitiontype=OPTIONAL"`
 	Level              int32   `parquet:"name=level, type=INT32"`
-	DisplaySequence    int32   `parquet:"name=displaySequence, type=INT32"`
-	DisplayFlag        string  `parquet:"name=displayFlag, type=BYTE_ARRAY, convertedtype=UTF8"`
-	PointNotApplicable string  `parquet:"name=pointNotApplicable, type=BYTE_ARRAY, convertedtype=UTF8"`
-	TaxFreeDivision    string  `parquet:"name=taxFreeDivision, type=BYTE_ARRAY, convertedtype=UTF8"`
+	DisplaySequence    int32   `parquet:"name=display_sequence, type=INT32"`
+	DisplayFlag        string  `parquet:"name=display_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
+	PointNotApplicable string  `parquet:"name=point_not_applicable, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TaxFreeDivision    string  `parquet:"name=tax_free_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	Color              *string `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	Tag                *string `parquet:"name=tag, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
-	InsDateTime        string  `parquet:"name=insDateTime, type=BYTE_ARRAY, convertedtype=UTF8"`
-	UpdDateTime        string  `parquet:"name=updDateTime, type=BYTE_ARRAY, convertedtype=UTF8"`
-
+	InsDateTime        string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UpdDateTime        string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
 type CategoryCSV struct {
