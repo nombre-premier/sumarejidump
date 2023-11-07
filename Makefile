@@ -5,17 +5,15 @@ GOTEST=$(GOCMD) test
 BINARY_NAME=sumarejidump
 
 all: build
-build:
-	$(GOBUILD) -o bin/$(BINARY_NAME) -v *.go
+
+build: vendor
+	$(GOBUILD) -mod=vendor -o bin/$(BINARY_NAME) -v *.go
 
 clean:
 	$(GOCLEAN)
-	rm -f  bin/$(BINARY_NAME)
+	rm -f bin/$(BINARY_NAME)
 
-dep:
-	dep ensure
-
-dep-update:
-	dep update
+vendor:
+	$(GOCMD) mod vendor
 
 # TODO test
