@@ -201,13 +201,14 @@ func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
 	}
 	defer handler.GetParquetWriter().Close()
 
+	// TODO: StockHistory、TransactionHead、TransactionDetailテーブルで全件検索の場合は範囲指定をする
 	for {
 		resp, err := sc.Request(p)
 		// TODO: remove this line
-		fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
 		if err != nil {
 			return nil, fmt.Errorf("failed to request with params: %w", err)
 		}
+		fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
 		handler.Write(resp)
 
 		if resp.TotalCount <= p.Limit*p.Page {
@@ -317,8 +318,10 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 		return NewSrGenericParquet[ProductInventoryReservationParquetSchema](output)
 	case CUSTOMER:
 		return NewSrGenericParquet[CustomerParquetSchema](output)
-	// case STOCK:
-	// case STOCK_HISTORY:
+	case STOCK:
+		return NewSrGenericParquet[StockParquetSchema](output)
+	case STOCK_HISTORY:
+		return NewSrGenericParquet[StockHistoryParquetSchema](output)
 	// case TRANSACTION_HEAD:
 	// case TRANSACTION_DETAIL:
 	// case BARGAIN:

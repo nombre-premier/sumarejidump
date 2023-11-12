@@ -9,6 +9,13 @@ type Stock struct {
 	UpdDateTime string      `json:"updDateTime" csv:"updDateTime"`
 }
 
+type StockParquetSchema struct {
+	StoreID     int64  `parquet:"name=store_id, type=INT64"`
+	ProductID   int64  `parquet:"name=product_id, type=INT64"`
+	StockAmount string `parquet:"name=stock_amount, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UpdDateTime string `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type StockCSV struct {
 	*CSVHandler
 	buf []Stock
@@ -46,6 +53,19 @@ type StockHistory struct {
 	StockDivision  string       `json:"stockDivision" csv:"stockDivision"`
 	FromStoreID    *json.Number `json:"fromStoreId" csv:"fromStoreId"`
 	ToStoreID      *json.Number `json:"toStoreId" csv:"toStoreId"`
+}
+
+type StockHistoryParquetSchema struct {
+	ID             int64  `parquet:"name=id, type=INT64"`
+	UpdDateTime    string `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TargetDateTime string `parquet:"name=target_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductID      int64  `parquet:"name=product_id, type=INT64"`
+	StoreID        int64  `parquet:"name=store_id, type=INT64"`
+	Amount         int64  `parquet:"name=amount, type=INT64"`
+	StockAmount    int64  `parquet:"name=stock_amount, type=INT64"`
+	StockDivision  string `parquet:"name=stock_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	FromStoreID    *int64 `parquet:"name=from_store_id, type=INT64, repetitiontype=OPTIONAL"`
+	ToStoreID      *int64 `parquet:"name=to_store_id, type=INT64, repetitiontype=OPTIONAL"`
 }
 
 type StockHistoryCSV struct {
