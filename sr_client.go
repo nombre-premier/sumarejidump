@@ -322,8 +322,10 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 		return NewSrGenericParquet[StockParquetSchema](output)
 	case STOCK_HISTORY:
 		return NewSrGenericParquet[StockHistoryParquetSchema](output)
-	// case TRANSACTION_HEAD:
-	// case TRANSACTION_DETAIL:
+	case TRANSACTION_HEAD:
+		return NewSrGenericParquet[TransactionHeadParquetSchema](output)
+	case TRANSACTION_DETAIL:
+		return NewSrGenericParquet[TransactionDetailParquetSchema](output)
 	// case BARGAIN:
 	// case BARGAIN_PRODUCT:
 	// case BARGAIN_STORE:

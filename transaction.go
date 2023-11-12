@@ -125,6 +125,127 @@ type TransactionHead struct {
 	UpdDateTime                    string       `json:"updDateTime" csv:"updDateTime"`
 }
 
+type TransactionHeadParquetSchema struct {
+	TransactionHeadID              int64   `parquet:"name=transaction_head_id, type=INT64"`
+	TransactionDateTime            string  `parquet:"name=transaction_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TransactionHeadDivision        string  `parquet:"name=transaction_head_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CancelDivision                 string  `parquet:"name=cancel_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UnitNonDiscountsubtotal        *int64  `parquet:"name=unit_non_discountsubtotal, type=INT64, repetitiontype=OPTIONAL"`
+	UnitDiscountsubtotal           *int64  `parquet:"name=unit_discountsubtotal, type=INT64, repetitiontype=OPTIONAL"`
+	Subtotal                       *int64  `parquet:"name=subtotal, type=INT64, repetitiontype=OPTIONAL"`
+	SubtotalForDiscount            *int64  `parquet:"name=subtotal_for_discount, type=INT64, repetitiontype=OPTIONAL"`
+	SubtotalDiscountPrice          *int64  `parquet:"name=subtotal_discount_price, type=INT64, repetitiontype=OPTIONAL"`
+	SubtotalDiscountRate           *int64  `parquet:"name=subtotal_discount_rate, type=INT64, repetitiontype=OPTIONAL"`
+	SubtotalDiscountDivision       *int64  `parquet:"name=subtotal_discount_division, type=INT64, repetitiontype=OPTIONAL"`
+	PointDiscount                  *int64  `parquet:"name=point_discount, type=INT64, repetitiontype=OPTIONAL"`
+	CouponDiscount                 *int64  `parquet:"name=coupon_discount, type=INT64, repetitiontype=OPTIONAL"`
+	Total                          *int64  `parquet:"name=total, type=INT64, repetitiontype=OPTIONAL"`
+	TaxExclude                     int64   `parquet:"name=tax_exclude, type=INT64"`
+	TaxInclude                     int64   `parquet:"name=tax_include, type=INT64"`
+	RoundingDivision               string  `parquet:"name=rounding_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	RoundingPrice                  *int64  `parquet:"name=rounding_price, type=INT64, repetitiontype=OPTIONAL"`
+	CashTotal                      *int64  `parquet:"name=cash_total, type=INT64, repetitiontype=OPTIONAL"`
+	CreditTotal                    *int64  `parquet:"name=credit_total, type=INT64, repetitiontype=OPTIONAL"`
+	Deposit                        *int64  `parquet:"name=deposit, type=INT64, repetitiontype=OPTIONAL"`
+	DepositCash                    *int64  `parquet:"name=deposit_cash, type=INT64, repetitiontype=OPTIONAL"`
+	DepositCredit                  *int64  `parquet:"name=deposit_credit, type=INT64, repetitiontype=OPTIONAL"`
+	Charge                         *int64  `parquet:"name=charge, type=INT64, repetitiontype=OPTIONAL"`
+	ChangeDifference               int64   `parquet:"name=change_difference, type=INT64"`
+	Amount                         *int64  `parquet:"name=amount, type=INT64, repetitiontype=OPTIONAL"`
+	ReturnAmount                   *int64  `parquet:"name=return_amount, type=INT64, repetitiontype=OPTIONAL"`
+	CostTotal                      *int64  `parquet:"name=cost_total, type=INT64, repetitiontype=OPTIONAL"`
+	SalesHeadDivision              string  `parquet:"name=sales_head_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	InTaxSalesTotal                int64   `parquet:"name=in_tax_sales_total, type=INT64"`
+	OutTaxSalesTotal               int64   `parquet:"name=out_tax_sales_total, type=INT64"`
+	NonTaxSalesTotal               int64   `parquet:"name=non_tax_sales_total, type=INT64"`
+	NonSalesTargetTotal            int64   `parquet:"name=non_sales_target_total, type=INT64"`
+	NonSalesTargetOutTaxTotal      int64   `parquet:"name=non_sales_target_out_tax_total, type=INT64"`
+	NonSalesTargetInTaxTotal       int64   `parquet:"name=non_sales_target_in_tax_total, type=INT64"`
+	NonSalesTargetTaxFreeTotal     int64   `parquet:"name=non_sales_target_tax_free_total, type=INT64"`
+	NonSalesTargetCostTotal        int64   `parquet:"name=non_sales_target_cost_total, type=INT64"`
+	NonSalesTargetAmount           int64   `parquet:"name=non_sales_target_amount, type=INT64"`
+	NonSalesTargetReturnAmount     int64   `parquet:"name=non_sales_target_return_amount, type=INT64"`
+	NewPoint                       int64   `parquet:"name=new_point, type=INT64"`
+	SpendPoint                     *int64  `parquet:"name=spend_point, type=INT64, repetitiontype=OPTIONAL"`
+	Point                          *int64  `parquet:"name=point, type=INT64, repetitiontype=OPTIONAL"`
+	TotalPoint                     *int64  `parquet:"name=total_point, type=INT64, repetitiontype=OPTIONAL"`
+	CurrentMile                    *int64  `parquet:"name=current_mile, type=INT64, repetitiontype=OPTIONAL"`
+	EarnMile                       *int64  `parquet:"name=earn_mile, type=INT64, repetitiontype=OPTIONAL"`
+	TotalMile                      *int64  `parquet:"name=total_mile, type=INT64, repetitiontype=OPTIONAL"`
+	AdjustmentMile                 *int64  `parquet:"name=adjustment_mile, type=INT64, repetitiontype=OPTIONAL"`
+	AdjustmentMileDivision         *string `parquet:"name=adjustment_mile_division, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	AdjustmentMileValue            *int64  `parquet:"name=adjustment_mile_value, type=INT64, repetitiontype=OPTIONAL"`
+	StoreID                        *int64  `parquet:"name=store_id, type=INT64, repetitiontype=OPTIONAL"`
+	StoreCode                      *string `parquet:"name=store_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TerminalID                     *int64  `parquet:"name=terminal_id, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerID                     *int64  `parquet:"name=customer_id, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerCode                   *string `parquet:"name=customer_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TerminalTranID                 *string `parquet:"name=terminal_tran_id, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TerminalTranDateTime           string  `parquet:"name=terminal_tran_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	SumDivision                    string  `parquet:"name=sum_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	AdjustmentDateTime             *string `parquet:"name=adjustment_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	SumDateTime                    *string `parquet:"name=sum_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CustomerRank                   *int64  `parquet:"name=customer_rank, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerGroupID                *int64  `parquet:"name=customer_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerGroupID2               *int64  `parquet:"name=customer_group_id2, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerGroupID3               *int64  `parquet:"name=customer_group_id3, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerGroupID4               *int64  `parquet:"name=customer_group_id4, type=INT64, repetitiontype=OPTIONAL"`
+	CustomerGroupID5               *int64  `parquet:"name=customer_group_id5, type=INT64, repetitiontype=OPTIONAL"`
+	StaffID                        *int64  `parquet:"name=staff_id, type=INT64, repetitiontype=OPTIONAL"`
+	StaffName                      *string `parquet:"name=staff_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	StaffCode                      *string `parquet:"name=staff_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PaymentCount                   *string `parquet:"name=payment_count, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	SlipNumber                     *string `parquet:"name=slip_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CancelSlipNumber               *string `parquet:"name=cancel_slip_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	AuthNumber                     *string `parquet:"name=auth_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	AuthDate                       *string `parquet:"name=auth_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CardCompany                    *string `parquet:"name=card_company, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Memo                           *string `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	ReceiptMemo                    *string `parquet:"name=receipt_memo, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PaymentMethodID1               *int64  `parquet:"name=payment_method_id1, type=INT64, repetitiontype=OPTIONAL"`
+	PaymentMethodName1             *string `parquet:"name=payment_method_name1, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DepositOthers1                 *int64  `parquet:"name=deposit_others1, type=INT64, repetitiontype=OPTIONAL"`
+	PaymentMethodID2               *int64  `parquet:"name=payment_method_id2, type=INT64, repetitiontype=OPTIONAL"`
+	PaymentMethodName2             *string `parquet:"name=payment_method_name2, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DepositOthers2                 *int64  `parquet:"name=deposit_others2, type=INT64, repetitiontype=OPTIONAL"`
+	PaymentMethodID3               *int64  `parquet:"name=payment_method_id3, type=INT64, repetitiontype=OPTIONAL"`
+	PaymentMethodName3             *string `parquet:"name=payment_method_name3, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DepositOthers3                 *int64  `parquet:"name=deposit_others3, type=INT64, repetitiontype=OPTIONAL"`
+	Carriage                       *string `parquet:"name=carriage, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Commission                     *string `parquet:"name=commission, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	GuestNumbers                   *int64  `parquet:"name=guest_numbers, type=INT64, repetitiontype=OPTIONAL"`
+	TaxFreeSalesDivision           string  `parquet:"name=tax_free_sales_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	NetTaxFreeGeneralTaxInclude    *int64  `parquet:"name=net_tax_free_general_tax_include, type=INT64, repetitiontype=OPTIONAL"`
+	NetTaxFreeGeneralTaxExclude    *int64  `parquet:"name=net_tax_free_general_tax_exclude, type=INT64, repetitiontype=OPTIONAL"`
+	NetTaxFreeConsumableTaxInclude *int64  `parquet:"name=net_tax_free_consumable_tax_include, type=INT64, repetitiontype=OPTIONAL"`
+	NetTaxFreeConsumableTaxExclude *int64  `parquet:"name=net_tax_free_consumable_tax_exclude, type=INT64, repetitiontype=OPTIONAL"`
+	Tags                           *string `parquet:"name=tags, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PointGivingDivision            *string `parquet:"name=point_giving_division, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PointGivingUnitPrice           *int64  `parquet:"name=point_giving_unit_price, type=INT64, repetitiontype=OPTIONAL"`
+	PointGivingUnit                *int64  `parquet:"name=point_giving_unit, type=INT64, repetitiontype=OPTIONAL"`
+	PointSpendDivision             *string `parquet:"name=point_spend_division, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MileageDivision                *string `parquet:"name=mileage_division, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MileageLabel                   *string `parquet:"name=mileage_label, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CustomerPinCode                *string `parquet:"name=customer_pin_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DisposeDivision                string  `parquet:"name=dispose_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	DisposeServerTransactionHeadID *int64  `parquet:"name=dispose_server_transaction_head_id, type=INT64, repetitiontype=OPTIONAL"`
+	CancelDateTime                 *string `parquet:"name=cancel_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	SellDivision                   string  `parquet:"name=sell_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TaxRate                        *int64  `parquet:"name=tax_rate, type=INT64, repetitiontype=OPTIONAL"`
+	TaxRounding                    *string `parquet:"name=tax_rounding, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DiscountRoundingDivision       string  `parquet:"name=discount_rounding_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TransactionUUID                *string `parquet:"name=transaction_uuid, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	GiftReceiptValidDays           *int64  `parquet:"name=gift_receipt_valid_days, type=INT64, repetitiontype=OPTIONAL"`
+	ReceiptIssueNumberOfTimes      int64   `parquet:"name=receipt_issue_number_of_times, type=INT64"`
+	PickupTransactionHeadID        *int64  `parquet:"name=pickup_transaction_head_id, type=INT64, repetitiontype=OPTIONAL"`
+	PickUpDate                     *string `parquet:"name=pick_up_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PartPayment                    *int64  `parquet:"name=part_payment, type=INT64, repetitiontype=OPTIONAL"`
+	PartPaymentClass               *string `parquet:"name=part_payment_class, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	LayawayServerTransactionHeadID *int64  `parquet:"name=layaway_server_transaction_head_id, type=INT64, repetitiontype=OPTIONAL"`
+	DisabledEdit                   *string `parquet:"name=disabled_edit, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	UpdDateTime                    string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type TransactionHeadCSV struct {
 	*CSVHandler
 	buf []TransactionHead
@@ -216,6 +337,73 @@ type TransactionDetail struct {
 	ReduceTaxRate                *json.Number `json:"reduceTaxRate" csv:"reduceTaxRate"`
 	Color                        *string      `json:"color" csv:"color"`
 	Size                         *string      `json:"size" csv:"size"`
+}
+
+type TransactionDetailParquetSchema struct {
+	TransactionHeadID            int64    `parquet:"name=transaction_head_id, type=INT64"`
+	TransactionDateTime          *string  `parquet:"name=transaction_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TransactionDetailID          int64    `parquet:"name=transaction_detail_id, type=INT64"`
+	ParentTransactionDetailID    *int64   `parquet:"name=parent_transaction_detail_id, type=INT64, repetitiontype=OPTIONAL"`
+	TransactionDetailDivision    string   `parquet:"name=transaction_detail_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductID                    *int64   `parquet:"name=product_id, type=INT64, repetitiontype=OPTIONAL"`
+	ProductCode                  *string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	ProductName                  *string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TaxDivision                  string   `parquet:"name=tax_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Price                        int64    `parquet:"name=price, type=INT64"`
+	SalesPrice                   int64    `parquet:"name=sales_price, type=INT64"`
+	UnitDiscountPrice            int64    `parquet:"name=unit_discount_price, type=INT64"`
+	UnitDiscountRate             *float64 `parquet:"name=unit_discount_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	UnitDiscountDivision         *int64   `parquet:"name=unit_discount_division, type=INT64, repetitiontype=OPTIONAL"`
+	Cost                         *int64   `parquet:"name=cost, type=INT64, repetitiontype=OPTIONAL"`
+	Quantity                     int64    `parquet:"name=quantity, type=INT64"`
+	UnitNonDiscountSum           int64    `parquet:"name=unit_non_discount_sum, type=INT64"`
+	UnitDiscountSum              int64    `parquet:"name=unit_discount_sum, type=INT64"`
+	UnitDiscountedSum            int64    `parquet:"name=unit_discounted_sum, type=INT64"`
+	CostSum                      int64    `parquet:"name=cost_sum, type=INT64"`
+	CategoryID                   int64    `parquet:"name=category_id, type=INT64"`
+	CategoryName                 string   `parquet:"name=category_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	DiscriminationNo             *string  `parquet:"name=discrimination_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	SalesDivision                string   `parquet:"name=sales_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductDivision              string   `parquet:"name=product_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	PointNotApplicable           string   `parquet:"name=point_not_applicable, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CalcDiscount                 string   `parquet:"name=calc_discount, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TaxFreeDivision              string   `parquet:"name=tax_free_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TaxFreeCommodityPrice        int64    `parquet:"name=tax_free_commodity_price, type=INT64"`
+	TaxFree                      int64    `parquet:"name=tax_free, type=INT64"`
+	ProductBundleGroupID         *int64   `parquet:"name=product_bundle_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	DiscountPriceProportional    int64    `parquet:"name=discount_price_proportional, type=INT64"`
+	DiscountPointProportional    int64    `parquet:"name=discount_point_proportional, type=INT64"`
+	DiscountCouponProportional   int64    `parquet:"name=discount_coupon_proportional, type=INT64"`
+	TaxIncludeProportional       int64    `parquet:"name=tax_include_proportional, type=INT64"`
+	TaxExcludeProportional       int64    `parquet:"name=tax_exclude_proportional, type=INT64"`
+	ProductBundleProportional    int64    `parquet:"name=product_bundle_proportional, type=INT64"`
+	StaffDiscountProportional    int64    `parquet:"name=staff_discount_proportional, type=INT64"`
+	BargainDiscountProportional  int64    `parquet:"name=bargain_discount_proportional, type=INT64"`
+	RoundingPriceProportional    int64    `parquet:"name=rounding_price_proportional, type=INT64"`
+	InventoryReservationDivision string   `parquet:"name=inventory_reservation_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	GroupCode                    *string  `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	UpdDateTime                  *string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	ProductStaffDiscountRate     *float64 `parquet:"name=product_staff_discount_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	StaffRank                    *string  `parquet:"name=staff_rank, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	StaffRankName                *string  `parquet:"name=staff_rank_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	StaffDiscountRate            *float64 `parquet:"name=staff_discount_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	StaffDiscountDivision        *int64   `parquet:"name=staff_discount_division, type=INT64, repetitiontype=OPTIONAL"`
+	ApplyStaffDiscountRate       *float64 `parquet:"name=apply_staff_discount_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	ApplyStaffDiscountPrice      *float64 `parquet:"name=apply_staff_discount_price, type=DOUBLE, repetitiontype=OPTIONAL"`
+	BargainID                    *int64   `parquet:"name=bargain_id, type=INT64, repetitiontype=OPTIONAL"`
+	BargainName                  *string  `parquet:"name=bargain_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	BargainDivision              *string  `parquet:"name=bargain_division, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	BargainValue                 *int64   `parquet:"name=bargain_value, type=INT64, repetitiontype=OPTIONAL"`
+	ApplyBargainValue            *int64   `parquet:"name=apply_bargain_value, type=INT64, repetitiontype=OPTIONAL"`
+	ApplyBargainDiscountPrice    *int64   `parquet:"name=apply_bargain_discount_price, type=INT64, repetitiontype=OPTIONAL"`
+	TaxRate                      int64    `parquet:"name=tax_rate, type=INT64"`
+	StandardTaxRate              int64    `parquet:"name=standard_tax_rate, type=INT64"`
+	ModifiedTaxRate              *float64 `parquet:"name=modified_tax_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	ReduceTaxID                  *int64   `parquet:"name=reduce_tax_id, type=INT64, repetitiontype=OPTIONAL"`
+	ReduceTaxName                *string  `parquet:"name=reduce_tax_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	ReduceTaxRate                *float64 `parquet:"name=reduce_tax_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
+	Color                        *string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Size                         *string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 }
 
 type TransactionDetailCSV struct {
