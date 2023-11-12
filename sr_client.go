@@ -301,8 +301,8 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 	switch p.TableName {
 	case CATEGORY:
 		return NewSrGenericParquet[CategoryParquetSchema](output)
-	// case STORE:
-	// 	return NewSrGenericParquet[CategoryParquetSchema](output)
+	case STORE:
+		return NewSrGenericParquet[StoreParquetSchema](output)
 	case PRODUCT:
 		return NewSrGenericParquet[ProductParquetSchema](output)
 	case PRODUCT_PRICE:
