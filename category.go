@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 type Category struct {
@@ -46,11 +45,6 @@ type CategoryCSV struct {
 	buf []Category
 }
 
-type CategoryParquet struct {
-	*ParquetHandler
-	buf []CategoryParquetSchema
-}
-
 func NewCategoryCSV(bufSize int, output string) (*CategoryCSV, error) {
 	buf := make([]Category, bufSize)
 	handler, err := NewCSVHandler([]Category{}, output)
@@ -62,27 +56,6 @@ func NewCategoryCSV(bufSize int, output string) (*CategoryCSV, error) {
 		handler,
 		buf,
 	}, nil
-}
-
-func NewCategoryParquet(output string) (*CategoryParquet, error) {
-	ph, err := NewParquetHandler(new(CategoryParquetSchema), output)
-	if err != nil {
-		return nil, fmt.Errorf("failed to initiate ParquetHandler: %w\n", err)
-	}
-	return &CategoryParquet{
-		ParquetHandler: ph,
-	}, nil
-}
-
-func (cp *CategoryParquet) Write(resp *SrRefResponse) error {
-	for _, r := range resp.Result {
-		var category CategoryParquetSchema
-		json.Unmarshal([]byte(r.String()), &category)
-		if err := cp.ParquetHandler.ParquetWriter.Write(category); err != nil {
-			return fmt.Errorf("failed to write parquet: %w\n", err)
-		}
-	}
-	return nil
 }
 
 func (cc *CategoryCSV) Write(resp *SrRefResponse) *CSVWriter {

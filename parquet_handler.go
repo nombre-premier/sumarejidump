@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/xitongsys/parquet-go-source/local"
 )
 
