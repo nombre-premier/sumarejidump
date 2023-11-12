@@ -203,6 +203,8 @@ func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
 
 	for {
 		resp, err := sc.Request(p)
+		// TODO: remove this line
+		fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
 		if err != nil {
 			return nil, fmt.Errorf("failed to request with params: %w", err)
 		}
@@ -299,6 +301,46 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 	switch p.TableName {
 	case CATEGORY:
 		return NewSrGenericParquet[CategoryParquetSchema](output)
+	// case STORE:
+	// 	return NewSrGenericParquet[CategoryParquetSchema](output)
+	case PRODUCT:
+		return NewSrGenericParquet[ProductParquetSchema](output)
+	case PRODUCT_PRICE:
+		return NewSrGenericParquet[ProductPriceParquetSchema](output)
+	case PRODUCT_RESERVE_ITEM:
+		return NewSrGenericParquet[ProductReserveItemParquetSchema](output)
+	case PRODUCT_RESERVE_ITEM_LABEL:
+		return NewSrGenericParquet[ProductReserveItemLabelParquetSchema](output)
+	case PRODUCT_STORE:
+		return NewSrGenericParquet[ProductStoreParquetSchema](output)
+	case PRODUCT_INVENTORY_RESERVATION:
+		return NewSrGenericParquet[ProductInventoryReservationParquetSchema](output)
+	// case CUSTOMER:
+	// case STOCK:
+	// case STOCK_HISTORY:
+	// case TRANSACTION_HEAD:
+	// case TRANSACTION_DETAIL:
+	// case BARGAIN:
+	// case BARGAIN_PRODUCT:
+	// case BARGAIN_STORE:
+	// case DAILY_SUM:
+	// case SHIPPING:
+	// case SHIPPING_DETAIL:
+	// case RECEIVING:
+	// case RECEIVING_DETAIL:
+	// case STOCKTAKING_INFO:
+	// case STOCKTAKING_HEAD:
+	// case STOCKTAKING_DETAIL:
+	// case LOSS:
+	// case LOSS_DETAIL:
+	// case SHIPMENT:
+	// case SHIPMENT_DETAIL:
+	// case STORAGE_INFO:
+	// case STORAGE_INFO_DELIVERY:
+	// case STORAGE_INFO_PRODUCT:
+	// case STORAGE_INFO_DELIVERY_PRODUCT:
+	// case STORAGE:
+	// case STORAGE_DETAIL:
 	case BUDGET_DAILY:
 		return NewSrGenericParquet[BudgetDailyParquetSchema](output)
 	default:
