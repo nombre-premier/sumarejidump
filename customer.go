@@ -50,6 +50,52 @@ type Customer struct {
 	UpdDateTime          string       `json:"updDateTime" csv:"updDateTime"`
 }
 
+type CustomerParquetSchema struct {
+	CustomerID           int64   `parquet:"name=customer_id, type=INT64"`
+	CustomerCode         string  `parquet:"name=customer_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CustomerNo           *string `parquet:"name=customer_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Rank                 *string `parquet:"name=rank, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	StaffRank            *string `parquet:"name=staff_rank, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	LastName             string  `parquet:"name=last_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	FirstName            string  `parquet:"name=first_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	LastKana             string  `parquet:"name=last_kana, type=BYTE_ARRAY, convertedtype=UTF8"`
+	FirstKana            string  `parquet:"name=first_kana, type=BYTE_ARRAY, convertedtype=UTF8"`
+	PostCode             *string `parquet:"name=post_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Address              *string `parquet:"name=address, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PhoneNumber          *string `parquet:"name=phone_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	FaxNumber            *string `parquet:"name=fax_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MobileNumber         *string `parquet:"name=mobile_number, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MailAddress          *string `parquet:"name=mail_address, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MailAddress2         *string `parquet:"name=mail_address2, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MailAddress3         *string `parquet:"name=mail_address3, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CompanyName          *string `parquet:"name=company_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DepartmentName       *string `parquet:"name=department_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	ManagerialPosition   *string `parquet:"name=managerial_position, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Sex                  string  `parquet:"name=sex, type=BYTE_ARRAY, convertedtype=UTF8"`
+	BirthDate            *string `parquet:"name=birth_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Mile                 *int64  `parquet:"name=mile, type=INT64"`
+	Point                int64   `parquet:"name=point, type=INT64"`
+	PointExpireDate      *string `parquet:"name=point_expire_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	LastComeDateTime     *string `parquet:"name=last_come_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	EntryDate            string  `parquet:"name=entry_date, type=BYTE_ARRAY, convertedtype=UTF8"`
+	LeaveDate            *string `parquet:"name=leave_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PointGivingUnitPrice *string `parquet:"name=point_giving_unit_price, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PointGivingUnit      *string `parquet:"name=point_giving_unit, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PinCode              *string `parquet:"name=pin_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	PassportNo           *string `parquet:"name=passport_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Nationality          *string `parquet:"name=nationality, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	AlphabetName         *string `parquet:"name=alphabet_name, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	MailReceiveFlag      string  `parquet:"name=mail_receive_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Note                 *string `parquet:"name=note, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Note2                *string `parquet:"name=note2, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	FavoriteList         *string `parquet:"name=favorite_list, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	BrowsingList         *string `parquet:"name=browsing_list, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Status               string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StoreID              *int64  `parquet:"name=store_id, type=INT64, repetitiontype=OPTIONAL"`
+	InsDateTime          string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UpdDateTime          string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type CustomerCSV struct {
 	*CSVHandler
 	buf []Customer

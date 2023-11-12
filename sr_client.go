@@ -315,7 +315,8 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 		return NewSrGenericParquet[ProductStoreParquetSchema](output)
 	case PRODUCT_INVENTORY_RESERVATION:
 		return NewSrGenericParquet[ProductInventoryReservationParquetSchema](output)
-	// case CUSTOMER:
+	case CUSTOMER:
+		return NewSrGenericParquet[CustomerParquetSchema](output)
 	// case STOCK:
 	// case STOCK_HISTORY:
 	// case TRANSACTION_HEAD:
