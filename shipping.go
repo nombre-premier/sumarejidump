@@ -76,6 +76,20 @@ type ShippingDetail struct {
 	Modified          string      `json:"modified"`
 }
 
+type ShippingDetailParquetSchema struct {
+	ShippingID        int64   `parquet:"name=shipping_id, type=INT64"`
+	ProductID         int64   `parquet:"name=product_id, type=INT64"`
+	ProductCode       string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ProductName       string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Size              string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Color             string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	GroupCode         *string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	SupplierProductNo *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	RequestQuantity   *string `parquet:"name=request_quantity, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Quantity          string  `parquet:"name=quantity, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified          string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+}
+
 type ShippingDetailCSV struct {
 	*CSVHandler
 	buf []ShippingDetail
