@@ -201,20 +201,74 @@ func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
 	}
 	defer handler.GetParquetWriter().Close()
 
-	// TODO: StockHistory、TransactionHead、TransactionDetailテーブルで全件検索の場合は範囲指定をする
-	for {
-		resp, err := sc.Request(p)
-		// TODO: remove this line
-		if err != nil {
-			return nil, fmt.Errorf("failed to request with params: %w", err)
-		}
-		fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
-		handler.Write(resp)
+	isAll := false
+	if len(p.Conditions[0]) == 0 {
+		isAll = true
+	}
 
-		if resp.TotalCount <= p.Limit*p.Page {
-			break
-		} else {
-			p.Page = p.Page + 1
+	if (p.TableName == "StockHistory" || p.TableName == "TransactionHead" || p.TableName == "TransactionDetail") && isAll {
+		startNum := 0
+		endNum := 100000
+		for {
+			var lastId int
+			startNumStr := strconv.Itoa(startNum)
+			endNumStr := strconv.Itoa(endNum)
+
+			if p.TableName == "StockHistory" {
+				p.Order = []string{"id"}
+				p.Conditions[0] = map[string]*string{"id >": &startNumStr, "id <=": &endNumStr}
+			} else {
+				p.Order = []string{"transactionHeadId"}
+				p.Conditions[0] = map[string]*string{"transactionHeadId >": &startNumStr, "transactionHeadId <=": &endNumStr}
+			}
+
+			for {
+				resp, err := sc.Request(p)
+				if err != nil {
+					return nil, fmt.Errorf("failed to request with params: %w", err)
+				}
+				fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
+				handler.Write(resp)
+
+				if resp.TotalCount <= p.Limit*p.Page {
+					dat := map[string]string{}
+					lastObj := resp.Result[len(resp.Result)-1]
+					if err := json.Unmarshal([]byte(lastObj.String()), &dat); err != nil {
+						panic(err)
+					}
+					if p.TableName == "StockHistory" {
+						lastId, _ = strconv.Atoi(dat["id"])
+					} else {
+						lastId, _ = strconv.Atoi(dat["transactionHeadId"])
+					}
+					p.Page = 1
+					break
+				} else {
+					p.Page = p.Page + 1
+				}
+			}
+
+			if lastId == endNum {
+				startNum = endNum
+				endNum += 100000
+			} else {
+				break
+			}
+		}
+	} else {
+		for {
+			resp, err := sc.Request(p)
+			if err != nil {
+				return nil, fmt.Errorf("failed to request with params: %w", err)
+			}
+			fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
+			handler.Write(resp)
+
+			if resp.TotalCount <= p.Limit*p.Page {
+				break
+			} else {
+				p.Page = p.Page + 1
+			}
 		}
 	}
 
