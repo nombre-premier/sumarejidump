@@ -13,6 +13,15 @@ type StorageInfo struct {
 	Modified         string      `json:"modified" csv:"modified"`
 }
 
+type StorageInfoParquetSchema struct {
+	StorageInfoID    int64   `parquet:"name=storage_info_id, type=INT64"`
+	RecipientOrderID int64   `parquet:"name=recipient_order_id, type=INT64"`
+	OrderedDate      string  `parquet:"name=ordered_date, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Status           string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8"`
+	IdentificationNo *string `parquet:"name=identification_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Modified         string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type StorageInfoCSV struct {
 	*CSVHandler
 	buf []StorageInfo
@@ -45,6 +54,14 @@ type StorageInfoDelivery struct {
 	StorageExpectedDateFrom string      `json:"storageExpectedDateFrom" csv:"storageExpectedDateFrom"`
 	StorageExpectedDateTo   string      `json:"storageExpectedDateTo" csv:"storageExpectedDateTo"`
 	Modified                string      `json:"modified" csv:"modified"`
+}
+
+type StorageInfoDeliveryParquetSchema struct {
+	StorageInfoID           int64  `parquet:"name=storage_info_id, type=INT64"`
+	StorageStoreID          int64  `parquet:"name=storage_store_id, type=INT64"`
+	StorageExpectedDateFrom string `parquet:"name=storage_expected_date_from, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StorageExpectedDateTo   string `parquet:"name=storage_expected_date_to, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Modified                string `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
 type StorageInfoDeliveryCSV struct {
@@ -87,6 +104,20 @@ type StorageInfoProduct struct {
 	Modified          string      `json:"modified" csv:"modified"`
 }
 
+type StorageInfoProductParquetSchema struct {
+	StorageInfoID     int64   `parquet:"name=storage_info_id, type=INT64"`
+	ProductID         int64   `parquet:"name=product_id, type=INT64"`
+	ProductCode       string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductName       string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Size              string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Color             string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8"`
+	GroupCode         string  `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	SupplierProductNo *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Cost              int64   `parquet:"name=cost, type=INT64"`
+	Quantity          int64   `parquet:"name=quantity, type=INT64"`
+	Modified          string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type StorageInfoProductCSV struct {
 	*CSVHandler
 	buf []StorageInfoProduct
@@ -125,6 +156,20 @@ type StorageInfoDeliveryProduct struct {
 	SupplierProductNo *string     `json:"supplierProductNo" csv:"supplierProductNo"`
 	Quantity          json.Number `json:"quantity" csv:"quantity"`
 	Modified          string      `json:"modified" csv:"modified"`
+}
+
+type StorageInfoDeliveryProductParquetSchema struct {
+	StorageInfoID     int64   `parquet:"name=storage_info_id, type=INT64"`
+	StoreID           int64   `parquet:"name=store_id, type=INT64"`
+	ProductID         int64   `parquet:"name=product_id, type=INT64"`
+	ProductCode       string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductName       string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Size              string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Color             string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8"`
+	GroupCode         string  `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	SupplierProductNo *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Quantity          int64   `parquet:"name=quantity, type=INT64"`
+	Modified          string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
 type StorageInfoDeliveryProductCSV struct {

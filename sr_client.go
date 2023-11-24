@@ -356,10 +356,14 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 		return NewSrGenericParquet[ShipmentParquetSchema](output)
 	case SHIPMENT_DETAIL:
 		return NewSrGenericParquet[ShipmentDetailParquetSchema](output)
-	// case STORAGE_INFO:
-	// case STORAGE_INFO_DELIVERY:
-	// case STORAGE_INFO_PRODUCT:
-	// case STORAGE_INFO_DELIVERY_PRODUCT:
+	case STORAGE_INFO:
+		return NewSrGenericParquet[StorageInfoParquetSchema](output)
+	case STORAGE_INFO_DELIVERY:
+		return NewSrGenericParquet[StorageInfoDeliveryParquetSchema](output)
+	case STORAGE_INFO_PRODUCT:
+		return NewSrGenericParquet[StorageInfoProductParquetSchema](output)
+	case STORAGE_INFO_DELIVERY_PRODUCT:
+		return NewSrGenericParquet[StorageInfoDeliveryProductParquetSchema](output)
 	// case STORAGE:
 	// case STORAGE_DETAIL:
 	case BUDGET_DAILY:
