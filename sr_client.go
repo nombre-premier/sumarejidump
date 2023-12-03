@@ -201,17 +201,74 @@ func (sc *SrClient) DumpTableToParquet(p SrRefParams) (*ParquetWriter, error) {
 	}
 	defer handler.GetParquetWriter().Close()
 
-	for {
-		resp, err := sc.Request(p)
-		if err != nil {
-			return nil, fmt.Errorf("failed to request with params: %w", err)
-		}
-		handler.Write(resp)
+	isAll := false
+	if len(p.Conditions[0]) == 0 {
+		isAll = true
+	}
 
-		if resp.TotalCount <= p.Limit*p.Page {
-			break
-		} else {
-			p.Page = p.Page + 1
+	if (p.TableName == "StockHistory" || p.TableName == "TransactionHead" || p.TableName == "TransactionDetail") && isAll {
+		startNum := 0
+		endNum := 100000
+		for {
+			var lastId int
+			startNumStr := strconv.Itoa(startNum)
+			endNumStr := strconv.Itoa(endNum)
+
+			if p.TableName == "StockHistory" {
+				p.Order = []string{"id"}
+				p.Conditions[0] = map[string]*string{"id >": &startNumStr, "id <=": &endNumStr}
+			} else {
+				p.Order = []string{"transactionHeadId"}
+				p.Conditions[0] = map[string]*string{"transactionHeadId >": &startNumStr, "transactionHeadId <=": &endNumStr}
+			}
+
+			for {
+				resp, err := sc.Request(p)
+				if err != nil {
+					return nil, fmt.Errorf("failed to request with params: %w", err)
+				}
+				fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
+				handler.Write(resp)
+
+				if resp.TotalCount <= p.Limit*p.Page {
+					dat := map[string]string{}
+					lastObj := resp.Result[len(resp.Result)-1]
+					if err := json.Unmarshal([]byte(lastObj.String()), &dat); err != nil {
+						panic(err)
+					}
+					if p.TableName == "StockHistory" {
+						lastId, _ = strconv.Atoi(dat["id"])
+					} else {
+						lastId, _ = strconv.Atoi(dat["transactionHeadId"])
+					}
+					p.Page = 1
+					break
+				} else {
+					p.Page = p.Page + 1
+				}
+			}
+
+			if lastId == endNum {
+				startNum = endNum
+				endNum += 100000
+			} else {
+				break
+			}
+		}
+	} else {
+		for {
+			resp, err := sc.Request(p)
+			if err != nil {
+				return nil, fmt.Errorf("failed to request with params: %w", err)
+			}
+			fmt.Printf("Processing %d / %d\n", p.Limit*p.Page, resp.TotalCount)
+			handler.Write(resp)
+
+			if resp.TotalCount <= p.Limit*p.Page {
+				break
+			} else {
+				p.Page = p.Page + 1
+			}
 		}
 	}
 
@@ -299,6 +356,72 @@ func chooseParquetHandler(p SrRefParams, output string) (SrParquetHandlerIf, err
 	switch p.TableName {
 	case CATEGORY:
 		return NewSrGenericParquet[CategoryParquetSchema](output)
+	case STORE:
+		return NewSrGenericParquet[StoreParquetSchema](output)
+	case PRODUCT:
+		return NewSrGenericParquet[ProductParquetSchema](output)
+	case PRODUCT_PRICE:
+		return NewSrGenericParquet[ProductPriceParquetSchema](output)
+	case PRODUCT_RESERVE_ITEM:
+		return NewSrGenericParquet[ProductReserveItemParquetSchema](output)
+	case PRODUCT_RESERVE_ITEM_LABEL:
+		return NewSrGenericParquet[ProductReserveItemLabelParquetSchema](output)
+	case PRODUCT_STORE:
+		return NewSrGenericParquet[ProductStoreParquetSchema](output)
+	case PRODUCT_INVENTORY_RESERVATION:
+		return NewSrGenericParquet[ProductInventoryReservationParquetSchema](output)
+	case CUSTOMER:
+		return NewSrGenericParquet[CustomerParquetSchema](output)
+	case STOCK:
+		return NewSrGenericParquet[StockParquetSchema](output)
+	case STOCK_HISTORY:
+		return NewSrGenericParquet[StockHistoryParquetSchema](output)
+	case TRANSACTION_HEAD:
+		return NewSrGenericParquet[TransactionHeadParquetSchema](output)
+	case TRANSACTION_DETAIL:
+		return NewSrGenericParquet[TransactionDetailParquetSchema](output)
+	case BARGAIN:
+		return NewSrGenericParquet[BargainParquetSchema](output)
+	case BARGAIN_PRODUCT:
+		return NewSrGenericParquet[BargainProductParquetSchema](output)
+	case BARGAIN_STORE:
+		return NewSrGenericParquet[BargainStoreParquetSchema](output)
+	case DAILY_SUM:
+		return NewSrGenericParquet[DailySumParquetSchema](output)
+	case SHIPPING:
+		return NewSrGenericParquet[ShippingParquetSchema](output)
+	case SHIPPING_DETAIL:
+		return NewSrGenericParquet[ShippingDetailParquetSchema](output)
+	case RECEIVING:
+		return NewSrGenericParquet[ReceivingParquetSchema](output)
+	case RECEIVING_DETAIL:
+		return NewSrGenericParquet[ReceivingDetailParquetSchema](output)
+	case STOCKTAKING_INFO:
+		return NewSrGenericParquet[StocktakingInfoParquetSchema](output)
+	case STOCKTAKING_HEAD:
+		return NewSrGenericParquet[StocktakingHeadParquetSchema](output)
+	case STOCKTAKING_DETAIL:
+		return NewSrGenericParquet[StocktakingDetailParquetSchema](output)
+	case LOSS:
+		return NewSrGenericParquet[LossParquetSchema](output)
+	case LOSS_DETAIL:
+		return NewSrGenericParquet[LossDetailParquetSchema](output)
+	case SHIPMENT:
+		return NewSrGenericParquet[ShipmentParquetSchema](output)
+	case SHIPMENT_DETAIL:
+		return NewSrGenericParquet[ShipmentDetailParquetSchema](output)
+	case STORAGE_INFO:
+		return NewSrGenericParquet[StorageInfoParquetSchema](output)
+	case STORAGE_INFO_DELIVERY:
+		return NewSrGenericParquet[StorageInfoDeliveryParquetSchema](output)
+	case STORAGE_INFO_PRODUCT:
+		return NewSrGenericParquet[StorageInfoProductParquetSchema](output)
+	case STORAGE_INFO_DELIVERY_PRODUCT:
+		return NewSrGenericParquet[StorageInfoDeliveryProductParquetSchema](output)
+	case STORAGE:
+		return NewSrGenericParquet[StorageParquetSchema](output)
+	case STORAGE_DETAIL:
+		return NewSrGenericParquet[StorageDetailParquetSchema](output)
 	case BUDGET_DAILY:
 		return NewSrGenericParquet[BudgetDailyParquetSchema](output)
 	default:

@@ -14,6 +14,18 @@ type Receiving struct {
 	Modified         string      `json:"modified" csv:"modified"`
 }
 
+type ReceivingParquetSchema struct {
+	ReceivingID      int64    `parquet:"name=receiving_id, type=INT64"`
+	ShippingID       int64    `parquet:"name=shipping_id, type=INT64"`
+	ShippingStoreID  int64    `parquet:"name=shipping_store_id, type=INT64"`
+	ReceivingStoreID int64    `parquet:"name=receiving_store_id, type=INT64"`
+	ReceivingDate    string   `parquet:"name=receiving_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Memo             string   `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Status           string   `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	IdentificationNo *string  `parquet:"name=identification_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified         string   `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+}
+
 type ReceivingCSV struct {
 	*CSVHandler
 	buf []Receiving
@@ -56,6 +68,24 @@ type ReceivingDetail struct {
 	InspectionDate     string      `json:"inspectionDate" csv:"inspectionDate"`
 	Status             string      `json:"status" csv:"status"`
 	Modified           string      `json:"modified" csv:"modified"`
+}
+
+type ReceivingDetailParquetSchema struct {
+	ReceivingID        int64    `parquet:"name=receiving_id, type=INT64"`
+	ProductID          int64    `parquet:"name=product_id, type=INT64"`
+	ProductCode        string   `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ProductName        string   `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Size               string   `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Color              string   `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	GroupCode          *string  `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	SupplierProductNo  *string  `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ScheduledQuantity  int64    `parquet:"name=scheduled_quantity, type=INT64"`
+	InspectionQuantity int64    `parquet:"name=inspection_quantity, type=INT64"`
+	StockoutQuantity   int64    `parquet:"name=stockout_quantity, type=INT64"`
+	StockoutReason     *string  `parquet:"name=stockout_reason, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	InspectionDate     string   `parquet:"name=inspection_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Status             string   `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified           string   `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 }
 
 type ReceivingDetailCSV struct {

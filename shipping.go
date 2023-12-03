@@ -19,6 +19,23 @@ type Shipping struct {
 	Modified                           string      `json:"modified" csv:"modified"`
 }
 
+type ShippingParquetSchema struct {
+	ShippingID                         int64   `parquet:"name=shipping_id, type=INT64"`
+	ShippingStoreID                    int64   `parquet:"name=shipping_store_id, type=INT64"`
+	ReceivingStoreID                   int64   `parquet:"name=receiving_store_id, type=INT64"`
+	ReceivingExpectedDateFrom          string  `parquet:"name=receiving_expected_date_from, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ReceivingExpectedDateTo            string  `parquet:"name=receiving_expected_date_to, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ShippingDate                       string  `parquet:"name=shipping_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ReceivingDesiredDate               *string `parquet:"name=receiving_desired_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Memo                               string  `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Status                             string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ModificationRequestStatus          string  `parquet:"name=modification_request_status, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ModificationRequestDateTime        *string `parquet:"name=modification_request_date_time, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ModificationRequestCheckedDateTime *string `parquet:"name=modification_request_checked_date_time, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	IdentificationNo                   *string `parquet:"name=identification_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified                           string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+}
+
 type ShippingCSV struct {
 	*CSVHandler
 	buf []Shipping
@@ -57,6 +74,20 @@ type ShippingDetail struct {
 	RequestQuantity   *string     `json:"requestQuantity"`
 	Quantity          string      `json:"quantity"`
 	Modified          string      `json:"modified"`
+}
+
+type ShippingDetailParquetSchema struct {
+	ShippingID        int64   `parquet:"name=shipping_id, type=INT64"`
+	ProductID         int64   `parquet:"name=product_id, type=INT64"`
+	ProductCode       string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ProductName       string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Size              string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Color             string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	GroupCode         *string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	SupplierProductNo *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	RequestQuantity   *string `parquet:"name=request_quantity, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Quantity          string  `parquet:"name=quantity, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified          string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 }
 
 type ShippingDetailCSV struct {

@@ -14,6 +14,16 @@ type Loss struct {
 	Modified         string      `json:"modified" csv:"modified"`
 }
 
+type LossParquetSchema struct {
+	LossID           int64  `parquet:"name=loss_id, type=INT64"`
+	StoreID          int64  `parquet:"name=store_id, type=INT64"`
+	Division         string `parquet:"name=division, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Memo             string `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	LossDatetime     string `parquet:"name=loss_datetime, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	IdentificationNo string `parquet:"name=identification_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Modified         string `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+}
+
 type LossCSV struct {
 	*CSVHandler
 	buf []Loss
@@ -51,6 +61,19 @@ type LossDetail struct {
 	SupplierProductNo *string     `json:"supplierProductNo" csv:"supplierProductNo"`
 	Quantity          json.Number `json:"quantity" csv:"quantity"`
 	Modified          string      `json:"modified" csv:"modified"`
+}
+
+type LossDetailParquetSchema struct {
+	LossID            int64  `parquet:"name=loss_id, type=INT64"`
+	ProductID         int64  `parquet:"name=product_id, type=INT64"`
+	ProductCode       string `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	ProductName       string `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Size              string `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Color             string `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	GroupCode         string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	SupplierProductNo string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
+	Quantity          int64  `parquet:"name=quantity, type=INT64"`
+	Modified          string `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 }
 
 type LossDetailCSV struct {
