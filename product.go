@@ -42,6 +42,44 @@ type Product struct {
 	UpdDateTime            string       `json:"updDateTime" csv:"updDateTime"`
 }
 
+type ProductParquetSchema struct {
+	ProductID              int64   `parquet:"name=product_id, type=INT64"`
+	CategoryID             int64   `parquet:"name=category_id, type=INT64"`
+	ProductCode            string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductName            string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductKana            *string `parquet:"name=product_kana, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	TaxDivision            string  `parquet:"name=tax_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductPriceDivision   string  `parquet:"name=product_price_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Price                  int64   `parquet:"name=price, type=INT64"`
+	CustomerPrice          *int64  `parquet:"name=customer_price, type=INT64, repetitiontype=OPTIONAL"`
+	Cost                   int64   `parquet:"name=cost, type=INT64"`
+	Attribute              *string `parquet:"name=attribute, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Description            *string `parquet:"name=description, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	CatchCopy              *string `parquet:"name=catch_copy, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Size                   string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Color                  string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Tag                    *string `parquet:"name=tag, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	GroupCode              *string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	URL                    *string `parquet:"name=url, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	DisplaySequence        *int64  `parquet:"name=display_sequence, type=INT64, repetitiontype=OPTIONAL"`
+	SalesDivision          string  `parquet:"name=sales_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StockControlDivision   string  `parquet:"name=stock_control_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	DisplayFlag            string  `parquet:"name=display_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Division               string  `parquet:"name=division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductOptionGroupID   *int64  `parquet:"name=product_option_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	PointNotApplicable     string  `parquet:"name=point_not_applicable, type=BYTE_ARRAY, convertedtype=UTF8"`
+	TaxFreeDivision        string  `parquet:"name=tax_free_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	SupplierProductNo      *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	StaffDiscountRate      *int64  `parquet:"name=staff_discount_rate, type=INT64, repetitiontype=OPTIONAL"`
+	UseCategoryReduceTax   int64   `parquet:"name=use_category_reduce_tax, type=INT64"`
+	ReduceTaxId            *int64  `parquet:"name=reduce_tax_id, type=INT64, repetitiontype=OPTIONAL"`
+	ReduceTaxPrice         int64   `parquet:"name=reduce_tax_price, type=INT64"`
+	ReduceTaxCustomerPrice int64   `parquet:"name=reduce_tax_customer_price, type=INT64"`
+	AppStartDateTime       *string `parquet:"name=app_start_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	InsDateTime            string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UpdDateTime            string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type ProductCSV struct {
 	*CSVHandler
 	buf []Product
@@ -79,6 +117,17 @@ type ProductPrice struct {
 	UpdDateTime   string      `json:"updDateTime" csv:"updDateTime"`
 }
 
+type ProductPriceParquetSchema struct {
+	ProductID     int64  `parquet:"name=product_id, type=INT64"`
+	StoreID       string `parquet:"name=store_id, type=BYTE_ARRAY, convertedtype=UTF8"`
+	PriceDivision string `parquet:"name=price_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StartDate     string `parquet:"name=start_date, type=BYTE_ARRAY, convertedtype=UTF8"`
+	EndDate       string `parquet:"name=end_date, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Price         int64  `parquet:"name=price, type=INT64"`
+	InsDateTime   string `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+	UpdDateTime   string `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type ProductPriceCSV struct {
 	*CSVHandler
 	buf []ProductPrice
@@ -111,6 +160,12 @@ type ProductReserveItem struct {
 	Value     string      `json:"value" csv:"value"`
 }
 
+type ProductReserveItemParquetSchema struct {
+	ProductID int64  `parquet:"name=product_id, type=INT64"`
+	No        int64  `parquet:"name=no, type=INT64"`
+	Value     string `parquet:"name=value, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type ProductReserveItemCSV struct {
 	*CSVHandler
 	buf []ProductReserveItem
@@ -140,6 +195,11 @@ func (pric *ProductReserveItemCSV) Write(resp *SrRefResponse) *CSVWriter {
 type ProductReserveItemLabel struct {
 	No    json.Number `json:"no" csv:"no"`
 	Label string      `json:"label" csv:"label"`
+}
+
+type ProductReserveItemLabelParquetSchema struct {
+	No    int64  `parquet:"name=no, type=INT64"`
+	Label string `parquet:"name=label, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
 type ProductReserveItemLabelCSV struct {
@@ -174,6 +234,12 @@ type ProductStore struct {
 	AssignDivision string      `json:"assignDivision" csv:"assignDivision"`
 }
 
+type ProductStoreParquetSchema struct {
+	ProductID      int64  `parquet:"name=product_id, type=INT64"`
+	StoreID        int64  `parquet:"name=store_id, type=INT64"`
+	AssignDivision string `parquet:"name=assign_division, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type ProductStoreCSV struct {
 	*CSVHandler
 	buf []ProductStore
@@ -204,6 +270,12 @@ type ProductInventoryReservation struct {
 	ProductID            json.Number `json:"productId" csv:"productId"`
 	ReservationProductID string      `json:"reservationProductId" csv:"reservationProductId"`
 	ReservationAmount    json.Number `json:"reservationAmount" csv:"reservationAmount"`
+}
+
+type ProductInventoryReservationParquetSchema struct {
+	ProductID            int64  `parquet:"name=product_id, type=INT64"`
+	ReservationProductID string `parquet:"name=reservation_product_id, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ReservationAmount    int64  `parquet:"name=reservation_amount, type=INT64"`
 }
 
 type ProductInventoryReservationCSV struct {

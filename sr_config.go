@@ -7,4 +7,5 @@ type SrConfig struct {
 	EndPoint    string
 	TableNames  []string
 	Conditions  map[string]*string
+	FileFormat  string
 }

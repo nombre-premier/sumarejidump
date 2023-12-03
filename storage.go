@@ -18,6 +18,20 @@ type Storage struct {
 	Modified                string      `json:"modified" csv:"modified"`
 }
 
+type StorageParquetSchema struct {
+	StorageID               int64   `parquet:"name=storage_id, type=INT64"`
+	StorageInfoID           int64   `parquet:"name=storage_info_id, type=INT64"`
+	SupplierID              int64   `parquet:"name=supplier_id, type=INT64"`
+	StorageStoreID          int64   `parquet:"name=storage_store_id, type=INT64"`
+	StorageExpectedDateFrom string  `parquet:"name=storage_expected_date_from, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StorageExpectedDateTo   string  `parquet:"name=storage_expected_date_to, type=BYTE_ARRAY, convertedtype=UTF8"`
+	StorageDate             *string `parquet:"name=storage_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Memo                    string  `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Status                  string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8"`
+	IdentificationNo        *string `parquet:"name=identification_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Modified                string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
+}
+
 type StorageCSV struct {
 	*CSVHandler
 	buf []Storage
@@ -62,6 +76,26 @@ type StorageDetail struct {
 	CompulsoryCompleteFlag string       `json:"compulsoryCompleteFlag" csv:"compulsoryCompleteFlag"`
 	Status                 string       `json:"status" csv:"status"`
 	Modified               string       `json:"modified" csv:"modified"`
+}
+
+type StorageDetailParquetSchema struct {
+	StorageID              int64   `parquet:"name=storage_id, type=INT64"`
+	ProductID              int64   `parquet:"name=product_id, type=INT64"`
+	ProductCode            string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	ProductName            string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Size                   string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Color                  string  `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8"`
+	GroupCode              string  `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8"`
+	SupplierProductNo      *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
+	Cost                   *int64  `parquet:"name=cost, type=INT64, repetitiontype=OPTIONAL"`
+	ScheduledQuantity      int64   `parquet:"name=scheduled_quantity, type=INT64"`
+	InspectionQuantity     int64   `parquet:"name=inspection_quantity, type=INT64"`
+	StockoutQuantity       int64   `parquet:"name=stockout_quantity, type=INT64"`
+	StockoutReason         string  `parquet:"name=stockout_reason, type=BYTE_ARRAY, convertedtype=UTF8"`
+	InspectionDate         string  `parquet:"name=inspection_date, type=BYTE_ARRAY, convertedtype=UTF8"`
+	CompulsoryCompleteFlag string  `parquet:"name=compulsory_complete_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Status                 string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8"`
+	Modified               string  `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
 type StorageDetailCSV struct {

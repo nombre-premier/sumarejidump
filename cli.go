@@ -33,6 +33,11 @@ func CreateCliApp() *cli.App {
 			Name:  "output, o",
 			Usage: "output dir name, default: yyyyMMDDhhmmss",
 		},
+		cli.StringFlag{
+      Name: "format, f",
+      Usage: "output format, options: csv, parquet",
+      Value: "csv",  // default value
+    },
 	}
 	app.Action = cliAction
 
@@ -51,6 +56,13 @@ func cliAction(c *cli.Context) error {
 		panic(err)
 	}
 
+	format := ""
+	if c.String("format") == "parquet" {
+		format = "parquet"
+	} else {
+		format = "csv"
+	}
+
 	config := SrConfig{
 		ContractID:  c.String("contract_id"),
 		AccessToken: c.String("token"),
@@ -58,8 +70,8 @@ func cliAction(c *cli.Context) error {
 		OutputDir:   dirName,
 		TableNames:  []string{c.Args().Get(0)},
 		Conditions:  conditionParser(c.StringSlice("conditions")),
+		FileFormat:  format,
 	}
-
 	return Main(config)
 }
 
