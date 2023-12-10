@@ -23,12 +23,12 @@ type Category struct {
 }
 
 type CategoryParquetSchema struct {
-	CategoryID         int64   `parquet:"name=category_id, type=INT64"`
+	CategoryID         int64   `json:",string" parquet:"name=category_id, type=INT64"`
 	CategoryCode       string  `parquet:"name=category_code, type=BYTE_ARRAY, convertedtype=UTF8"`
 	CategoryName       string  `parquet:"name=category_name, type=BYTE_ARRAY, convertedtype=UTF8"`
 	CategoryAbbr       string  `parquet:"name=category_abbr, type=BYTE_ARRAY, convertedtype=UTF8"`
-	CategoryGroupID    *int64  `parquet:"name=category_group_id, type=INT64, repetitiontype=OPTIONAL"`
-	ParentCategoryID   *int64  `parquet:"name=parent_category_id, type=INT64, repetitiontype=OPTIONAL"`
+	CategoryGroupID    *int64  `json:",string" parquet:"name=category_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	ParentCategoryID   *int64  `json:",string" parquet:"name=parent_category_id, type=INT64, repetitiontype=OPTIONAL"`
 	Level              int32   `parquet:"name=level, type=INT32"`
 	DisplaySequence    int32   `parquet:"name=display_sequence, type=INT32"`
 	DisplayFlag        string  `parquet:"name=display_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
