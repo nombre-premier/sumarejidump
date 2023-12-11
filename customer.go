@@ -51,7 +51,7 @@ type Customer struct {
 }
 
 type CustomerParquetSchema struct {
-	CustomerID           int64   `parquet:"name=customer_id, type=INT64"`
+	CustomerID           int64   `json:",string" parquet:"name=customer_id, type=INT64"`
 	CustomerCode         string  `parquet:"name=customer_code, type=BYTE_ARRAY, convertedtype=UTF8"`
 	CustomerNo           *string `parquet:"name=customer_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	Rank                 *string `parquet:"name=rank, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
@@ -73,8 +73,8 @@ type CustomerParquetSchema struct {
 	ManagerialPosition   *string `parquet:"name=managerial_position, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	Sex                  string  `parquet:"name=sex, type=BYTE_ARRAY, convertedtype=UTF8"`
 	BirthDate            *string `parquet:"name=birth_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
-	Mile                 *int64  `parquet:"name=mile, type=INT64"`
-	Point                int64   `parquet:"name=point, type=INT64"`
+	Mile                 *int64  `json:",string" parquet:"name=mile, type=INT64"`
+	Point                int64   `json:",string" parquet:"name=point, type=INT64"`
 	PointExpireDate      *string `parquet:"name=point_expire_date, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	LastComeDateTime     *string `parquet:"name=last_come_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	EntryDate            string  `parquet:"name=entry_date, type=BYTE_ARRAY, convertedtype=UTF8"`
@@ -91,7 +91,7 @@ type CustomerParquetSchema struct {
 	FavoriteList         *string `parquet:"name=favorite_list, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	BrowsingList         *string `parquet:"name=browsing_list, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	Status               string  `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8"`
-	StoreID              *int64  `parquet:"name=store_id, type=INT64, repetitiontype=OPTIONAL"`
+	StoreID              *int64  `json:",string" parquet:"name=store_id, type=INT64, repetitiontype=OPTIONAL"`
 	InsDateTime          string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 	UpdDateTime          string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 }

@@ -18,10 +18,10 @@ type Shipment struct {
 }
 
 type ShipmentParquetSchema struct {
-	ShipmentID       int64  `parquet:"name=shipment_id, type=INT64"`
-	ShipmentStoreID  int64  `parquet:"name=shipment_store_id, type=INT64"`
+	ShipmentID       int64  `json:",string" parquet:"name=shipment_id, type=INT64"`
+	ShipmentStoreID  int64  `json:",string" parquet:"name=shipment_store_id, type=INT64"`
 	RecipientType    string `parquet:"name=recipient_type, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
-	RecipientID      int64  `parquet:"name=recipient_id, type=INT64"`
+	RecipientID      int64  `json:",string" parquet:"name=recipient_id, type=INT64"`
 	RecipientName    string `parquet:"name=recipient_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ShipmentDivision string `parquet:"name=shipment_division, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ShipmentDate     string `parquet:"name=shipment_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
@@ -72,16 +72,16 @@ type ShipmentDetail struct {
 }
 
 type ShipmentDetailParquetSchema struct {
-	ShipmentID        int64  `parquet:"name=shipment_id, type=INT64"`
-	ProductID         int64  `parquet:"name=product_id, type=INT64"`
+	ShipmentID        int64  `json:",string" parquet:"name=shipment_id, type=INT64"`
+	ProductID         int64  `json:",string" parquet:"name=product_id, type=INT64"`
 	ProductCode       string `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ProductName       string `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	Size              string `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	Color             string `parquet:"name=color, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	GroupCode         string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	SupplierProductNo string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
-	Cost              int64  `parquet:"name=cost, type=INT64"`
-	Quantity          int64  `parquet:"name=quantity, type=INT64"`
+	Cost              int64  `json:",string" parquet:"name=cost, type=INT64"`
+	Quantity          int64  `json:",string" parquet:"name=quantity, type=INT64"`
 	Memo              string `parquet:"name=memo, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	Modified          string `parquet:"name=modified, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 }

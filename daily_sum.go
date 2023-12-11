@@ -77,8 +77,8 @@ type DailySum struct {
 
 type DailySumParquetSchema struct {
 	SumDate                          string   `parquet:"name=sum_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
-	StoreID                          int64    `parquet:"name=store_id, type=INT64"`
-	CashDrawerID                     int64    `parquet:"name=cash_drawer_id, type=INT64"`
+	StoreID                          int64    `json:",string" parquet:"name=store_id, type=INT64"`
+	CashDrawerID                     int64    `json:",string" parquet:"name=cash_drawer_id, type=INT64"`
 	Status                           string   `parquet:"name=status, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	SalesTotal                       float64  `parquet:"name=sales_total, type=DOUBLE"`
 	Discount                         float64  `parquet:"name=discount, type=DOUBLE"`
@@ -180,7 +180,7 @@ type OtherSales struct {
 	Sales                     json.Number `json:"sales" csv:"sales"`
 }
 type OtherSalesParquetSchema struct {
-	ID                        int64   `parquet:"name=id, type=INT64"`
+	ID                        int64   `json:",string" parquet:"name=id, type=INT64"`
 	Name                      string  `parquet:"name=name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	PaymentMethodDivision     string  `parquet:"name=payment_method_division, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	PaymentMethodDivisionName string  `parquet:"name=payment_method_division_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`

@@ -12,7 +12,7 @@ type Bargain struct {
 }
 
 type BargainParquetSchema struct {
-	BargainID   int64  `parquet:"name=bargain_id, type=INT64"`
+	BargainID   int64  `json:",string" parquet:"name=bargain_id, type=INT64"`
 	BargainName string `parquet:"name=bargain_name, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TermStart   string `parquet:"name=term_start, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TermEnd     string `parquet:"name=term_end, type=BYTE_ARRAY, convertedtype=UTF8"`
@@ -54,12 +54,12 @@ type BargainProduct struct {
 }
 
 type BargainProductParquetSchema struct {
-	BargainProductID int64  `parquet:"name=bargain_product_id, type=INT64"`
-	BargainID        int64  `parquet:"name=bargain_id, type=INT64"`
+	BargainProductID int64  `json:",string" parquet:"name=bargain_product_id, type=INT64"`
+	BargainID        int64  `json:",string" parquet:"name=bargain_id, type=INT64"`
 	TargetDivision   string `parquet:"name=target_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TargetID         string `parquet:"name=target_id, type=BYTE_ARRAY, convertedtype=UTF8"`
 	Division         string `parquet:"name=division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	Value            int64  `parquet:"name=value, type=INT64"`
+	Value            int64  `json:",string" parquet:"name=value, type=INT64"`
 }
 
 type BargainProductCSV struct {
@@ -95,9 +95,9 @@ type BargainStore struct {
 }
 
 type BargainStoreParquetSchema struct {
-	BargainStoreID int64 `parquet:"name=bargain_store_id, type=INT64"`
-	BargainID      int64 `parquet:"name=bargain_id, type=INT64"`
-	StoreID        int64 `parquet:"name=store_id, type=INT64"`
+	BargainStoreID int64 `json:",string" parquet:"name=bargain_store_id, type=INT64"`
+	BargainID      int64 `json:",string" parquet:"name=bargain_id, type=INT64"`
+	StoreID        int64 `json:",string" parquet:"name=store_id, type=INT64"`
 }
 
 type BargainStoreCSV struct {

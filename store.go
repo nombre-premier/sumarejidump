@@ -32,7 +32,7 @@ type Store struct {
 }
 
 type StoreParquetSchema struct {
-	StoreID                  int64   `parquet:"name=store_id, type=INT64"`
+	StoreID                  int64   `json:",string" parquet:"name=store_id, type=INT64"`
 	StoreCode                string  `parquet:"name=store_code, type=BYTE_ARRAY, convertedtype=UTF8"`
 	StoreName                string  `parquet:"name=store_name, type=BYTE_ARRAY, convertedtype=UTF8"`
 	StoreAbbr                *string `parquet:"name=store_abbr, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
@@ -51,10 +51,10 @@ type StoreParquetSchema struct {
 	SumRefColumn             string  `parquet:"name=sum_ref_column, type=BYTE_ARRAY, convertedtype=UTF8"`
 	PointNotApplicable       string  `parquet:"name=point_not_applicable, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TaxFreeDivision          string  `parquet:"name=tax_free_division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	MaxBundleProductCount    int64   `parquet:"name=max_bundle_product_count, type=INT64"`
+	MaxBundleProductCount    int64   `json:",string" parquet:"name=max_bundle_product_count, type=INT64"`
 	RoundingDivision         string  `parquet:"name=rounding_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	DiscountRoundingDivision string  `parquet:"name=discount_rounding_division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	PauseFlag                int64   `parquet:"name=pause_flag, type=INT64"`
+	PauseFlag                int64   `json:",string" parquet:"name=pause_flag, type=INT64"`
 	PointUseDivision         string  `parquet:"name=point_use_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	InsDateTime              string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 	UpdDateTime              string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`

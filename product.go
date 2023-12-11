@@ -43,16 +43,16 @@ type Product struct {
 }
 
 type ProductParquetSchema struct {
-	ProductID              int64   `parquet:"name=product_id, type=INT64"`
-	CategoryID             int64   `parquet:"name=category_id, type=INT64"`
+	ProductID              int64   `json:",string" parquet:"name=product_id, type=INT64"`
+	CategoryID             int64   `json:",string" parquet:"name=category_id, type=INT64"`
 	ProductCode            string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8"`
 	ProductName            string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8"`
 	ProductKana            *string `parquet:"name=product_kana, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	TaxDivision            string  `parquet:"name=tax_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	ProductPriceDivision   string  `parquet:"name=product_price_division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	Price                  int64   `parquet:"name=price, type=INT64"`
-	CustomerPrice          *int64  `parquet:"name=customer_price, type=INT64, repetitiontype=OPTIONAL"`
-	Cost                   int64   `parquet:"name=cost, type=INT64"`
+	Price                  int64   `json:",string" parquet:"name=price, type=INT64"`
+	CustomerPrice          *int64  `json:",string" parquet:"name=customer_price, type=INT64, repetitiontype=OPTIONAL"`
+	Cost                   int64   `json:",string" parquet:"name=cost, type=INT64"`
 	Attribute              *string `parquet:"name=attribute, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	Description            *string `parquet:"name=description, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	CatchCopy              *string `parquet:"name=catch_copy, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
@@ -61,20 +61,20 @@ type ProductParquetSchema struct {
 	Tag                    *string `parquet:"name=tag, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	GroupCode              *string `parquet:"name=group_code, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	URL                    *string `parquet:"name=url, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
-	DisplaySequence        *int64  `parquet:"name=display_sequence, type=INT64, repetitiontype=OPTIONAL"`
+	DisplaySequence        *int64  `json:",string" parquet:"name=display_sequence, type=INT64, repetitiontype=OPTIONAL"`
 	SalesDivision          string  `parquet:"name=sales_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	StockControlDivision   string  `parquet:"name=stock_control_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	DisplayFlag            string  `parquet:"name=display_flag, type=BYTE_ARRAY, convertedtype=UTF8"`
 	Division               string  `parquet:"name=division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	ProductOptionGroupID   *int64  `parquet:"name=product_option_group_id, type=INT64, repetitiontype=OPTIONAL"`
+	ProductOptionGroupID   *int64  `json:",string" parquet:"name=product_option_group_id, type=INT64, repetitiontype=OPTIONAL"`
 	PointNotApplicable     string  `parquet:"name=point_not_applicable, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TaxFreeDivision        string  `parquet:"name=tax_free_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	SupplierProductNo      *string `parquet:"name=supplier_product_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
-	StaffDiscountRate      *int64  `parquet:"name=staff_discount_rate, type=INT64, repetitiontype=OPTIONAL"`
-	UseCategoryReduceTax   int64   `parquet:"name=use_category_reduce_tax, type=INT64"`
-	ReduceTaxId            *int64  `parquet:"name=reduce_tax_id, type=INT64, repetitiontype=OPTIONAL"`
-	ReduceTaxPrice         int64   `parquet:"name=reduce_tax_price, type=INT64"`
-	ReduceTaxCustomerPrice int64   `parquet:"name=reduce_tax_customer_price, type=INT64"`
+	StaffDiscountRate      *int64  `json:",string" parquet:"name=staff_discount_rate, type=INT64, repetitiontype=OPTIONAL"`
+	UseCategoryReduceTax   int64   `json:",string" parquet:"name=use_category_reduce_tax, type=INT64"`
+	ReduceTaxId            *int64  `json:",string" parquet:"name=reduce_tax_id, type=INT64, repetitiontype=OPTIONAL"`
+	ReduceTaxPrice         int64   `json:",string" parquet:"name=reduce_tax_price, type=INT64"`
+	ReduceTaxCustomerPrice int64   `json:",string" parquet:"name=reduce_tax_customer_price, type=INT64"`
 	AppStartDateTime       *string `parquet:"name=app_start_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	InsDateTime            string  `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 	UpdDateTime            string  `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
@@ -118,12 +118,12 @@ type ProductPrice struct {
 }
 
 type ProductPriceParquetSchema struct {
-	ProductID     int64  `parquet:"name=product_id, type=INT64"`
+	ProductID     int64  `json:",string" parquet:"name=product_id, type=INT64"`
 	StoreID       string `parquet:"name=store_id, type=BYTE_ARRAY, convertedtype=UTF8"`
 	PriceDivision string `parquet:"name=price_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	StartDate     string `parquet:"name=start_date, type=BYTE_ARRAY, convertedtype=UTF8"`
 	EndDate       string `parquet:"name=end_date, type=BYTE_ARRAY, convertedtype=UTF8"`
-	Price         int64  `parquet:"name=price, type=INT64"`
+	Price         int64  `json:",string" parquet:"name=price, type=INT64"`
 	InsDateTime   string `parquet:"name=ins_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 	UpdDateTime   string `parquet:"name=upd_date_time, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
@@ -161,8 +161,8 @@ type ProductReserveItem struct {
 }
 
 type ProductReserveItemParquetSchema struct {
-	ProductID int64  `parquet:"name=product_id, type=INT64"`
-	No        int64  `parquet:"name=no, type=INT64"`
+	ProductID int64  `json:",string" parquet:"name=product_id, type=INT64"`
+	No        int64  `json:",string" parquet:"name=no, type=INT64"`
 	Value     string `parquet:"name=value, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
@@ -198,7 +198,7 @@ type ProductReserveItemLabel struct {
 }
 
 type ProductReserveItemLabelParquetSchema struct {
-	No    int64  `parquet:"name=no, type=INT64"`
+	No    int64  `json:",string" parquet:"name=no, type=INT64"`
 	Label string `parquet:"name=label, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
@@ -235,8 +235,8 @@ type ProductStore struct {
 }
 
 type ProductStoreParquetSchema struct {
-	ProductID      int64  `parquet:"name=product_id, type=INT64"`
-	StoreID        int64  `parquet:"name=store_id, type=INT64"`
+	ProductID      int64  `json:",string" parquet:"name=product_id, type=INT64"`
+	StoreID        int64  `json:",string" parquet:"name=store_id, type=INT64"`
 	AssignDivision string `parquet:"name=assign_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 }
 
@@ -273,9 +273,9 @@ type ProductInventoryReservation struct {
 }
 
 type ProductInventoryReservationParquetSchema struct {
-	ProductID            int64  `parquet:"name=product_id, type=INT64"`
+	ProductID            int64  `json:",string" parquet:"name=product_id, type=INT64"`
 	ReservationProductID string `parquet:"name=reservation_product_id, type=BYTE_ARRAY, convertedtype=UTF8"`
-	ReservationAmount    int64  `parquet:"name=reservation_amount, type=INT64"`
+	ReservationAmount    int64  `json:",string" parquet:"name=reservation_amount, type=INT64"`
 }
 
 type ProductInventoryReservationCSV struct {

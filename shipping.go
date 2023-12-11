@@ -20,9 +20,9 @@ type Shipping struct {
 }
 
 type ShippingParquetSchema struct {
-	ShippingID                         int64   `parquet:"name=shipping_id, type=INT64"`
-	ShippingStoreID                    int64   `parquet:"name=shipping_store_id, type=INT64"`
-	ReceivingStoreID                   int64   `parquet:"name=receiving_store_id, type=INT64"`
+	ShippingID                         int64   `json:",string" parquet:"name=shipping_id, type=INT64"`
+	ShippingStoreID                    int64   `json:",string" parquet:"name=shipping_store_id, type=INT64"`
+	ReceivingStoreID                   int64   `json:",string" parquet:"name=receiving_store_id, type=INT64"`
 	ReceivingExpectedDateFrom          string  `parquet:"name=receiving_expected_date_from, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ReceivingExpectedDateTo            string  `parquet:"name=receiving_expected_date_to, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ShippingDate                       string  `parquet:"name=shipping_date, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
@@ -77,8 +77,8 @@ type ShippingDetail struct {
 }
 
 type ShippingDetailParquetSchema struct {
-	ShippingID        int64   `parquet:"name=shipping_id, type=INT64"`
-	ProductID         int64   `parquet:"name=product_id, type=INT64"`
+	ShippingID        int64   `json:",string" parquet:"name=shipping_id, type=INT64"`
+	ProductID         int64   `json:",string" parquet:"name=product_id, type=INT64"`
 	ProductCode       string  `parquet:"name=product_code, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	ProductName       string  `parquet:"name=product_name, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
 	Size              string  `parquet:"name=size, type=BYTE_ARRAY, convertedtype=UTF8, encoding=PLAIN_DICTIONARY"`
