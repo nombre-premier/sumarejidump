@@ -132,10 +132,10 @@ type TransactionHeadParquetSchema struct {
 	CancelDivision                 string  `parquet:"name=cancel_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	UnitNonDiscountsubtotal        *int64  `json:",string" parquet:"name=unit_non_discountsubtotal, type=INT64, repetitiontype=OPTIONAL"`
 	UnitDiscountsubtotal           *int64  `json:",string" parquet:"name=unit_discountsubtotal, type=INT64, repetitiontype=OPTIONAL"`
-	Subtotal                       *int64  `json:",string" parquet:"name=subtotal, type=INT64, repetitiontype=OPTIONAL"`
+	Subtotal                       *float32  `json:",string" parquet:"name=subtotal, type=FLOAT, repetitiontype=OPTIONAL"`
 	SubtotalForDiscount            *int64  `json:",string" parquet:"name=subtotal_for_discount, type=INT64, repetitiontype=OPTIONAL"`
 	SubtotalDiscountPrice          *int64  `json:",string" parquet:"name=subtotal_discount_price, type=INT64, repetitiontype=OPTIONAL"`
-	SubtotalDiscountRate           *int64  `json:",string" parquet:"name=subtotal_discount_rate, type=INT64, repetitiontype=OPTIONAL"`
+	SubtotalDiscountRate           *float32 `json:",string" parquet:"name=subtotal_discount_rate, type=FLOAT, repetitiontype=OPTIONAL"`
 	SubtotalDiscountDivision       *int64  `json:",string" parquet:"name=subtotal_discount_division, type=INT64, repetitiontype=OPTIONAL"`
 	PointDiscount                  *int64  `json:",string" parquet:"name=point_discount, type=INT64, repetitiontype=OPTIONAL"`
 	CouponDiscount                 *int64  `json:",string" parquet:"name=coupon_discount, type=INT64, repetitiontype=OPTIONAL"`
@@ -153,7 +153,7 @@ type TransactionHeadParquetSchema struct {
 	ChangeDifference               int64   `json:",string" parquet:"name=change_difference, type=INT64"`
 	Amount                         *int64  `json:",string" parquet:"name=amount, type=INT64, repetitiontype=OPTIONAL"`
 	ReturnAmount                   *int64  `json:",string" parquet:"name=return_amount, type=INT64, repetitiontype=OPTIONAL"`
-	CostTotal                      *int64  `json:",string" parquet:"name=cost_total, type=INT64, repetitiontype=OPTIONAL"`
+	CostTotal                      *float32 `json:",string" parquet:"name=cost_total, type=FLOAT, repetitiontype=OPTIONAL"`
 	SalesHeadDivision              string  `parquet:"name=sales_head_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	InTaxSalesTotal                int64   `json:",string" parquet:"name=in_tax_sales_total, type=INT64"`
 	OutTaxSalesTotal               int64   `json:",string" parquet:"name=out_tax_sales_total, type=INT64"`
@@ -162,7 +162,7 @@ type TransactionHeadParquetSchema struct {
 	NonSalesTargetOutTaxTotal      int64   `json:",string" parquet:"name=non_sales_target_out_tax_total, type=INT64"`
 	NonSalesTargetInTaxTotal       int64   `json:",string" parquet:"name=non_sales_target_in_tax_total, type=INT64"`
 	NonSalesTargetTaxFreeTotal     int64   `json:",string" parquet:"name=non_sales_target_tax_free_total, type=INT64"`
-	NonSalesTargetCostTotal        int64   `json:",string" parquet:"name=non_sales_target_cost_total, type=INT64"`
+	NonSalesTargetCostTotal        float32 `json:",string" parquet:"name=non_sales_target_cost_total, type=FLOAT"`
 	NonSalesTargetAmount           int64   `json:",string" parquet:"name=non_sales_target_amount, type=INT64"`
 	NonSalesTargetReturnAmount     int64   `json:",string" parquet:"name=non_sales_target_return_amount, type=INT64"`
 	NewPoint                       int64   `json:",string" parquet:"name=new_point, type=INT64"`
@@ -231,7 +231,7 @@ type TransactionHeadParquetSchema struct {
 	DisposeServerTransactionHeadID *int64  `json:",string" parquet:"name=dispose_server_transaction_head_id, type=INT64, repetitiontype=OPTIONAL"`
 	CancelDateTime                 *string `parquet:"name=cancel_date_time, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	SellDivision                   string  `parquet:"name=sell_division, type=BYTE_ARRAY, convertedtype=UTF8"`
-	TaxRate                        *int64  `json:",string" parquet:"name=tax_rate, type=INT64, repetitiontype=OPTIONAL"`
+	TaxRate                        *float32 `json:",string" parquet:"name=tax_rate, type=FLOAT, repetitiontype=OPTIONAL"`
 	TaxRounding                    *string `parquet:"name=tax_rounding, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
 	DiscountRoundingDivision       string  `parquet:"name=discount_rounding_division, type=BYTE_ARRAY, convertedtype=UTF8"`
 	TransactionUUID                *string `parquet:"name=transaction_uuid, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
