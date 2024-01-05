@@ -354,12 +354,12 @@ type TransactionDetailParquetSchema struct {
 	UnitDiscountPrice            int64    `json:",string" parquet:"name=unit_discount_price, type=INT64"`
 	UnitDiscountRate             *float64 `parquet:"name=unit_discount_rate, type=DOUBLE, repetitiontype=OPTIONAL"`
 	UnitDiscountDivision         *int64   `json:",string" parquet:"name=unit_discount_division, type=INT64, repetitiontype=OPTIONAL"`
-	Cost                         *int64   `json:",string" parquet:"name=cost, type=INT64, repetitiontype=OPTIONAL"`
+	Cost                         *float32 `json:",string" parquet:"name=cost, type=FLOAT, repetitiontype=OPTIONAL"`
 	Quantity                     int64    `json:",string" parquet:"name=quantity, type=INT64"`
 	UnitNonDiscountSum           int64    `json:",string" parquet:"name=unit_non_discount_sum, type=INT64"`
 	UnitDiscountSum              int64    `json:",string" parquet:"name=unit_discount_sum, type=INT64"`
 	UnitDiscountedSum            int64    `json:",string" parquet:"name=unit_discounted_sum, type=INT64"`
-	CostSum                      int64    `json:",string" parquet:"name=cost_sum, type=INT64"`
+	CostSum                      float32  `json:",string" parquet:"name=cost_sum, type=FLOAT"`
 	CategoryID                   int64    `json:",string" parquet:"name=category_id, type=INT64"`
 	CategoryName                 string   `parquet:"name=category_name, type=BYTE_ARRAY, convertedtype=UTF8"`
 	DiscriminationNo             *string  `parquet:"name=discrimination_no, type=BYTE_ARRAY, convertedtype=UTF8, repetitiontype=OPTIONAL"`
